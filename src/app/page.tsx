@@ -1,7 +1,9 @@
 export default function Home() {
   return (
-    <main className="container mx-auto">
-      <div>Testing</div>
+    <main className="container min-h-screen">
+      <div className="prose">
+        <h1>Hello</h1>
+      </div>
     </main>
   );
 }
