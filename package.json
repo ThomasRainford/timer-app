@@ -6,9 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:migrate:dev": "dotenv -e .env.local -- npx prisma migrate dev --name init",
+    "prisma:studio": "dotenv -e .env.local -- npx prisma studio"
   },
   "dependencies": {
+    "@prisma/client": "^5.15.0",
+    "dotenv-cli": "^7.4.2",
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
