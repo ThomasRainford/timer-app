@@ -14,29 +14,29 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
   password String
-  series Series[]
+  series   Series[]
 }
 
 model Series {
-  id Int @id @default(autoincrement())
-  owner  User    @relation(fields: [ownerId], references: [id])
-  ownerId Int
-  name String
-  colour String
-  timers Timer[]
+  id       Int     @id @default(autoincrement())
+  owner    User    @relation(fields: [ownerId], references: [id])
+  ownerId  Int
+  name     String
+  colour   String
+  timers   Timer[]
 }
 
 model Timer {
-  id Int @id @default(autoincrement())
-  series Series  @relation(fields: [seriesId], references: [id])
-  seriesId Int
-  name String
-  colour String
-  position Int
-  main Int
-  interval Int
-  repeat Int @default(0)
+  id        Int     @id @default(autoincrement())
+  series    Series  @relation(fields: [seriesId], references: [id])
+  seriesId  Int
+  name      String
+  colour    String
+  position  Int
+  main      Int
+  interval  Int
+  repeat    Int     @default(0)
 }
