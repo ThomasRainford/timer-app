@@ -1,3 +1,4 @@
+import LoginForm from "@/app/components/login-form";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -28,33 +29,9 @@ const Login = () => {
         <div className="prose flex justify-center mt-2">
           <h2>Log in.</h2>
         </div>
-        <form className="card-body">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Email</span>
-            </label>
-            <input
-              type="email"
-              placeholder="email"
-              className="input input-bordered bg-base-100 "
-              required
-            />
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Password</span>
-            </label>
-            <input
-              type="password"
-              placeholder="password"
-              className="input input-bordered bg-base-100 "
-              required
-            />
-          </div>
-          <div className="form-control mt-6">
-            <button className="btn btn-primary">Login</button>
-          </div>
-        </form>
+        <div className="card-body">
+          <LoginForm />
+        </div>
         <div className="prose pl-4 pb-4">
           <p className="text-sm">
             Not registered? <Link href={"/register"}>Create account</Link>
