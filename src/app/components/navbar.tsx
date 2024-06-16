@@ -1,6 +1,8 @@
+import { auth, signOut } from "@/auth";
+import { User } from "@prisma/client";
 import Link from "next/link";
 
-const MobileDropdown = () => {
+const MobileDropdown = ({ user }: { user?: User }) => {
   return (
     <div className="dropdown md:hidden block">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
@@ -30,12 +32,18 @@ const MobileDropdown = () => {
         </li>
         <li>
           <div className="flex flex-col mt-5">
-            <Link
-              className="btn btn-outline btn-info btn-sm w-full"
-              href={"/login"}
-            >
-              Log in
-            </Link>
+            {!user ? (
+              <Link
+                className="btn btn-outline btn-info btn-sm w-full"
+                href={"/login"}
+              >
+                Log in
+              </Link>
+            ) : (
+              <div className="md:hidden w-full">
+                <LogoutButton />
+              </div>
+            )}
           </div>
         </li>
       </ul>
@@ -90,7 +98,7 @@ const AppNameAndLinks = () => {
   return (
     <>
       <div className="prose">
-        <a
+        <Link
           className="btn btn-ghost bg-base-100 no-underline p-1 md:px-3"
           href="/"
         >
@@ -109,7 +117,7 @@ const AppNameAndLinks = () => {
           <div className="m-0 p-0 ml-1 text-lg md:text-2xl text-base-content font-bold">
             Timer App
           </div>
-        </a>
+        </Link>
       </div>
       <div className="ml-3 hidden md:block">
         <ul className="menu menu-horizontal px-1">
@@ -126,7 +134,7 @@ const AppNameAndLinks = () => {
 
 const LoginButton = () => {
   return (
-    <div className="ml-5 hidden md:block">
+    <div className="md:ml-5 w-full md:w-auto">
       <Link className="btn btn-outline btn-info" href={"/login"}>
         Log in
       </Link>
@@ -134,16 +142,42 @@ const LoginButton = () => {
   );
 };
 
-const NavBar = () => {
+const LogoutButton = () => {
+  return (
+    <div className="md:ml-5 w-full md:w-auto">
+      <form
+        action={async () => {
+          "use server";
+          await signOut();
+        }}
+      >
+        <button className="btn btn-outline btn-sm md:btn-md btn-info w-full md:w-auto">
+          Log out
+        </button>
+      </form>
+    </div>
+  );
+};
+
+const NavBar = async () => {
+  const session = await auth();
+  const user = session?.user as unknown as User | undefined;
+
   return (
     <div className="navbar bg-base-100 justify-between">
       <div className="navbar-start w-fit ml-1">
-        <MobileDropdown />
+        <MobileDropdown user={user} />
         <AppNameAndLinks />
       </div>
       <div className="flex justify-end float-end w-1/4 md:navbar-end mr-1">
         <ThemeController />
-        <LoginButton />
+        {!user ? (
+          <LoginButton />
+        ) : (
+          <div className="hidden">
+            <LogoutButton />
+          </div>
+        )}
       </div>
     </div>
   );
