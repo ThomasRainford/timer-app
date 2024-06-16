@@ -1,40 +1,7 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import * as bcrypt from "bcryptjs";
 
 const prisma = new PrismaClient();
-
-const users = async (
-  series: Prisma.SeriesCreateInput[]
-): Promise<Prisma.UserCreateInput[]> => [
-  {
-    email: "user01@mail.com",
-    password: await bcrypt.hash("password", 10),
-    series: {
-      create: series,
-    },
-  },
-  {
-    email: "user02@mail.com",
-    password: await bcrypt.hash("password", 10),
-    series: {
-      create: series,
-    },
-  },
-  {
-    email: "user03@mail.com",
-    password: await bcrypt.hash("password", 10),
-    series: {
-      create: series,
-    },
-  },
-  {
-    email: "user04@mail.com",
-    password: await bcrypt.hash("password", 10),
-    series: {
-      create: series,
-    },
-  },
-];
 
 const timers = () => {
   const nextTimers = [
