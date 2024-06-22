@@ -1,11 +1,14 @@
+import "@/app/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Timer App",
+  title: {
+    template: "%s | Timer App",
+    default: "Timer App",
+  },
   description: "Timer App allows you to create a series of timers.",
 };
 

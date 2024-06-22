@@ -18,9 +18,11 @@
     "bcryptjs": "^2.4.3",
     "dotenv-cli": "^7.4.2",
     "next": "14.2.3",
+    "next-auth": "^5.0.0-beta.19",
     "react": "^18",
     "react-dom": "^18",
-    "theme-change": "^2.5.0"
+    "theme-change": "^2.5.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.13",
