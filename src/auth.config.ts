@@ -4,14 +4,16 @@ import { NextResponse } from "next/server";
 export const authConfig = {
   pages: {
     signIn: "/login",
+    newUser: "/register",
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isRegisterPage = nextUrl.pathname.startsWith("/register");
       if (!isLoggedIn && !isRegisterPage) return false;
+      if (!isLoggedIn && isRegisterPage) return true;
       const isLoginPage = nextUrl.pathname.startsWith("/login");
-      if (isLoginPage) {
+      if (isLoginPage || isRegisterPage) {
         return NextResponse.redirect(new URL("/timers", nextUrl.href));
       }
       return true;
