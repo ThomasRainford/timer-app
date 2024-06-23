@@ -14,7 +14,7 @@ export const authConfig = {
       if (!isLoggedIn && isRegisterPage) return true;
       const isLoginPage = nextUrl.pathname.startsWith("/login");
       if (isLoginPage || isRegisterPage) {
-        return NextResponse.redirect(new URL("/timers", nextUrl.href));
+        return NextResponse.redirect(new URL("/series", nextUrl.href));
       }
       return true;
     },
