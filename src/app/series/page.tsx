@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import SingleSeries from "../components/single-series";
+import SingleSeries from "../components/series/single-series";
 import prisma from "../lib/db";
 
 const Series = async () => {

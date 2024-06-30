@@ -3,7 +3,7 @@ import {
   buttonHoverColours,
   supprtedColours,
   supprtedHoverColours,
-} from "./util";
+} from "../util";
 
 interface Props {
   series: Prisma.SeriesGetPayload<{ include: { timers: true } }>;
