@@ -1,10 +1,7 @@
 import { Prisma } from "@prisma/client";
-import {
-  buttonHoverColours,
-  supprtedColours,
-  supprtedHoverColours,
-} from "../util";
+import { supprtedColours, supprtedHoverColours } from "../util";
 import DeleteSeriesModal from "./delete-series-modal";
+import EditSeriesModal from "./edit-series-modal";
 
 interface Props {
   series: Prisma.SeriesGetPayload<{ include: { timers: true } }>;
@@ -12,6 +9,7 @@ interface Props {
 }
 
 const SingleSeries = ({ series, index }: Props) => {
+  const id = series.id;
   const name = series.name;
   const timersCount = series.timers.length;
   const totalTime = series.timers.reduce((acc, curr) => {
@@ -22,35 +20,14 @@ const SingleSeries = ({ series, index }: Props) => {
   const dislayColour = supprtedColours[colour as keyof typeof supprtedColours];
   const hoverColour =
     supprtedHoverColours[colour as keyof typeof supprtedHoverColours];
-  const btnHoverColour =
-    buttonHoverColours[colour as keyof typeof buttonHoverColours];
 
   return (
     <div
       className={`flex flex-col ${dislayColour} ${hoverColour} cursor-pointer rounded-md p-2`}
     >
       <div className="flex justify-between">
-        <div className="tooltip tooltip-right" data-tip="Edit series">
-          <button
-            className={`btn btn-outline btn-square btn-sm ${btnHoverColour}`}
-          >
-            <svg
-              className="h-5 w-5 text-base-300"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
-              <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
-              <line x1="16" y1="5" x2="19" y2="8" />
-            </svg>
-          </button>
-        </div>
-        <DeleteSeriesModal name={name} colour={colour} />
+        <EditSeriesModal id={id} name={name} colour={colour} />
+        <DeleteSeriesModal id={id} name={name} colour={colour} />
       </div>
       <div className="text-base-300 text-6xl text-center my-12">
         <h3>{index}</h3>

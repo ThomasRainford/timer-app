@@ -1,5 +1,5 @@
 export const supprtedColours = {
-  white: "bg-white-400",
+  white: "bg-white",
   slate: "bg-gray-400",
   gray: "bg-gray-400",
   stone: "bg-stone-400",
@@ -24,7 +24,7 @@ export const supprtedColours = {
 };
 
 export const supprtedHoverColours = {
-  white: "hover:bg-white-500",
+  white: "hover:bg-white",
   slate: "hover:bg-gray-400",
   gray: "hover:bg-gray-400",
   stone: "hover:bg-stone-400",
@@ -49,7 +49,7 @@ export const supprtedHoverColours = {
 };
 
 export const buttonHoverColours = {
-  white: "bg-white-400",
+  white: "bg-white",
   slate: "bg-gray-400",
   gray: "bg-gray-400",
   stone: "bg-stone-400",

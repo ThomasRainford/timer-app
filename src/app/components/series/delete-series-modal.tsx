@@ -3,22 +3,23 @@
 import { buttonHoverColours } from "@/app/components/util";
 
 interface Props {
+  id: number;
   name: string;
   colour: string;
 }
 
-const DeleteSeriesModal = ({ name, colour }: Props) => {
+const DeleteSeriesModal = ({ id, name, colour }: Props) => {
   const btnHoverColour =
     buttonHoverColours[colour as keyof typeof buttonHoverColours];
+
+  const modalId = "delete_series_modal_" + id;
 
   return (
     <>
       <div className="tooltip tooltip-left" data-tip="Delete series">
         <button
           className={`btn btn-outline btn-square btn-sm ${btnHoverColour}`}
-          onClick={() =>
-            (document.getElementById("my_modal_1") as any)?.showModal()
-          }
+          onClick={() => (document.getElementById(modalId) as any)?.showModal()}
         >
           <svg
             className="h-5 w-5 text-base-300 float-end"
@@ -37,7 +38,7 @@ const DeleteSeriesModal = ({ name, colour }: Props) => {
           </svg>
         </button>
       </div>
-      <dialog id="my_modal_1" className="modal modal-bottom sm:modal-middle">
+      <dialog id={modalId} className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg text-accent">{`Delete ${name}?`}</h3>
           <p className="py-4">Are you sure you want to delete this series?</p>
