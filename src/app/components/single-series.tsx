@@ -1,4 +1,9 @@
 import { Prisma } from "@prisma/client";
+import {
+  buttonHoverColours,
+  supprtedColours,
+  supprtedHoverColours,
+} from "./util";
 
 interface Props {
   series: Prisma.SeriesGetPayload<{ include: { timers: true } }>;
@@ -13,11 +18,21 @@ const SingleSeries = ({ series, index }: Props) => {
   }, 0);
   const colour = series.colour;
 
+  const dislayColour = supprtedColours[colour as keyof typeof supprtedColours];
+  const hoverColour =
+    supprtedHoverColours[colour as keyof typeof supprtedHoverColours];
+  const btnHoverColour =
+    buttonHoverColours[colour as keyof typeof buttonHoverColours];
+
   return (
-    <div className={`flex flex-col bg-${colour}-400 rounded-md p-2`}>
+    <div
+      className={`flex flex-col ${dislayColour} ${hoverColour} cursor-pointer rounded-md p-2`}
+    >
       <div className="flex justify-between">
-        <div>
-          <button className={`btn btn-outline btn-square btn-sm`}>
+        <div className="tooltip tooltip-right" data-tip="Edit series">
+          <button
+            className={`btn btn-outline btn-square btn-sm ${btnHoverColour}`}
+          >
             <svg
               className="h-5 w-5 text-base-300"
               viewBox="0 0 24 24"
@@ -34,22 +49,26 @@ const SingleSeries = ({ series, index }: Props) => {
             </svg>
           </button>
         </div>
-        <div>
-          <svg
-            className="h-5 w-5 text-base-300 float-end"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+        <div className="tooltip tooltip-left" data-tip="Delete series">
+          <button
+            className={`btn btn-outline btn-square btn-sm ${btnHoverColour}`}
           >
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
+            <svg
+              className="h-5 w-5 text-base-300 float-end"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
         </div>
       </div>
       <div className="text-base-300 text-6xl text-center my-12">
