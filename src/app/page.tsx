@@ -40,7 +40,7 @@ export default async function Home() {
               Sign up now!
             </Link>
           ) : (
-            <Link className="btn btn-accent btn-lg" href="/timers">
+            <Link className="btn btn-accent btn-lg" href="/series">
               <svg
                 className="h-8 w-8 text-base-100"
                 width="24"

@@ -67,5 +67,5 @@ export async function register(
     }
     throw error;
   }
-  redirect("/timers");
+  redirect("/series");
 }

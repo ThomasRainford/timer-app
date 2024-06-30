@@ -26,8 +26,8 @@ const MobileDropdown = ({ user }: { user?: User }) => {
         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
       >
         <li>
-          <Link className="text-accent" href={"/timers"}>
-            Timers
+          <Link className="text-accent" href={"/series"}>
+            Series
           </Link>
         </li>
         <li>
@@ -79,8 +79,8 @@ const AppNameAndLinks = () => {
       <div className="ml-3 hidden md:block">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link href={"/timers"}>
-              <h3 className="prose font-bold text-accent">Timers</h3>
+            <Link href={"/series"}>
+              <h3 className="prose font-bold text-accent">Series</h3>
             </Link>
           </li>
         </ul>
