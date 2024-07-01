@@ -1,16 +1,15 @@
 "use client";
 
-import { buttonHoverColours } from "@/app/components/util";
+import { Colour, buttonHoverColours } from "@/app/components/util";
 
 interface Props {
   id: number;
   name: string;
-  colour: string;
+  colour: Colour;
 }
 
 const DeleteSeriesModal = ({ id, name, colour }: Props) => {
-  const btnHoverColour =
-    buttonHoverColours[colour as keyof typeof buttonHoverColours];
+  const btnHoverColour = buttonHoverColours[colour];
 
   const modalId = "delete_series_modal_" + id;
 

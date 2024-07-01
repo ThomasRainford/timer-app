@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  Colour,
-  buttonHoverColours,
-  supprtedColours,
-} from "@/app/components/util";
+import { Colour, buttonHoverColours } from "@/app/components/util";
 import { ChangeEvent, useState } from "react";
 import EditSeriesForm from "./edit-series-form";
 
@@ -15,17 +11,10 @@ interface Props {
 }
 
 const EditSeriesModal = ({ id, name, colour }: Props) => {
-  const [newName, setNewName] = useState(name);
-  const [selectedColour, setSelectedColour] =
-    useState<keyof typeof supprtedColours>(colour);
+  const [selectedColour, setSelectedColour] = useState<Colour>(colour);
 
-  const btnHoverColour =
-    buttonHoverColours[colour as keyof typeof buttonHoverColours];
+  const btnHoverColour = buttonHoverColours[colour];
   const modalId = "edit_series_modal_" + id;
-
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewName(e.target.value);
-  };
 
   const handleColourChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -68,6 +57,7 @@ const EditSeriesModal = ({ id, name, colour }: Props) => {
               initialName={name}
               initialColour={colour}
               selectedColour={selectedColour}
+              handleColourChange={handleColourChange}
             />
           </div>
         </div>

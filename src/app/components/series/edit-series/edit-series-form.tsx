@@ -2,6 +2,7 @@
 
 import { Colour, supprtedColours } from "@/app/components/util";
 import { editSeries } from "@/app/lib/actions";
+import { ChangeEvent } from "react";
 import { useFormState } from "react-dom";
 
 interface Props {
@@ -10,6 +11,7 @@ interface Props {
   initialName: string;
   initialColour: string;
   selectedColour: Colour;
+  handleColourChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const EditSeriesForm = ({
@@ -18,6 +20,7 @@ const EditSeriesForm = ({
   initialName,
   initialColour,
   selectedColour,
+  handleColourChange,
 }: Props) => {
   const colours = Object.keys(supprtedColours).map((c) => {
     return c.charAt(0).toUpperCase() + c.slice(1);
@@ -60,6 +63,7 @@ const EditSeriesForm = ({
           name="colour"
           className="select select-bordered select-md bg-base-100"
           defaultValue={initialColourSelect}
+          onChange={handleColourChange}
         >
           <option disabled selected>
             Colour
