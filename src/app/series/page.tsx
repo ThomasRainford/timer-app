@@ -9,6 +9,9 @@ const Series = async () => {
     where: { email: userEmail },
   });
   const series = await prisma.series.findMany({
+    orderBy: {
+      id: "asc",
+    },
     where: {
       ownerId: user?.id,
     },
