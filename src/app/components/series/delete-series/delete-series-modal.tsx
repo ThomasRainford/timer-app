@@ -1,6 +1,7 @@
 "use client";
 
 import { Colour, buttonHoverColours } from "@/app/components/util";
+import DeleteSeriesForm from "./delete-series-form";
 
 interface Props {
   id: number;
@@ -42,9 +43,7 @@ const DeleteSeriesModal = ({ id, name, colour }: Props) => {
           <h3 className="font-bold text-lg text-accent">{`Delete ${name}?`}</h3>
           <p className="py-4">Are you sure you want to delete this series?</p>
           <div className="flex justify-end mt-4">
-            <div>
-              <button className="btn btn-error">Delete</button>
-            </div>
+            <DeleteSeriesForm id={id} />
             <div className="modal-action mt-0 ml-4">
               <form method="dialog">
                 <button className="btn outline">Cancel</button>

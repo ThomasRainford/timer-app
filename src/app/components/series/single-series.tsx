@@ -1,6 +1,6 @@
 import { Prisma } from "@prisma/client";
 import { Colour, supprtedColours, supprtedHoverColours } from "../util";
-import DeleteSeriesModal from "./delete-series-modal";
+import DeleteSeriesModal from "./delete-series/delete-series-modal";
 import EditSeriesModal from "./edit-series/edit-series-modal";
 
 interface Props {

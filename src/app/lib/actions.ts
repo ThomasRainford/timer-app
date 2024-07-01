@@ -105,10 +105,27 @@ export async function editSeries(id: number, _: State, formData: FormData) {
       data: { name, colour },
     });
   } catch (error) {
+    console.error(error);
     return {
       message: "Database Error: Failed to Edit Series.",
     };
   }
   // Revalidate the cache for the series page.
   revalidatePath("/series");
+  return { message: "Updated Series." };
+}
+
+export async function deleteSeries(id: number) {
+  try {
+    await prisma.series.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.error(error);
+    return {
+      message: "Database Error: Failed to Delete Series.",
+    };
+  }
+  revalidatePath("/series");
+  return { message: "Deleted Series." };
 }
