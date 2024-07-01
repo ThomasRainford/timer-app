@@ -1,13 +1,17 @@
 "use client";
 
-import { buttonHoverColours, supprtedColours } from "@/app/components/util";
+import {
+  Colour,
+  buttonHoverColours,
+  supprtedColours,
+} from "@/app/components/util";
 import { ChangeEvent, useState } from "react";
 import EditSeriesForm from "./edit-series-form";
 
 interface Props {
   id: number;
   name: string;
-  colour: keyof typeof supprtedColours;
+  colour: Colour;
 }
 
 const EditSeriesModal = ({ id, name, colour }: Props) => {
@@ -26,7 +30,7 @@ const EditSeriesModal = ({ id, name, colour }: Props) => {
   const handleColourChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
     const colour = value.charAt(0).toLowerCase() + value.slice(1);
-    setSelectedColour(colour as keyof typeof supprtedColours);
+    setSelectedColour(colour as Colour);
   };
 
   return (
@@ -62,11 +66,8 @@ const EditSeriesModal = ({ id, name, colour }: Props) => {
               modalId={modalId}
               id={id}
               initialName={name}
-              newName={newName}
               initialColour={colour}
               selectedColour={selectedColour}
-              handleNameChange={handleNameChange}
-              handleColourChange={handleColourChange}
             />
           </div>
         </div>

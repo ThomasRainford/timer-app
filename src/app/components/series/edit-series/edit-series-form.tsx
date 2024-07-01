@@ -1,28 +1,23 @@
 "use client";
 
-import { supprtedColours } from "@/app/components/util";
-import { ChangeEvent, FormEvent } from "react";
+import { Colour, supprtedColours } from "@/app/components/util";
+import { editSeries } from "@/app/lib/actions";
+import { useFormState } from "react-dom";
 
 interface Props {
   modalId: string;
   id: number;
   initialName: string;
-  newName: string;
   initialColour: string;
-  selectedColour: keyof typeof supprtedColours;
-  handleNameChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleColourChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  selectedColour: Colour;
 }
 
 const EditSeriesForm = ({
   modalId,
   id,
   initialName,
-  newName,
   initialColour,
   selectedColour,
-  handleNameChange,
-  handleColourChange,
 }: Props) => {
   const colours = Object.keys(supprtedColours).map((c) => {
     return c.charAt(0).toUpperCase() + c.slice(1);
@@ -32,25 +27,16 @@ const EditSeriesForm = ({
   const selectedColourDisplay =
     supprtedColours[
       (selectedColour.charAt(0).toLowerCase() +
-        selectedColour.slice(1)) as keyof typeof supprtedColours
+        selectedColour.slice(1)) as Colour
     ];
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData();
-    formData.append("name", newName);
-    formData.append("colour", selectedColour);
-    const res = await fetch(`/api/series/${id}`, {
-      method: "PUT",
-      body: formData,
-    });
-    if (!res.ok) {
-      console.error("Failed to update record");
-    }
-  };
+  const editSeriesWithId = editSeries.bind(null, id);
+
+  const initialState = { message: null, errors: {} };
+  const [state, dispatch] = useFormState(editSeriesWithId as any, initialState);
 
   return (
-    <form onSubmit={handleSubmit} id={`edit-series-form-${id}`} method="dialog">
+    <form action={dispatch} id={`edit-series-form-${id}`} method="dialog">
       <div className="form-control">
         <label className="label" htmlFor="name">
           <span className="label-text text-lg">Name</span>
@@ -63,7 +49,6 @@ const EditSeriesForm = ({
           className="input input-bordered input-md bg-base-100"
           required
           defaultValue={initialName}
-          onChange={handleNameChange}
         />
       </div>
       <div className="form-control">
@@ -75,7 +60,6 @@ const EditSeriesForm = ({
           name="colour"
           className="select select-bordered select-md bg-base-100"
           defaultValue={initialColourSelect}
-          onChange={handleColourChange}
         >
           <option disabled selected>
             Colour

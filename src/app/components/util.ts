@@ -72,3 +72,5 @@ export const buttonHoverColours = {
   magenta: "bg-magenta-400",
   rose: "bg-pink-400",
 };
+
+export type Colour = keyof typeof supprtedColours;

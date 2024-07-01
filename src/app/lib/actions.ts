@@ -83,9 +83,11 @@ export async function register(_: string | undefined, formData: FormData) {
 }
 
 export async function editSeries(id: number, _: State, formData: FormData) {
+  let formColour = formData.get("colour") as string;
+  formColour = formColour.charAt(0).toLowerCase() + formColour.slice(1);
   const validatedFields = EditSeries.safeParse({
     name: formData.get("name"),
-    colour: formData.get("colour"),
+    colour: formColour,
   });
   // If form validation fails, return errors early. Otherwise, continue.
   if (!validatedFields.success) {
