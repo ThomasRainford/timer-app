@@ -1,7 +1,7 @@
 "use client";
 
 import { Colour, supprtedColours } from "@/app/components/util";
-import { editSeries } from "@/app/lib/actions";
+import { State, editSeries } from "@/app/lib/actions";
 import { ChangeEvent } from "react";
 import { useFormState } from "react-dom";
 
@@ -36,7 +36,13 @@ const EditSeriesForm = ({
   const editSeriesWithId = editSeries.bind(null, id);
 
   const initialState = { message: null, errors: {} };
-  const [state, dispatch] = useFormState(editSeriesWithId as any, initialState);
+  const [state, dispatch] = useFormState<State>(
+    editSeriesWithId as any,
+    initialState
+  );
+
+  const nameError = state.errors?.name;
+  const colourError = state.errors?.colour;
 
   return (
     <form action={dispatch} id={`edit-series-form-${id}`}>
@@ -53,6 +59,11 @@ const EditSeriesForm = ({
           required
           defaultValue={initialName}
         />
+        <div>
+          {nameError ? (
+            <span className="text-error text-sm">{nameError}</span>
+          ) : null}
+        </div>
       </div>
       <div className="form-control">
         <label className="label" htmlFor="colour">
@@ -70,6 +81,11 @@ const EditSeriesForm = ({
             <option key={colour}>{colour}</option>
           ))}
         </select>
+        <div>
+          {nameError ? (
+            <span className="text-error text-sm">{nameError}</span>
+          ) : null}
+        </div>
       </div>
       <div className={`w-full h-[20px] ${selectedColourDisplay} mt-1`} />
       <div className="flex justify-end mt-4">
