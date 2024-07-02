@@ -25,31 +25,6 @@ export const supprtedColours = {
 
 export const supprtedHoverColours = {
   white: "hover:bg-white",
-  slate: "hover:bg-gray-400",
-  gray: "hover:bg-gray-400",
-  stone: "hover:bg-stone-400",
-  red: "hover:bg-red-500",
-  orange: "hover:bg-orange-400",
-  amber: "hover:bg-amber-400",
-  yellow: "hover:bg-yellow-400",
-  lime: "hover:bg-lime-400",
-  green: "hover:bg-green-500",
-  emerald: "hover:bg-emerald-400",
-  teal: "hover:bg-teal-400",
-  cyan: "hover:bg-cyan-400",
-  sky: "hover:bg-sky-400",
-  blue: "hover:bg-blue-400",
-  indigo: "hover:bg-indigo-400",
-  violet: "hover:bg-violet-400",
-  purple: "hover:bg-purple-400",
-  fuchsia: "hover:bg-fuchsia-400",
-  pink: "hover:bg-pink-400",
-  magenta: "hover:bg-magenta-400",
-  rose: "hover:bg-pink-400",
-};
-
-export const buttonHoverColours = {
-  white: "hover:bg-white",
   slate: "hover:bg-gray-500",
   gray: "hover:bg-gray-500",
   stone: "hover:bg-stone-500",
@@ -71,6 +46,31 @@ export const buttonHoverColours = {
   pink: "hover:bg-pink-500",
   magenta: "hover:bg-magenta-500",
   rose: "hover:bg-pink-500",
+};
+
+export const buttonHoverColours = {
+  white: "hover:bg-white",
+  slate: "hover:bg-gray-400",
+  gray: "hover:bg-gray-400",
+  stone: "hover:bg-stone-400",
+  red: "hover:bg-red-400",
+  orange: "hover:bg-orange-400",
+  amber: "hover:bg-amber-400",
+  yellow: "hover:bg-yellow-400",
+  lime: "hover:bg-lime-400",
+  green: "hover:bg-green-400",
+  emerald: "hover:bg-emerald-400",
+  teal: "hover:bg-teal-400",
+  cyan: "hover:bg-cyan-400",
+  sky: "hover:bg-sky-400",
+  blue: "hover:bg-blue-400",
+  indigo: "hover:bg-indigo-400",
+  violet: "hover:bg-violet-400",
+  purple: "hover:bg-purple-400",
+  fuchsia: "hover:bg-fuchsia-400",
+  pink: "hover:bg-pink-400",
+  magenta: "hover:bg-magenta-400",
+  rose: "hover:bg-pink-400",
 };
 
 export type Colour = keyof typeof supprtedColours;
