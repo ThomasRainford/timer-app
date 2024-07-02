@@ -39,7 +39,7 @@ const EditSeriesForm = ({
   const [state, dispatch] = useFormState(editSeriesWithId as any, initialState);
 
   return (
-    <form action={dispatch} id={`edit-series-form-${id}`} method="dialog">
+    <form action={dispatch} id={`edit-series-form-${id}`}>
       <div className="form-control">
         <label className="label" htmlFor="name">
           <span className="label-text text-lg">Name</span>
@@ -65,9 +65,7 @@ const EditSeriesForm = ({
           defaultValue={initialColourSelect}
           onChange={handleColourChange}
         >
-          <option disabled selected>
-            Colour
-          </option>
+          <option disabled>Colour</option>
           {colours.map((colour) => (
             <option key={colour}>{colour}</option>
           ))}
