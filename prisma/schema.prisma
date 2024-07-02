@@ -22,7 +22,7 @@ model User {
 
 model Series {
   id       Int     @id @default(autoincrement())
-  owner    User    @relation(fields: [ownerId], references: [id])
+  owner    User    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   ownerId  Int
   name     String
   colour   String
@@ -31,7 +31,7 @@ model Series {
 
 model Timer {
   id        Int     @id @default(autoincrement())
-  series    Series  @relation(fields: [seriesId], references: [id])
+  series    Series  @relation(fields: [seriesId], references: [id], onDelete: Cascade)
   seriesId  Int
   name      String
   colour    String

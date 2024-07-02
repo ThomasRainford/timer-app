@@ -62,7 +62,8 @@ const series = () => {
 };
 
 async function main() {
-  console.log("Seed main function");
+  await prisma.user.deleteMany();
+
   const user01 = await prisma.user.upsert({
     where: { email: "user01@mail.com" },
     update: {},

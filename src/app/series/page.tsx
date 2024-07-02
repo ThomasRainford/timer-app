@@ -9,6 +9,9 @@ const Series = async () => {
     where: { email: userEmail },
   });
   const series = await prisma.series.findMany({
+    orderBy: {
+      id: "asc",
+    },
     where: {
       ownerId: user?.id,
     },
@@ -18,9 +21,9 @@ const Series = async () => {
   });
 
   return (
-    <div className="flex justify-center ">
-      <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full px-4 sticky overflow-y-scroll overscroll-contain">
-        {series.map((s, i) => (
+    <div className="flex justify-center mt-1 mb-4 overflow-y-hidden">
+      <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full px-4 overflow-y-auto">
+        {[...series].map((s, i) => (
           <SingleSeries key={s.id} series={s} index={i} />
         ))}
       </div>

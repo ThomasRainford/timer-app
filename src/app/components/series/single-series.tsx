@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
-import { supprtedColours, supprtedHoverColours } from "../util";
-import DeleteSeriesModal from "./delete-series-modal";
-import EditSeriesModal from "./edit-series-modal";
+import { Colour, supprtedColours, supprtedHoverColours } from "../util";
+import DeleteSeriesModal from "./delete-series/delete-series-modal";
+import EditSeriesModal from "./edit-series/edit-series-modal";
 
 interface Props {
   series: Prisma.SeriesGetPayload<{ include: { timers: true } }>;
@@ -15,11 +15,10 @@ const SingleSeries = ({ series, index }: Props) => {
   const totalTime = series.timers.reduce((acc, curr) => {
     return acc + curr.main + curr.interval;
   }, 0);
-  const colour = series.colour;
+  const colour = series.colour as Colour;
 
-  const dislayColour = supprtedColours[colour as keyof typeof supprtedColours];
-  const hoverColour =
-    supprtedHoverColours[colour as keyof typeof supprtedHoverColours];
+  const dislayColour = supprtedColours[colour];
+  const hoverColour = supprtedHoverColours[colour];
 
   return (
     <div
