@@ -43,7 +43,7 @@ const DeleteSeriesModal = ({ id, name, colour }: Props) => {
           <h3 className="font-bold text-lg text-accent">{`Delete ${name}?`}</h3>
           <p className="py-4">Are you sure you want to delete this series?</p>
           <div className="flex justify-end mt-4">
-            <DeleteSeriesForm id={id} />
+            <DeleteSeriesForm id={id} modalId={modalId} />
             <div className="modal-action mt-0 ml-4">
               <form method="dialog">
                 <button className="btn outline">Cancel</button>
