@@ -1,6 +1,7 @@
 import { auth, signOut } from "@/auth";
 import { User } from "@prisma/client";
 import Link from "next/link";
+import ThemeController from "./theme-controller";
 
 const MobileDropdown = ({ user }: { user?: User }) => {
   return (
@@ -127,7 +128,7 @@ const NavBar = async () => {
         <AppNameAndLinks />
       </div>
       <div className="flex justify-end float-end w-1/4 md:navbar-end mr-1">
-        {/* <ThemeController /> // Currently disabled. */}
+        <ThemeController />
         {!user ? (
           <div className="hidden md:block">
             <LoginButton />

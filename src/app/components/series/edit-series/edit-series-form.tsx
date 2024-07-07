@@ -2,8 +2,9 @@
 
 import { Colour, supprtedColours } from "@/app/components/util";
 import { State, editSeries } from "@/app/lib/actions";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import { useFormState } from "react-dom";
+import { ToastContainer } from "react-toastify";
 
 interface Props {
   modalId: string;
@@ -22,6 +23,7 @@ const EditSeriesForm = ({
   selectedColour,
   handleColourChange,
 }: Props) => {
+  const [hasSubmitted, setHasSubmitted] = useState(false);
   const colours = Object.keys(supprtedColours).map((c) => {
     return c.charAt(0).toUpperCase() + c.slice(1);
   });
@@ -34,8 +36,7 @@ const EditSeriesForm = ({
     ];
 
   const editSeriesWithId = editSeries.bind(null, id);
-
-  const initialState = { message: null, errors: {} };
+  let initialState = { message: null, errors: undefined };
   const [state, dispatch] = useFormState<State>(
     editSeriesWithId as any,
     initialState
@@ -43,6 +44,11 @@ const EditSeriesForm = ({
 
   const nameError = state.errors?.name;
   const colourError = state.errors?.colour;
+
+  if (hasSubmitted && state.message) {
+    (document.getElementById(modalId) as any)?.close();
+    setHasSubmitted(false);
+  }
 
   return (
     <form action={dispatch} id={`edit-series-form-${id}`}>
@@ -82,8 +88,8 @@ const EditSeriesForm = ({
           ))}
         </select>
         <div>
-          {nameError ? (
-            <span className="text-error text-sm">{nameError}</span>
+          {colourError ? (
+            <span className="text-error text-sm">{colourError}</span>
           ) : null}
         </div>
       </div>
@@ -94,9 +100,13 @@ const EditSeriesForm = ({
             type="submit"
             form={`edit-series-form-${id}`}
             className="btn btn-primary"
+            onClick={(e) => {
+              setHasSubmitted(true);
+            }}
           >
             Confirm
           </button>
+          <ToastContainer />
         </div>
         <div className="mt-0 ml-4">
           <button
