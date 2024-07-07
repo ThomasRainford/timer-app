@@ -1,19 +1,30 @@
 "use client";
 
-import { useEffect } from "react";
-import { themeChange } from "theme-change";
+import { useEffect, useState } from "react";
 
 const ThemeController = () => {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "light");
+  const handleToggle = (e: any) => {
+    if (e.target.checked) {
+      setTheme("light");
+    } else {
+      setTheme("dark");
+    }
+  };
   useEffect(() => {
-    themeChange(false);
-  }, []);
+    localStorage.setItem("theme", theme!);
+    const localTheme = localStorage.getItem("theme");
+    document.querySelector("html")?.setAttribute("data-theme", localTheme!);
+  }, [theme]);
 
   return (
     <div>
       <label className="cursor-pointer grid place-items-center">
         <input
           type="checkbox"
-          value="light"
+          checked={theme === "light"}
+          onChange={handleToggle}
+          value={theme}
           className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2"
         />
         <svg
