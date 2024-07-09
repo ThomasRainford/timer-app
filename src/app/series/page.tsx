@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import Link from "next/link";
 import SingleSeries from "../components/series/single-series";
 import prisma from "../lib/db";
 
@@ -23,7 +24,10 @@ const Series = async () => {
   return (
     <div className="flex flex-col justify-center overflow-y-hidden px-4 mt-2">
       <div className="mb-4">
-        <button className="btn btn-primary w-full md:w-[30%] text-md">
+        <Link
+          className="btn btn-primary w-full md:w-[30%] text-md"
+          href={"/series/create"}
+        >
           <svg
             className="h-6 w-6"
             width="24"
@@ -40,9 +44,9 @@ const Series = async () => {
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
           Create New Series
-        </button>
+        </Link>
       </div>
-      <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-2 w-full overflow-y-auto">
+      <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-2 w-full overflow-y-auto pb-4">
         {[...series].map((s, i) => (
           <SingleSeries key={s.id} series={s} index={i} />
         ))}

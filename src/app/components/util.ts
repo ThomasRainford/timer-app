@@ -74,3 +74,8 @@ export const buttonHoverColours = {
 };
 
 export type Colour = keyof typeof supprtedColours;
+
+export const randomColour = (): Colour => {
+  const colours = Object.keys(supprtedColours) as Colour[];
+  return colours[Math.floor(Math.random() * colours.length)];
+};

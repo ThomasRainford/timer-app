@@ -1,55 +1,42 @@
 "use client";
 
-import { Colour, supprtedColours } from "@/app/components/util";
-import { State, editSeries } from "@/app/lib/actions";
+import { State, createSeries } from "@/app/lib/actions";
+import Link from "next/link";
 import { ChangeEvent, useState } from "react";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
+import { Colour, randomColour, supprtedColours } from "../../util";
 
-interface Props {
-  modalId: string;
-  id: number;
-  initialName: string;
-  initialColour: string;
-  selectedColour: Colour;
-  handleColourChange: (e: ChangeEvent<HTMLSelectElement>) => void;
-}
-
-const EditSeriesForm = ({
-  modalId,
-  id,
-  initialName,
-  initialColour,
-  selectedColour,
-  handleColourChange,
-}: Props) => {
-  const [hasSubmitted, setHasSubmitted] = useState(false);
+const CreateSeriesForm = () => {
+  const [selectedColour, setSelectedColour] = useState<Colour>(randomColour());
   const colours = Object.keys(supprtedColours).map((c) => {
     return c.charAt(0).toUpperCase() + c.slice(1);
   });
   const initialColourSelect =
-    initialColour.charAt(0).toUpperCase() + initialColour.slice(1);
-  const selectedColourDisplay =
-    supprtedColours[
-      (selectedColour.charAt(0).toLowerCase() +
-        selectedColour.slice(1)) as Colour
-    ];
+    selectedColour.charAt(0).toUpperCase() + selectedColour.slice(1);
+  const selectedColourDisplay = selectedColour
+    ? supprtedColours[
+        (selectedColour.charAt(0).toLowerCase() +
+          selectedColour.slice(1)) as Colour
+      ]
+    : "";
 
-  let initialState = { message: null, errors: undefined };
+  const handleColourChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    const colour = value.charAt(0).toLowerCase() + value.slice(1);
+    setSelectedColour(colour as Colour);
+  };
+  let initialState = { message: null, errors: undefined } as State;
   const [state, dispatch] = useFormState<State>(
-    editSeries as any,
+    createSeries as any,
     initialState
   );
+  const { pending } = useFormStatus();
 
   const nameError = state.errors?.name;
   const colourError = state.errors?.colour;
 
-  if (hasSubmitted && state.message) {
-    (document.getElementById(modalId) as any)?.close();
-    setHasSubmitted(false);
-  }
-
   return (
-    <form action={dispatch} id={`edit-series-form-${id}`}>
+    <form action={dispatch} id="create-series-form" className="w-full">
       <div className="form-control">
         <label className="label" htmlFor="name">
           <span className="label-text text-lg">Name</span>
@@ -61,7 +48,6 @@ const EditSeriesForm = ({
           placeholder="Series name"
           className="input input-bordered input-md bg-base-100"
           required
-          defaultValue={initialName}
         />
         <div>
           {nameError ? (
@@ -77,8 +63,8 @@ const EditSeriesForm = ({
           id="colour"
           name="colour"
           className="select select-bordered select-md bg-base-100"
-          defaultValue={initialColourSelect}
           onChange={handleColourChange}
+          defaultValue={initialColourSelect}
         >
           <option disabled>Colour</option>
           {colours.map((colour) => (
@@ -96,29 +82,21 @@ const EditSeriesForm = ({
         <div>
           <button
             type="submit"
-            form={`edit-series-form-${id}`}
+            form={`create-series-form`}
             className="btn btn-primary"
-            onClick={(e) => {
-              setHasSubmitted(true);
-            }}
+            aria-disabled={pending}
           >
             Confirm
           </button>
         </div>
         <div className="mt-0 ml-4">
-          <button
-            className="btn outline"
-            onClick={(e) => {
-              e.preventDefault();
-              (document.getElementById(modalId) as any)?.close();
-            }}
-          >
+          <Link className="btn outline" href={"/series"}>
             Cancel
-          </button>
+          </Link>
         </div>
       </div>
     </form>
   );
 };
 
-export default EditSeriesForm;
+export default CreateSeriesForm;

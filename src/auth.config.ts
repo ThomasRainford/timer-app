@@ -7,6 +7,11 @@ export const authConfig = {
     newUser: "/register",
   },
   callbacks: {
+    async session({ session, token }) {
+      // Attach 'id' to session.
+      session.user = { ...session.user, id: token.sub || "" };
+      return session;
+    },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const isRegisterPage = nextUrl.pathname.startsWith("/register");

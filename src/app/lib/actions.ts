@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn } from "@/auth";
+import { auth, signIn } from "@/auth";
 import { Prisma } from "@prisma/client";
 import * as bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
@@ -93,7 +93,7 @@ export async function editSeries(id: number, _: State, formData: FormData) {
   if (!validatedFields.success) {
     return {
       errors: validatedFields.error.flatten().fieldErrors,
-      message: "Missing Fields. Failed to Edit Series.",
+      message: "Missing Fields. Failed to Create Series.",
     };
   }
   // Prepare data for insertion into the database
@@ -107,12 +107,12 @@ export async function editSeries(id: number, _: State, formData: FormData) {
   } catch (error) {
     console.error(error);
     return {
-      message: "Database Error: Failed to Edit Series.",
+      message: "Database Error: Failed to Create Series.",
     };
   }
   // Revalidate the cache for the series page.
   revalidatePath("/series");
-  return { message: "Updated Series." };
+  return { message: "Created Series." };
 }
 
 export async function deleteSeries(id: number) {
@@ -128,4 +128,46 @@ export async function deleteSeries(id: number) {
   }
   revalidatePath("/series");
   return { message: "Deleted Series." };
+}
+
+export async function createSeries(_: State, formData: FormData) {
+  // Validate user is logged in.
+  const session = await auth();
+  const userId = Number(session?.user?.id);
+  if (!userId) {
+    return {
+      message: "You must be logged in to create a series.",
+    };
+  }
+  // Process form data.
+  let formColour = formData.get("colour") as string;
+  formColour = formColour.charAt(0).toLowerCase() + formColour.slice(1);
+  const validatedFields = EditSeries.safeParse({
+    name: formData.get("name"),
+    colour: formColour,
+  });
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Missing Fields. Failed to Edit Series.",
+    };
+  }
+  // Prepare data for insertion into the database
+  const { name, colour } = validatedFields.data;
+  // Update series.
+  try {
+    await prisma.series.create({
+      data: { name, colour, ownerId: userId },
+    });
+  } catch (error) {
+    console.error(error);
+    return {
+      message: "Database Error: Failed to Edit Series.",
+    };
+  }
+  // Revalidate the cache for the series page.
+  revalidatePath("/series");
+  redirect("/series");
+  return { message: "Updated Series." };
 }
