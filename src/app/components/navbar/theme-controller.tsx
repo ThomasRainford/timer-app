@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react";
 
 const ThemeController = () => {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") ?? "light");
+  const [theme, setTheme] = useState(
+    global?.window !== undefined
+      ? localStorage.getItem("theme") ?? "dark"
+      : "dark"
+  );
   const handleToggle = (e: any) => {
     if (e.target.checked) {
       setTheme("light");
