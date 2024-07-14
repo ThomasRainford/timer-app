@@ -24,7 +24,7 @@ const EditSeriesModal = ({ id, name, colour }: Props) => {
 
   return (
     <>
-      <div className="tooltip tooltip-right" data-tip="Edit series">
+      <div className="tooltip tooltip-left" data-tip="Edit series">
         <button
           className={`btn btn-outline btn-square btn-sm ${btnHoverColour}`}
           onClick={() => {

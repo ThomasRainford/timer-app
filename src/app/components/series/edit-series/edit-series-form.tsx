@@ -34,9 +34,10 @@ const EditSeriesForm = ({
         selectedColour.slice(1)) as Colour
     ];
 
+  const editSeriesWithId = editSeries.bind(null, id);
   let initialState = { message: null, errors: undefined };
   const [state, dispatch] = useFormState<State>(
-    editSeries as any,
+    editSeriesWithId as any,
     initialState
   );
 
@@ -98,7 +99,7 @@ const EditSeriesForm = ({
             type="submit"
             form={`edit-series-form-${id}`}
             className="btn btn-primary"
-            onClick={(e) => {
+            onClick={() => {
               setHasSubmitted(true);
             }}
           >

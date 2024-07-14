@@ -111,7 +111,7 @@ export async function editSeries(id: number, _: State, formData: FormData) {
     };
   }
   // Revalidate the cache for the series page.
-  revalidatePath("/series");
+  revalidatePath(`/series/${id}`);
   return { message: "Created Series." };
 }
 
@@ -126,7 +126,7 @@ export async function deleteSeries(id: number) {
       message: "Database Error: Failed to Delete Series.",
     };
   }
-  revalidatePath("/series");
+  redirect("/series");
   return { message: "Deleted Series." };
 }
 
