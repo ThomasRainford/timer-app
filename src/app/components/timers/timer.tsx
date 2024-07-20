@@ -18,7 +18,7 @@ const TimerComponent = ({ timer }: Props) => {
   return (
     <div>
       <div
-        className={`flex flex-col ${dislayColour} ${hoverColour} cursor-pointer rounded-md p-2 mt-2`}
+        className={`flex flex-col ${dislayColour} ${hoverColour} cursor-pointer rounded-md py-2 px-4 mt-2`}
       >
         <div>
           <h6 className="text-base-300 text-sm font-bold text-center">

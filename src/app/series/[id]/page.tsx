@@ -45,13 +45,13 @@ const Series = async ({ params }: Props) => {
   const colour = series?.colour as Colour;
   const timers = series?.timers;
   return (
-    <div className="px-4 mt-4">
+    <div className="flex flex-col md:self-center px-2 md:px-0 md:w-[90%] lg:w-[75%] mt-4 overflow-y-hidden">
       <div>
         <TimersHeading id={id} name={name} colour={colour} />
       </div>
       <div className="divider divider-primary mt-6 text-xl">Timers</div>
-      <div className="">
-        {timers.map((timer) => {
+      <div className="overflow-y-auto">
+        {[...timers].map((timer) => {
           return <Timer key={timer.id} timer={timer} />;
         })}
       </div>
