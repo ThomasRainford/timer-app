@@ -16,7 +16,7 @@ const TimersHeading = ({ id, name, colour }: Props) => {
   const btnHoverColour = buttonHoverColours[colour];
 
   return (
-    <div className={`flex justify-between p-4 ${dislayColour} rounded`}>
+    <div className={`flex justify-between p-3 ${dislayColour} rounded`}>
       <div className="flex flex-row">
         <Link
           className={`btn btn-outline btn-square btn-sm ${btnHoverColour}`}
