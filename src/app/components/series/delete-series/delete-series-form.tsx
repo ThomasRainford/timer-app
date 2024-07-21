@@ -10,10 +10,10 @@ interface Props {
 }
 
 const DeleteSeriesForm = ({ id, modalId }: Props) => {
-  const deleteInvoiceWithId = deleteSeries.bind(null, id);
+  const deleteSeriesWithId = deleteSeries.bind(null, id);
   const initialState = { message: null, errors: undefined };
   const [state, dispatch] = useFormState<State>(
-    deleteInvoiceWithId,
+    deleteSeriesWithId,
     initialState
   );
 

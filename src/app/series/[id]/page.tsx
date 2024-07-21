@@ -44,7 +44,9 @@ const Series = async ({ params }: Props) => {
   const id = series?.id;
   const name = series?.name;
   const colour = series?.colour as Colour;
-  const timers = series?.timers;
+  const timers = series?.timers.sort((a, b) => {
+    return a.position - b.position;
+  });
   return (
     <div className="flex flex-col md:self-center px-2 md:px-0 md:w-[90%] lg:w-[75%] mt-2 overflow-y-hidden">
       <div>

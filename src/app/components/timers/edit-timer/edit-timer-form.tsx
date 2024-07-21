@@ -1,7 +1,7 @@
 "use client";
 
 import { Colour, supprtedColours } from "@/app/components/util";
-import { State, editSeries } from "@/app/lib/actions";
+import { State, editTimer } from "@/app/lib/actions";
 import { ChangeEvent, useState } from "react";
 import { useFormState } from "react-dom";
 
@@ -11,21 +11,15 @@ interface Props {
   initialName: string;
   initialColour: string;
   selectedColour: Colour;
-  initialRepeat: number;
-  initialInterval: number;
-  initialMain: number;
   handleColourChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const EditSeriesForm = ({
+const EditTimerForm = ({
   modalId,
   id,
   initialName,
   initialColour,
   selectedColour,
-  initialRepeat,
-  initialInterval,
-  initialMain,
   handleColourChange,
 }: Props) => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -40,10 +34,10 @@ const EditSeriesForm = ({
         selectedColour.slice(1)) as Colour
     ];
 
-  const editSeriesWithId = editSeries.bind(null, id);
+  const editTimerWithId = editTimer.bind(null, id);
   let initialState = { message: null, errors: undefined };
   const [state, dispatch] = useFormState<State>(
-    editSeriesWithId as any,
+    editTimerWithId as any,
     initialState
   );
 
@@ -56,7 +50,7 @@ const EditSeriesForm = ({
   }
 
   return (
-    <form action={dispatch} id={`edit-series-form-${id}`}>
+    <form action={dispatch} id={`edit-timer-form-${id}`}>
       <div className="form-control">
         <label className="label" htmlFor="name">
           <span className="label-text text-lg">Name</span>
@@ -65,7 +59,7 @@ const EditSeriesForm = ({
           id="name"
           type="text"
           name="name"
-          placeholder="Series name"
+          placeholder="Timer name"
           className="input input-bordered input-md bg-base-100"
           required
           defaultValue={initialName}
@@ -100,17 +94,20 @@ const EditSeriesForm = ({
       </div>
       <div className={`w-full h-[20px] ${selectedColourDisplay} mt-1`} />
       <div className="form-control">
-        <label className="label cursor-pointer" htmlFor="repeat">
-          <span className="label-text text-lg">Repeat?</span>
-          <input
-            id="repeat"
-            type="checkbox"
-            name="repeat"
-            required
-            defaultValue={initialRepeat}
-            className="toggle toggle-primary"
-          />
+        <label className="label" htmlFor="repeat">
+          <span className="label-text text-lg">Repetitions</span>
+          <span className="label-text-alt text-sm">(0 for none)</span>
         </label>
+        <input
+          id="repeat"
+          type="number"
+          name="repeat"
+          className="input input-bordered input-md bg-base-100 "
+          required
+          min={0}
+          max={10}
+          step={1}
+        />
       </div>
       <div className="form-control">
         <label className="label" htmlFor="interval">
@@ -125,7 +122,6 @@ const EditSeriesForm = ({
           name="interval"
           className="input input-bordered input-md bg-base-100 "
           required
-          value={initialInterval}
           min={0}
           step={5}
         />
@@ -141,7 +137,6 @@ const EditSeriesForm = ({
           name="main"
           className="input input-bordered input-md bg-base-100 "
           required
-          value={initialMain}
           min={0}
           step={5}
         />
@@ -150,7 +145,7 @@ const EditSeriesForm = ({
         <div>
           <button
             type="submit"
-            form={`edit-series-form-${id}`}
+            form={`edit-timer-form-${id}`}
             className="btn btn-primary"
             onClick={() => {
               setHasSubmitted(true);
@@ -175,4 +170,4 @@ const EditSeriesForm = ({
   );
 };
 
-export default EditSeriesForm;
+export default EditTimerForm;

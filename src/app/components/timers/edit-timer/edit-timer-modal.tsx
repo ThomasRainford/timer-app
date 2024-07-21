@@ -59,9 +59,6 @@ const EditTimerModal = ({ timer }: Props) => {
               initialName={name}
               initialColour={colour}
               selectedColour={selectedColour}
-              initialRepeat={repeat}
-              initialInterval={interval}
-              initialMain={main}
               handleColourChange={handleColourChange}
             />
           </div>
