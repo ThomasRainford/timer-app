@@ -9,7 +9,7 @@ interface Props {
 }
 
 const DeleteTimerModal = ({ timer }: Props) => {
-  const { id, name, colour } = timer;
+  const { id, name, colour, seriesId } = timer;
   const btnHoverColour = buttonHoverColours[colour as Colour];
 
   const modalId = "delete_timer_modal_" + id;
@@ -46,7 +46,7 @@ const DeleteTimerModal = ({ timer }: Props) => {
           <h3 className="font-bold text-lg text-accent">{`Delete ${name}?`}</h3>
           <p className="py-4">Are you sure you want to delete this timer?</p>
           <div className="flex justify-end mt-4">
-            <DeleteTimerForm id={id} modalId={modalId} />
+            <DeleteTimerForm id={id} seriesId={seriesId} modalId={modalId} />
             <div className="modal-action mt-0 ml-4">
               <form method="dialog">
                 <button className="btn outline">Cancel</button>

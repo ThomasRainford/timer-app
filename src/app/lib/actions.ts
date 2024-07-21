@@ -220,25 +220,36 @@ export async function editTimer(id: number, _: State, formData: FormData) {
 }
 
 export async function deleteTimer(id: number, seriesId: number) {
-  // Delete timer.
-  try {
-    await prisma.timer.delete({
-      where: { id },
-    });
-  } catch (error) {
-    console.error(error);
-    return {
-      message: "Database Error: Failed to Delete Timer.",
-    };
-  }
-  // Update remaining timers positions.
-  try {
-  } catch (error) {
-    console.error(error);
-    return {
-      message: "Database Error: Failed to update timer position.",
-    };
-  }
+  prisma.$transaction(async (tx) => {
+    // Delete timer.
+    try {
+      await tx.timer.delete({
+        where: { id },
+      });
+    } catch (error) {
+      console.error(error);
+      return {
+        message: "Database Error: Failed to Delete Timer.",
+      };
+    }
+    // Update remaining timers positions.
+    try {
+      const timers = await tx.timer.findMany({ where: { seriesId } });
+      console.log("timers", timers.length, " for series ", seriesId);
+      timers.forEach(async (timer, index) => {
+        await prisma.timer.update({
+          where: { id: timer.id },
+          data: { position: index },
+        });
+      });
+    } catch (error) {
+      console.error(error);
+      return {
+        message: "Database Error: Failed to update timer position.",
+      };
+    }
+  });
+
   revalidatePath(`/series/${seriesId}`);
   return { message: "Deleted Timer." };
 }
