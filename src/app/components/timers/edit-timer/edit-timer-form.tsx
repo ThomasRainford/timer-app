@@ -11,6 +11,9 @@ interface Props {
   initialName: string;
   initialColour: string;
   selectedColour: Colour;
+  initialRepeat: number;
+  initialInterval: number;
+  initialMain: number;
   handleColourChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
@@ -20,6 +23,9 @@ const EditSeriesForm = ({
   initialName,
   initialColour,
   selectedColour,
+  initialRepeat,
+  initialInterval,
+  initialMain,
   handleColourChange,
 }: Props) => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -92,8 +98,54 @@ const EditSeriesForm = ({
           ) : null}
         </div>
       </div>
-
       <div className={`w-full h-[20px] ${selectedColourDisplay} mt-1`} />
+      <div className="form-control">
+        <label className="label cursor-pointer" htmlFor="repeat">
+          <span className="label-text text-lg">Repeat?</span>
+          <input
+            id="repeat"
+            type="checkbox"
+            name="repeat"
+            required
+            defaultValue={initialRepeat}
+            className="toggle toggle-primary"
+          />
+        </label>
+      </div>
+      <div className="form-control">
+        <label className="label" htmlFor="interval">
+          <span className="label-text text-lg">Interval</span>
+          <span className="label-text-alt text-sm">
+            (in seconds, 0 for no interval)
+          </span>
+        </label>
+        <input
+          id="interval"
+          type="number"
+          name="interval"
+          className="input input-bordered input-md bg-base-100 "
+          required
+          value={initialInterval}
+          min={0}
+          step={5}
+        />
+      </div>
+      <div className="form-control">
+        <label className="label" htmlFor="main">
+          <span className="label-text text-lg">Main</span>
+          <span className="label-text-alt text-sm">(in seconds)</span>
+        </label>
+        <input
+          id="main"
+          type="number"
+          name="main"
+          className="input input-bordered input-md bg-base-100 "
+          required
+          value={initialMain}
+          min={0}
+          step={5}
+        />
+      </div>
       <div className="flex justify-end mt-4">
         <div>
           <button

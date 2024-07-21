@@ -51,28 +51,49 @@ const Series = async ({ params }: Props) => {
         <TimersHeading id={id} name={name} colour={colour} />
       </div>
       <div className="divider divider-primary mt-5 text-xl">Timers</div>
-      <div className="mb-2">
-        <Link
-          className="btn btn-primary btn-sm w-full md:w-[30%] text-md"
-          href={`/series/${id}/timers/create`}
-        >
-          <svg
-            className="h-6 w-6"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+      <div className="mb-2 flex justify-between">
+        <div>
+          <Link
+            className="btn btn-primary btn-sm w-full text-md"
+            href={`/series/${id}/timers/create`}
           >
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <line x1="12" y1="5" x2="12" y2="19" />
-            <line x1="5" y1="12" x2="19" y2="12" />
-          </svg>
-          Create New Timer
-        </Link>
+            <svg
+              className="h-6 w-6"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            Create New Timer
+          </Link>
+        </div>
+        <div>
+          <Link
+            className="btn btn-success btn-sm w-full text-md"
+            href={`/series/${id}/run`}
+          >
+            <svg
+              className="h-6 w-6"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+            Run series
+          </Link>
+        </div>
       </div>
       <div className="overflow-y-auto">
         {[...timers].map((timer) => {
