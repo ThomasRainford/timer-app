@@ -1,5 +1,6 @@
 import { Timer } from "@prisma/client";
 import { Colour, supprtedColours } from "../util";
+import DeleteTimerModal from "./delete-timer/delete-timer-modal";
 import EditTimerModal from "./edit-timer/edit-timer-modal";
 
 interface Props {
@@ -18,7 +19,7 @@ const TimerComponent = ({ timer }: Props) => {
   return (
     <div>
       <div
-        className={`flex flex-col ${dislayColour} cursor-pointer rounded-md py-2 px-4 mb-2`}
+        className={`flex flex-col ${dislayColour} rounded-md py-2 px-4 mb-2`}
       >
         <div className="grid grid-cols-3">
           <div></div>
@@ -26,7 +27,12 @@ const TimerComponent = ({ timer }: Props) => {
             {intervalTime > 0 ? `${intervalTime} sec.` : "No Interval"}
           </h6>
           <div className="flex justify-end">
-            <EditTimerModal timer={timer} />
+            <div>
+              <EditTimerModal timer={timer} />
+            </div>
+            <div className="ml-2">
+              <DeleteTimerModal timer={timer} />
+            </div>
           </div>
         </div>
         <div className="text-base-300 text-xl font-bold text-center mt-6 mb-6">
