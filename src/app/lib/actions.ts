@@ -166,7 +166,7 @@ export async function createSeries(_: State, formData: FormData) {
   }
   // Prepare data for insertion into the database
   const { name, colour } = validatedFields.data;
-  // Update series.
+  // Create series.
   try {
     await prisma.series.create({
       data: { name, colour, ownerId: userId },
@@ -252,4 +252,62 @@ export async function deleteTimer(id: number, seriesId: number) {
 
   revalidatePath(`/series/${seriesId}`);
   return { message: "Deleted Timer." };
+}
+
+export async function createTimer(
+  id: number,
+  lastPosition: number,
+  _: State,
+  formData: FormData
+) {
+  // Validate user is logged in.
+  const session = await auth();
+  const userId = Number(session?.user?.id);
+  if (!userId) {
+    return {
+      message: "You must be logged in to create a timer.",
+    };
+  }
+  // Process form data.
+  let formColour = formData.get("colour") as string;
+  formColour = formColour.charAt(0).toLowerCase() + formColour.slice(1);
+  const validatedFields = EditTimer.safeParse({
+    name: formData.get("name"),
+    colour: formColour,
+    repeat: Number(formData.get("repeat")),
+    interval: Number(formData.get("interval")),
+    main: Number(formData.get("main")),
+  });
+  // If form validation fails, return errors early. Otherwise, continue.
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Missing Fields. Failed to Create Series.",
+    };
+  }
+  // Prepare data for insertion into the database
+  const { name, colour, repeat, interval, main } = validatedFields.data;
+  // Create series.
+  try {
+    await prisma.timer.create({
+      data: {
+        name,
+        colour,
+        repeat,
+        interval,
+        main,
+        position: lastPosition,
+        seriesId: id,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    return {
+      message: "Database Error: Failed to Create Timer.",
+    };
+  }
+  // Revalidate the cache for the series page.
+  revalidatePath(`/series/${id}`);
+  redirect(`/series/${id}`);
+  return { message: "Created Timer." };
 }

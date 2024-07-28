@@ -1,62 +1,49 @@
 "use client";
 
-import { Colour, supprtedColours } from "@/app/components/util";
-import { State, editTimer } from "@/app/lib/actions";
+import { State, createTimer } from "@/app/lib/actions";
+import Link from "next/link";
 import { ChangeEvent, useState } from "react";
-import { useFormState } from "react-dom";
+import { useFormState, useFormStatus } from "react-dom";
+import { Colour, randomColour, supprtedColours } from "../../util";
 
 interface Props {
-  modalId: string;
-  id: number;
-  initialName: string;
-  initialColour: string;
-  initialRepeat: number;
-  initialInterval: number;
-  initialMain: number;
-  selectedColour: Colour;
-  handleColourChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  seriesId: number;
+  lastPosition: number;
 }
 
-const EditTimerForm = ({
-  modalId,
-  id,
-  initialName,
-  initialColour,
-  initialRepeat,
-  initialInterval,
-  initialMain,
-  selectedColour,
-  handleColourChange,
-}: Props) => {
-  const [hasSubmitted, setHasSubmitted] = useState(false);
+const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
+  const [selectedColour, setSelectedColour] = useState<Colour>(randomColour());
   const colours = Object.keys(supprtedColours).map((c) => {
     return c.charAt(0).toUpperCase() + c.slice(1);
   });
   const initialColourSelect =
-    initialColour.charAt(0).toUpperCase() + initialColour.slice(1);
-  const selectedColourDisplay =
-    supprtedColours[
-      (selectedColour.charAt(0).toLowerCase() +
-        selectedColour.slice(1)) as Colour
-    ];
+    selectedColour.charAt(0).toUpperCase() + selectedColour.slice(1);
+  const selectedColourDisplay = selectedColour
+    ? supprtedColours[
+        (selectedColour.charAt(0).toLowerCase() +
+          selectedColour.slice(1)) as Colour
+      ]
+    : "";
 
-  const editTimerWithId = editTimer.bind(null, id);
-  let initialState = { message: null, errors: undefined };
+  const handleColourChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    const colour = value.charAt(0).toLowerCase() + value.slice(1);
+    setSelectedColour(colour as Colour);
+  };
+
+  const createTimerWithId = createTimer.bind(null, seriesId, lastPosition);
+  let initialState = { message: null, errors: undefined } as State;
   const [state, dispatch] = useFormState<State>(
-    editTimerWithId as any,
+    createTimerWithId as any,
     initialState
   );
+  const { pending } = useFormStatus();
 
   const nameError = state.errors?.name;
   const colourError = state.errors?.colour;
 
-  if (hasSubmitted && state.message) {
-    (document.getElementById(modalId) as any)?.close();
-    setHasSubmitted(false);
-  }
-
   return (
-    <form action={dispatch} id={`edit-timer-form-${id}`}>
+    <form action={dispatch} id="create-timer-form" className="w-full">
       <div className="form-control">
         <label className="label" htmlFor="name">
           <span className="label-text text-lg">Name</span>
@@ -68,7 +55,6 @@ const EditTimerForm = ({
           placeholder="Timer name"
           className="input input-bordered input-md bg-base-100"
           required
-          defaultValue={initialName}
         />
         <div>
           {nameError ? (
@@ -84,8 +70,8 @@ const EditTimerForm = ({
           id="colour"
           name="colour"
           className="select select-bordered select-md bg-base-100"
-          defaultValue={initialColourSelect}
           onChange={handleColourChange}
+          defaultValue={initialColourSelect}
         >
           <option disabled>Colour</option>
           {colours.map((colour) => (
@@ -110,7 +96,6 @@ const EditTimerForm = ({
           name="repeat"
           className="input input-bordered input-md bg-base-100 "
           required
-          defaultValue={initialRepeat}
           min={0}
           max={10}
           step={1}
@@ -129,7 +114,6 @@ const EditTimerForm = ({
           name="interval"
           className="input input-bordered input-md bg-base-100 "
           required
-          defaultValue={initialInterval}
           min={0}
           step={5}
         />
@@ -145,7 +129,6 @@ const EditTimerForm = ({
           name="main"
           className="input input-bordered input-md bg-base-100 "
           required
-          defaultValue={initialMain}
           min={0}
           step={5}
         />
@@ -154,29 +137,21 @@ const EditTimerForm = ({
         <div>
           <button
             type="submit"
-            form={`edit-timer-form-${id}`}
+            form={`create-timer-form`}
             className="btn btn-primary"
-            onClick={() => {
-              setHasSubmitted(true);
-            }}
+            aria-disabled={pending}
           >
             Confirm
           </button>
         </div>
         <div className="mt-0 ml-4">
-          <button
-            className="btn outline"
-            onClick={(e) => {
-              e.preventDefault();
-              (document.getElementById(modalId) as any)?.close();
-            }}
-          >
+          <Link className="btn outline" href={`/series/${seriesId}`}>
             Cancel
-          </button>
+          </Link>
         </div>
       </div>
     </form>
   );
 };
 
-export default EditTimerForm;
+export default CreateTimerForm;
