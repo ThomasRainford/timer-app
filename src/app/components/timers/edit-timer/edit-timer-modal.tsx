@@ -1,20 +1,22 @@
 "use client";
 
 import { Colour, buttonHoverColours } from "@/app/components/util";
+import { Timer } from "@prisma/client";
 import { ChangeEvent, useState } from "react";
-import EditSeriesForm from "./edit-series-form";
+import EditTimerForm from "./edit-timer-form";
 
 interface Props {
-  id: number;
-  name: string;
-  colour: Colour;
+  timer: Timer;
 }
 
-const EditSeriesModal = ({ id, name, colour }: Props) => {
-  const [selectedColour, setSelectedColour] = useState<Colour>(colour);
+const EditTimerModal = ({ timer }: Props) => {
+  const { id, colour, name, repeat, interval, main } = timer;
+  const [selectedColour, setSelectedColour] = useState<Colour>(
+    colour as Colour
+  );
 
-  const btnHoverColour = buttonHoverColours[colour];
-  const modalId = "edit_series_modal_" + id;
+  const btnHoverColour = buttonHoverColours[colour as Colour];
+  const modalId = "edit_timer_modal_" + id;
 
   const handleColourChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -24,7 +26,7 @@ const EditSeriesModal = ({ id, name, colour }: Props) => {
 
   return (
     <>
-      <div className="tooltip tooltip-left" data-tip="Edit series">
+      <div className="tooltip tooltip-left" data-tip="Edit Timer">
         <button
           className={`btn btn-outline btn-square btn-sm ${btnHoverColour}`}
           onClick={() => {
@@ -51,11 +53,14 @@ const EditSeriesModal = ({ id, name, colour }: Props) => {
         <div className="modal-box">
           <h3 className="font-bold text-lg text-accent">{`Edit ${name}?`}</h3>
           <div className="mt-2">
-            <EditSeriesForm
+            <EditTimerForm
               modalId={modalId}
               id={id}
               initialName={name}
               initialColour={colour}
+              initialRepeat={repeat}
+              initialInterval={interval}
+              initialMain={main}
               selectedColour={selectedColour}
               handleColourChange={handleColourChange}
             />
@@ -66,4 +71,4 @@ const EditSeriesModal = ({ id, name, colour }: Props) => {
   );
 };
 
-export default EditSeriesModal;
+export default EditTimerModal;

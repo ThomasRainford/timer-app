@@ -1,7 +1,6 @@
 import { Prisma } from "@prisma/client";
+import Link from "next/link";
 import { Colour, supprtedColours, supprtedHoverColours } from "../util";
-import DeleteSeriesModal from "./delete-series/delete-series-modal";
-import EditSeriesModal from "./edit-series/edit-series-modal";
 
 interface Props {
   series: Prisma.SeriesGetPayload<{ include: { timers: true } }>;
@@ -21,14 +20,11 @@ const SingleSeries = ({ series, index }: Props) => {
   const hoverColour = supprtedHoverColours[colour];
 
   return (
-    <div
+    <Link
       className={`flex flex-col ${dislayColour} ${hoverColour} cursor-pointer rounded-md p-2`}
+      href={`/series/${id}`}
     >
-      <div className="flex justify-between">
-        <EditSeriesModal id={id} name={name} colour={colour} />
-        <DeleteSeriesModal id={id} name={name} colour={colour} />
-      </div>
-      <div className="text-base-300 text-6xl text-center my-12">
+      <div className="text-base-300 text-6xl text-center my-14">
         <h3>{index}</h3>
       </div>
       <div className="grid grid-cols-3">
@@ -40,7 +36,7 @@ const SingleSeries = ({ series, index }: Props) => {
           {timersCount} timers
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

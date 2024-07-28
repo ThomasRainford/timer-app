@@ -1,19 +1,20 @@
 "use client";
 
-import { State, deleteSeries } from "@/app/lib/actions";
+import { deleteTimer, State } from "@/app/lib/actions";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
 
 interface Props {
   id: number;
+  seriesId: number;
   modalId: string;
 }
 
-const DeleteSeriesForm = ({ id, modalId }: Props) => {
-  const deleteSeriesWithId = deleteSeries.bind(null, id);
+const DeleteTimerForm = ({ id, seriesId, modalId }: Props) => {
+  const deleteTimerWithId = deleteTimer.bind(null, id, seriesId);
   const initialState = { message: null, errors: undefined };
   const [state, dispatch] = useFormState<State>(
-    deleteSeriesWithId,
+    deleteTimerWithId,
     initialState
   );
 
@@ -30,4 +31,4 @@ const DeleteSeriesForm = ({ id, modalId }: Props) => {
   );
 };
 
-export default DeleteSeriesForm;
+export default DeleteTimerForm;
