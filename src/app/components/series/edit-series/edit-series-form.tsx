@@ -1,7 +1,8 @@
 "use client";
 
 import { Colour, supprtedColours } from "@/app/components/util";
-import { State, editSeries } from "@/app/lib/actions/actions";
+import { editSeries } from "@/app/lib/actions/series";
+import { State } from "@/app/lib/actions/types";
 import { ChangeEvent, useState } from "react";
 import { useFormState } from "react-dom";
 

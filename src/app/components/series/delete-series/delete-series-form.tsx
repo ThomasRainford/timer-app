@@ -1,6 +1,7 @@
 "use client";
 
-import { State, deleteSeries } from "@/app/lib/actions/actions";
+import { deleteSeries } from "@/app/lib/actions/series";
+import { State } from "@/app/lib/actions/types";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
 
