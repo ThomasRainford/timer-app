@@ -79,7 +79,7 @@ export async function createSeries(_: State, formData: FormData) {
   const seriesCount = await prisma.series.count({
     where: { ownerId: userId },
   });
-  if (seriesCount < SERIES_LIMIT) {
+  if (seriesCount >= SERIES_LIMIT) {
     return {
       errors: {
         limit: `You have reached the limit of ${SERIES_LIMIT} series.`,
