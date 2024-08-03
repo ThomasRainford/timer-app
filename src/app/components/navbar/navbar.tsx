@@ -8,7 +8,7 @@ const MobileDropdown = ({ user }: { user?: User }) => {
   return (
     <div className="dropdown md:hidden block">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-        <MenuIcon size={5} />
+        <MenuIcon size={6} />
       </div>
       <ul
         tabIndex={0}
@@ -48,7 +48,7 @@ const AppNameAndLinks = () => {
           className="btn btn-ghost bg-base-100 no-underline p-1 md:px-3"
           href="/"
         >
-          <ClockIcon size={6} />
+          <ClockIcon className="h-6 w-6 md:h-9 md:w-9 text-accent" />
           <div className="m-0 p-0 ml-1 text-lg md:text-2xl text-base-content font-bold">
             Timer App
           </div>

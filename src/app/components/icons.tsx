@@ -1,5 +1,6 @@
 interface IconProps {
-  size: number;
+  className?: string;
+  size?: number;
 }
 
 export const PersonIcon = (props: IconProps) => {
@@ -82,10 +83,10 @@ export const MenuIcon = (props: IconProps) => {
 };
 
 export const ClockIcon = (props: IconProps) => {
-  const { size } = props;
+  const { className } = props;
   return (
     <svg
-      className={`h-${size} w-${size} md:h-9 md:w-9 text-accent`}
+      className={className}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -105,8 +106,8 @@ export const MoonIcon = (props: IconProps) => {
     <svg
       className="col-start-1 row-start-1 stroke-base-100 fill-base-100"
       xmlns="http://www.w3.org/2000/svg"
-      width={size.toString()}
-      height={size.toString()}
+      width={size?.toString()}
+      height={size?.toString()}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -125,8 +126,8 @@ export const SunIcon = (props: IconProps) => {
     <svg
       className="col-start-2 row-start-1 stroke-base-100 fill-base-100"
       xmlns="http://www.w3.org/2000/svg"
-      width={size.toString()}
-      height={size.toString()}
+      width={size?.toString()}
+      height={size?.toString()}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
