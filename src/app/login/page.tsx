@@ -1,6 +1,7 @@
 import LoginForm from "@/app/components/login/login-form";
 import { Metadata } from "next";
 import Link from "next/link";
+import { PersonIcon } from "../components/icons";
 
 export const metadata: Metadata = {
   title: "Login",
@@ -12,18 +13,7 @@ const Login = () => {
       <div className="card shrink-0 w-full max-w-sm shadow-3xl bg-base-100">
         <div className="flex justify-center mt-2">
           <div className="bg-base-100 rounded-full p-3">
-            <svg
-              className="h-16 w-16 text-accent"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />{" "}
-              <circle cx="12" cy="7" r="4" />
-            </svg>
+            <PersonIcon size={16} />
           </div>
         </div>
         <div className="prose flex justify-center mt-2">
