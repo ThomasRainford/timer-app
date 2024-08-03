@@ -1,6 +1,7 @@
 "use client";
 
-import { State, createSeries } from "@/app/lib/actions/actions";
+import { createSeries } from "@/app/lib/actions/series";
+import { State } from "@/app/lib/actions/types";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
@@ -34,6 +35,7 @@ const CreateSeriesForm = () => {
 
   const nameError = state.errors?.name;
   const colourError = state.errors?.colour;
+  const limitError = state.errors?.limit;
 
   return (
     <form action={dispatch} id="create-series-form" className="w-full">
@@ -78,13 +80,24 @@ const CreateSeriesForm = () => {
         </div>
       </div>
       <div className={`w-full h-[20px] ${selectedColourDisplay} mt-1`} />
+      <div
+        className="flex h-8 items-end space-x-1"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {limitError && (
+          <>
+            <p className="text-md text-red-500">{limitError}</p>
+          </>
+        )}
+      </div>
       <div className="flex justify-end mt-4">
         <div>
           <button
             type="submit"
             form={`create-series-form`}
             className="btn btn-primary"
-            aria-disabled={pending}
+            disabled={pending || limitError !== undefined}
           >
             Confirm
           </button>

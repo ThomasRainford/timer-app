@@ -7,6 +7,9 @@ import * as bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
 import { redirect } from "next/navigation";
 
+// Maximum number of users that can register.
+const USER_LIMIT = 100;
+
 export async function authenticate(_: string | undefined, formData: FormData) {
   try {
     await signIn("credentials", formData);
@@ -24,6 +27,12 @@ export async function authenticate(_: string | undefined, formData: FormData) {
 }
 
 export async function register(_: string | undefined, formData: FormData) {
+  // Check if user limit has been reached.
+  const userCount = await prisma.user.count();
+  if (userCount >= USER_LIMIT) {
+    return "User limit has been reached.";
+  }
+
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const confirmPassword = formData.get("confirm-password") as string;

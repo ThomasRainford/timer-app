@@ -1,7 +1,7 @@
 "use client";
 
+import { register } from "@/app/lib/actions/auth";
 import { useFormState, useFormStatus } from "react-dom";
-import { register } from "../lib/actions";
 
 const RegisterForm = () => {
   const [errorMessage, dispatch] = useFormState(register, undefined);
