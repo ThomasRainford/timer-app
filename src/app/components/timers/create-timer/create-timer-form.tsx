@@ -1,6 +1,6 @@
 "use client";
 
-import { State, createTimer } from "@/app/lib/actions";
+import { State, createTimer } from "@/app/lib/actions/actions";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
