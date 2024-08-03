@@ -1,6 +1,7 @@
 "use client";
 
-import { State, createTimer } from "@/app/lib/actions/actions";
+import { createTimer } from "@/app/lib/actions/timer";
+import { State } from "@/app/lib/actions/types";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
@@ -41,6 +42,8 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
 
   const nameError = state.errors?.name;
   const colourError = state.errors?.colour;
+  const mainError = state.errors?.main;
+  const limitError = state.errors?.limit;
 
   return (
     <form action={dispatch} id="create-timer-form" className="w-full">
@@ -99,6 +102,7 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
           min={0}
           max={10}
           step={1}
+          defaultValue={0}
         />
       </div>
       <div className="form-control">
@@ -116,6 +120,7 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
           required
           min={0}
           step={5}
+          defaultValue={0}
         />
       </div>
       <div className="form-control">
@@ -131,7 +136,24 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
           required
           min={0}
           step={5}
+          defaultValue={0}
         />
+        <div>
+          {mainError ? (
+            <span className="text-error text-sm">{mainError}</span>
+          ) : null}
+        </div>
+      </div>
+      <div
+        className="flex h-8 items-end space-x-1"
+        aria-live="polite"
+        aria-atomic="true"
+      >
+        {limitError && (
+          <>
+            <p className="text-md text-red-500">{limitError}</p>
+          </>
+        )}
       </div>
       <div className="flex justify-end mt-4">
         <div>
@@ -139,7 +161,7 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
             type="submit"
             form={`create-timer-form`}
             className="btn btn-primary"
-            aria-disabled={pending}
+            disabled={pending || limitError !== undefined}
           >
             Confirm
           </button>

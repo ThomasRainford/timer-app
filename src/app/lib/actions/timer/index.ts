@@ -7,13 +7,16 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
+// Maximum number of timers per series.
+const TIMER_LIMIT = 20;
+
 const TimerFormSchema = z.object({
   id: z.number(),
   name: z.string(),
   colour: z.string(),
-  repeat: z.number(),
-  interval: z.number(),
-  main: z.number(),
+  repeat: z.number().gte(0),
+  interval: z.number().gte(0),
+  main: z.number().gt(0),
 });
 
 const EditTimer = TimerFormSchema.omit({ id: true });
@@ -69,8 +72,12 @@ export async function deleteTimer(id: number, seriesId: number) {
     }
     // Update remaining timers positions.
     try {
-      const timers = await tx.timer.findMany({ where: { seriesId } });
-      console.log("timers", timers.length, " for series ", seriesId);
+      const timers = await tx.timer.findMany({
+        where: { seriesId },
+        orderBy: {
+          position: "asc",
+        },
+      });
       timers.forEach(async (timer, index) => {
         await prisma.timer.update({
           where: { id: timer.id },
@@ -103,6 +110,17 @@ export async function createTimer(
       message: "You must be logged in to create a timer.",
     };
   }
+  // Check if timer limit has been reached for this series.
+  const timerCount = await prisma.timer.count({
+    where: { seriesId: id },
+  });
+  if (timerCount >= TIMER_LIMIT) {
+    return {
+      errors: {
+        limit: `You have reached the limit of ${TIMER_LIMIT} timers.`,
+      },
+    };
+  }
   // Process form data.
   let formColour = formData.get("colour") as string;
   formColour = formColour.charAt(0).toLowerCase() + formColour.slice(1);
@@ -131,7 +149,7 @@ export async function createTimer(
         repeat,
         interval,
         main,
-        position: lastPosition,
+        position: lastPosition + 1,
         seriesId: id,
       },
     });

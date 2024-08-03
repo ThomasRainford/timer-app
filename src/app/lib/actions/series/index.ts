@@ -7,6 +7,9 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
+// Maximum number of series per user.
+const SERIES_LIMIT = 5;
+
 const SeriesFormSchema = z.object({
   id: z.number(),
   name: z.string(),
@@ -70,6 +73,17 @@ export async function createSeries(_: State, formData: FormData) {
   if (!userId) {
     return {
       message: "You must be logged in to create a series.",
+    };
+  }
+  // Check if series limit has been reached for this user.
+  const seriesCount = await prisma.series.count({
+    where: { ownerId: userId },
+  });
+  if (seriesCount < SERIES_LIMIT) {
+    return {
+      errors: {
+        limit: `You have reached the limit of ${SERIES_LIMIT} series.`,
+      },
     };
   }
   // Process form data.
