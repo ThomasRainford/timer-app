@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowLeftIcon } from "../icons";
 import DeleteSeriesModal from "../series/delete-series/delete-series-modal";
 import EditSeriesModal from "../series/edit-series/edit-series-modal";
 import { buttonHoverColours, Colour, supprtedColours } from "../util";
@@ -22,22 +23,7 @@ const TimersHeading = ({ id, name, colour }: Props) => {
           className={`btn btn-outline btn-square btn-sm ${btnHoverColour}`}
           href={"/series"}
         >
-          <svg
-            className="h-5 w-5 text-base-300"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <line x1="5" y1="12" x2="11" y2="18" />
-            <line x1="5" y1="12" x2="11" y2="6" />
-          </svg>
+          <ArrowLeftIcon size={5} />
         </Link>
         <div className={`invisible btn btn-outline btn-square btn-sm`}></div>
       </div>

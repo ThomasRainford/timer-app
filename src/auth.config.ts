@@ -13,6 +13,7 @@ export const authConfig = {
       return session;
     },
     authorized({ auth, request: { nextUrl } }) {
+      if (nextUrl.pathname === "/") return true;
       const isLoggedIn = !!auth?.user;
       const isRegisterPage = nextUrl.pathname.startsWith("/register");
       if (!isLoggedIn && !isRegisterPage) return false;

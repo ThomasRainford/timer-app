@@ -3,6 +3,7 @@
 import { Colour, buttonHoverColours } from "@/app/components/util";
 import { Timer } from "@prisma/client";
 import { ChangeEvent, useState } from "react";
+import { PencilIcon } from "../../icons";
 import EditTimerForm from "./edit-timer-form";
 
 interface Props {
@@ -33,20 +34,7 @@ const EditTimerModal = ({ timer }: Props) => {
             (document.getElementById(modalId) as any)?.showModal();
           }}
         >
-          <svg
-            className="h-5 w-5 text-base-300"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <path d="M9 7 h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
-            <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
-            <line x1="16" y1="5" x2="19" y2="8" />
-          </svg>
+          <PencilIcon size={5} />
         </button>
       </div>
       <dialog id={modalId} className="modal modal-bottom sm:modal-middle">

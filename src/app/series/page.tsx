@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import Link from "next/link";
+import { PlusIcon } from "../components/icons";
 import SingleSeries from "../components/series/single-series";
 import prisma from "../lib/db";
 
@@ -28,21 +29,7 @@ const Series = async () => {
           className="btn btn-primary w-full md:w-[30%] text-md"
           href={"/series/create"}
         >
-          <svg
-            className="h-6 w-6"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <line x1="12" y1="5" x2="12" y2="19" />
-            <line x1="5" y1="12" x2="19" y2="12" />
-          </svg>
+          <PlusIcon size={6} />
           Create New Series
         </Link>
       </div>

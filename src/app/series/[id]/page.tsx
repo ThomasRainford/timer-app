@@ -1,3 +1,4 @@
+import { PlayIcon, PlusIcon } from "@/app/components/icons";
 import Timer from "@/app/components/timers/timer";
 import TimersHeading from "@/app/components/timers/timers-heading";
 import { Colour } from "@/app/components/util";
@@ -59,21 +60,7 @@ const Series = async ({ params }: Props) => {
             className="btn btn-primary btn-sm w-full text-md"
             href={`/series/${id}/timers/create`}
           >
-            <svg
-              className="h-6 w-6"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="currentColor"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <line x1="12" y1="5" x2="12" y2="19" />
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
+            <PlusIcon size={6} />
             Create New Timer
           </Link>
         </div>
@@ -82,17 +69,7 @@ const Series = async ({ params }: Props) => {
             className="btn btn-success btn-sm w-full text-md"
             href={`/series/${id}/run`}
           >
-            <svg
-              className="h-6 w-6"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polygon points="5 3 19 12 5 21 5 3" />
-            </svg>
+            <PlayIcon size={6} />
             Run series
           </Link>
         </div>

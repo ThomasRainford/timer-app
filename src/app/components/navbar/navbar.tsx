@@ -1,26 +1,14 @@
 import { auth, signOut } from "@/auth";
 import { User } from "@prisma/client";
 import Link from "next/link";
+import { ClockIcon, MenuIcon } from "../icons";
 import ThemeController from "./theme-controller";
 
 const MobileDropdown = ({ user }: { user?: User }) => {
   return (
     <div className="dropdown md:hidden block">
       <div tabIndex={0} role="button" className="btn btn-ghost btn-circle">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-5 w-5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M4 6h16M4 12h16M4 18h7"
-          />
-        </svg>
+        <MenuIcon size={5} />
       </div>
       <ul
         tabIndex={0}
@@ -60,18 +48,7 @@ const AppNameAndLinks = () => {
           className="btn btn-ghost bg-base-100 no-underline p-1 md:px-3"
           href="/"
         >
-          <svg
-            className="h-6 w-6 md:h-9 md:w-9 text-accent"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <polyline points="12 6 12 12 16 14" />
-          </svg>
+          <ClockIcon size={6} />
           <div className="m-0 p-0 ml-1 text-lg md:text-2xl text-base-content font-bold">
             Timer App
           </div>
