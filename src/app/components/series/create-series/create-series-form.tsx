@@ -1,6 +1,6 @@
 "use client";
 
-import { State, createSeries } from "@/app/lib/actions";
+import { State, createSeries } from "@/app/lib/actions/actions";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";

@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteTimer, State } from "@/app/lib/actions";
+import { deleteTimer, State } from "@/app/lib/actions/actions";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
 
