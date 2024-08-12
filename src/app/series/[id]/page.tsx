@@ -1,5 +1,5 @@
 import { PlayIcon, PlusIcon } from "@/app/components/icons";
-import Timer from "@/app/components/timers/timer";
+import Timers from "@/app/components/timers/timers";
 import TimersHeading from "@/app/components/timers/timers-heading";
 import { Colour } from "@/app/components/util";
 import prisma from "@/app/lib/db";
@@ -75,9 +75,7 @@ const Series = async ({ params }: Props) => {
         </div>
       </div>
       <div className="overflow-y-auto">
-        {[...timers].map((timer) => {
-          return <Timer key={timer.id} timer={timer} />;
-        })}
+        <Timers timers={timers} seriesId={id} />
       </div>
     </div>
   );

@@ -17,36 +17,32 @@ const TimerComponent = ({ timer }: Props) => {
   const dislayColour = supprtedColours[colour];
 
   return (
-    <div>
-      <div
-        className={`flex flex-col ${dislayColour} rounded-md py-2 px-4 mb-2`}
-      >
-        <div className="grid grid-cols-3">
-          <div></div>
-          <h6 className="text-base-300 text-sm font-bold text-center">
-            {intervalTime > 0 ? `${intervalTime} sec.` : "No Interval"}
-          </h6>
-          <div className="flex justify-end">
-            <div>
-              <EditTimerModal timer={timer} />
-            </div>
-            <div className="ml-2">
-              <DeleteTimerModal timer={timer} />
-            </div>
-          </div>
-        </div>
-        <div className="text-base-300 text-xl font-bold text-center mt-6 mb-6">
-          <h3>{mainTime} sec.</h3>
-        </div>
-        <div className="grid grid-cols-3">
-          <div className="text-base-300 text-start font-bold">{name}</div>
+    <div className={`flex flex-col ${dislayColour} rounded-md py-2 px-4 mb-2`}>
+      <div className="grid grid-cols-3">
+        <div></div>
+        <h6 className="text-base-300 text-sm font-bold text-center">
+          {intervalTime > 0 ? `${intervalTime} sec.` : "No Interval"}
+        </h6>
+        <div className="flex justify-end">
           <div>
-            <h6 className={`text-base-300 text-sm font-bold text-center`}>
-              {repetitions > 0 ? `Repeat ${repetitions}` : "No Repeat"}
-            </h6>
+            <EditTimerModal timer={timer} />
           </div>
-          <div className="text-base-300 text-end font-bold">{position + 1}</div>
+          <div className="ml-2">
+            <DeleteTimerModal timer={timer} />
+          </div>
         </div>
+      </div>
+      <div className="text-base-300 text-xl font-bold text-center mt-6 mb-6">
+        <h3>{mainTime} sec.</h3>
+      </div>
+      <div className="grid grid-cols-3">
+        <div className="text-base-300 text-start font-bold">{name}</div>
+        <div>
+          <h6 className={`text-base-300 text-sm font-bold text-center`}>
+            {repetitions > 0 ? `Repeat ${repetitions}` : "No Repeat"}
+          </h6>
+        </div>
+        <div className="text-base-300 text-end font-bold">{position + 1}</div>
       </div>
     </div>
   );
