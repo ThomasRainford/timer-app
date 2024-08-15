@@ -11,7 +11,7 @@ interface Props {
 }
 
 const EditTimerModal = ({ timer }: Props) => {
-  const { id, colour, name, repeat, interval, main } = timer;
+  const { id, colour, name, repeat, interval, main, seriesId } = timer;
   const [selectedColour, setSelectedColour] = useState<Colour>(
     colour as Colour
   );
@@ -34,7 +34,7 @@ const EditTimerModal = ({ timer }: Props) => {
             (document.getElementById(modalId) as any)?.showModal();
           }}
         >
-          <PencilIcon size={5} />
+          <PencilIcon />
         </button>
       </div>
       <dialog id={modalId} className="modal modal-bottom sm:modal-middle">
@@ -44,6 +44,7 @@ const EditTimerModal = ({ timer }: Props) => {
             <EditTimerForm
               modalId={modalId}
               id={id}
+              seriesId={seriesId}
               initialName={name}
               initialColour={colour}
               initialRepeat={repeat}

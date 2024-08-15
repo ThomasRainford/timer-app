@@ -169,7 +169,7 @@ export const PencilIcon = (props: IconProps) => {
   const { size } = props;
   return (
     <svg
-      className={`h-${size} w-${size} text-base-300`}
+      className={`h-5 w-5 text-base-300`}
       viewBox="0 0 24 24"
       strokeWidth="2"
       stroke="currentColor"
@@ -220,6 +220,28 @@ export const PlayIcon = (props: IconProps) => {
       strokeLinejoin="round"
     >
       <polygon points="5 3 19 12 5 21 5 3" />
+    </svg>
+  );
+};
+
+export const DotSquareIcon = (props: IconProps) => {
+  const { size } = props;
+  return (
+    <svg
+      className={`h-${size} w-${size} text-base-300`}
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <circle cx="5" cy="5" r="1" /> <circle cx="12" cy="5" r="1" />
+      <circle cx="19" cy="5" r="1" /> <circle cx="5" cy="12" r="1" />
+      <circle cx="12" cy="12" r="1" /> <circle cx="19" cy="12" r="1" />
+      <circle cx="5" cy="19" r="1" /> <circle cx="12" cy="19" r="1" />
+      <circle cx="19" cy="19" r="1" />
     </svg>
   );
 };

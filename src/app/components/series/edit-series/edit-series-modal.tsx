@@ -32,7 +32,7 @@ const EditSeriesModal = ({ id, name, colour }: Props) => {
             (document.getElementById(modalId) as any)?.showModal();
           }}
         >
-          <PencilIcon size={5} />
+          <PencilIcon />
         </button>
       </div>
       <dialog id={modalId} className="modal modal-bottom sm:modal-middle">

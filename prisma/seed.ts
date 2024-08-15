@@ -64,7 +64,11 @@ const series = () => {
 async function main() {
   await prisma.user.deleteMany();
 
-  const user01 = await prisma.user.upsert({
+  await prisma.$executeRaw`ALTER SEQUENCE "User_id_seq" RESTART WITH 1`;
+  await prisma.$executeRaw`ALTER SEQUENCE "Series_id_seq" RESTART WITH 1`;
+  await prisma.$executeRaw`ALTER SEQUENCE "Timer_id_seq" RESTART WITH 1`;
+
+  await prisma.user.upsert({
     where: { email: "user01@mail.com" },
     update: {},
     create: {
@@ -75,7 +79,7 @@ async function main() {
       },
     },
   });
-  const user02 = await prisma.user.upsert({
+  await prisma.user.upsert({
     where: { email: "user02@mail.com" },
     update: {},
     create: {
@@ -86,7 +90,7 @@ async function main() {
       },
     },
   });
-  const user03 = await prisma.user.upsert({
+  await prisma.user.upsert({
     where: { email: "user03@mail.com" },
     update: {},
     create: {
@@ -97,7 +101,7 @@ async function main() {
       },
     },
   });
-  const user04 = await prisma.user.upsert({
+  await prisma.user.upsert({
     where: { email: "user04@mail.com" },
     update: {},
     create: {

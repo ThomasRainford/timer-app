@@ -1,12 +1,14 @@
 "use client";
 
+import { editTimers } from "@/app/lib/actions/timer";
 import { closestCenter, DndContext, DragEndEvent } from "@dnd-kit/core";
+import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { Timer } from "@prisma/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DraggableTimers from "./draggable-timers";
 
 interface Props {
@@ -17,40 +19,46 @@ interface Props {
 const Timers = ({ timers, seriesId }: Props) => {
   const [items, setItems] = useState(timers);
 
-  const updateTimerPosition = async (seriesId: number, timers: Timer[]) => {
-    const response = await fetch(`/api/series/${seriesId}/timer`, {
-      method: "PUT",
-      body: JSON.stringify(timers),
-    });
-    console.log(response, await response.json());
+  // Update items with new timers.
+  useEffect(() => {
+    setItems(timers);
+  }, [timers]);
+
+  const updateTimersPosition = async (seriesId: number, timers: Timer[]) => {
+    return await editTimers(seriesId, timers);
   };
 
   const handleDragEnd = async (event: DragEndEvent) => {
-    if (!event.collisions) return;
-    const active = event.active?.id as number;
-    const over = event.over?.id as number;
-    let newTimers = items;
-    setItems((items) => {
-      const oldIndex = items.findIndex(
-        (timer) => timer.position === active - 1
+    const { active, over } = event;
+    const activeId = active?.id as number;
+    const overId = over?.id as number;
+    if (!over || activeId === overId) return;
+    setItems((prevItems) => {
+      const oldIndex = prevItems.findIndex(
+        (item) => item.position === activeId - 1
       );
-      const newIndex = items.findIndex((timer) => timer.position === over - 1);
-      const newItems = [...items];
-      newItems.splice(oldIndex, 1);
-      newItems.splice(newIndex, 0, items[oldIndex]);
-      const newItemsPositions = newItems.map((item, i) => ({
+      const newIndex = prevItems.findIndex(
+        (item) => item.position === overId - 1
+      );
+      const newItems = [...prevItems];
+      const [movedItem] = newItems.splice(oldIndex, 1);
+      newItems.splice(newIndex, 0, movedItem);
+      // Update positions.
+      const updatedItems = newItems.map((item, index) => ({
         ...item,
-        position: i,
+        position: index,
       }));
-      newTimers = newItemsPositions;
-      return newItemsPositions;
+      updateTimersPosition(seriesId, updatedItems);
+      return updatedItems;
     });
-    // Update the timers positions.
-    await updateTimerPosition(seriesId, newTimers);
   };
 
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <DndContext
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+      modifiers={[restrictToVerticalAxis]}
+    >
       <SortableContext
         items={items.map((timer) => ({ id: timer.position + 1 }))}
         strategy={verticalListSortingStrategy}
