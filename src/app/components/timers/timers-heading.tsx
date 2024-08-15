@@ -25,7 +25,9 @@ const TimersHeading = ({ id, name, colour }: Props) => {
         >
           <ArrowLeftIcon size={5} />
         </Link>
-        <div className={`invisible btn btn-outline btn-square btn-sm`}></div>
+        <div
+          className={`invisible btn btn-outline btn-square btn-sm ml-2`}
+        ></div>
       </div>
       <div className="flex items-center ">
         <h1 className="text-xl font-bold text-base-300">{name}</h1>

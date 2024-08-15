@@ -9,6 +9,7 @@ import { useFormState } from "react-dom";
 interface Props {
   modalId: string;
   id: number;
+  seriesId: number;
   initialName: string;
   initialColour: string;
   initialRepeat: number;
@@ -21,6 +22,7 @@ interface Props {
 const EditTimerForm = ({
   modalId,
   id,
+  seriesId,
   initialName,
   initialColour,
   initialRepeat,
@@ -41,13 +43,12 @@ const EditTimerForm = ({
         selectedColour.slice(1)) as Colour
     ];
 
-  const editTimerWithId = editTimer.bind(null, id);
+  const editTimerWithId = editTimer.bind(null, id, seriesId);
   let initialState = { message: null, errors: undefined };
   const [state, dispatch] = useFormState<State>(
     editTimerWithId as any,
     initialState
   );
-
   const nameError = state.errors?.name;
   const colourError = state.errors?.colour;
 

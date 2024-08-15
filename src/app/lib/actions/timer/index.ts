@@ -3,6 +3,7 @@
 import { State } from "@/app/lib/actions/types";
 import prisma from "@/app/lib/db";
 import { auth } from "@/auth";
+import { Timer } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
@@ -21,7 +22,12 @@ const TimerFormSchema = z.object({
 
 const EditTimer = TimerFormSchema.omit({ id: true });
 
-export async function editTimer(id: number, _: State, formData: FormData) {
+export async function editTimer(
+  id: number,
+  seriesId: number,
+  _: State,
+  formData: FormData
+) {
   let formColour = formData.get("colour") as string;
   formColour = formColour.charAt(0).toLowerCase() + formColour.slice(1);
   const validatedFields = EditTimer.safeParse({
@@ -53,8 +59,37 @@ export async function editTimer(id: number, _: State, formData: FormData) {
     };
   }
   // Revalidate the cache for the selected series page.
-  revalidatePath(`/series/${id}`);
+  revalidatePath(`/series/${seriesId}`);
   return { message: "Created Timer." };
+}
+
+export async function editTimers(seriesId: number, timers: Timer[]) {
+  let results;
+  await prisma.$transaction(async (tx) => {
+    // Update the given timers for the series given by the id.
+    // The series id is not needed but ensures the correct series
+    // is provided for the given timers.
+    try {
+      const updatePromises = timers.map((timer) => {
+        return tx.timer.update({
+          where: { id: timer.id, seriesId },
+          data: { position: timer.position },
+        });
+      });
+      results = await Promise.all(updatePromises);
+    } catch (error) {
+      console.error(error);
+      return {
+        message: "Database Error: Failed to Edit Timers.",
+      };
+    }
+  });
+  // Revalidate the cache for the selected series page.
+  revalidatePath(`/series/${seriesId}`);
+  return {
+    message: "Successfully edited Timers.",
+    timers: results || [],
+  };
 }
 
 export async function deleteTimer(id: number, seriesId: number) {
@@ -91,7 +126,6 @@ export async function deleteTimer(id: number, seriesId: number) {
       };
     }
   });
-
   revalidatePath(`/series/${seriesId}`);
   return { message: "Deleted Timer." };
 }

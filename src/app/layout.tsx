@@ -19,7 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html data-theme="dark" lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body
+        style={{ maxWidth: "100%", overflowX: "hidden" }}
+        className={`${inter.className} antialiased`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
