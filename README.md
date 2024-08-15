@@ -26,7 +26,7 @@ Then run the seeder:
 npx prisma db seed
 ```
 
-## Developemnt Server
+### Developemnt Server
 
 To start the development server:
 
