@@ -41,7 +41,6 @@ export async function editSeries(id: number, _: State, formData: FormData) {
       data: { name, colour },
     });
   } catch (error) {
-    console.error(error);
     return {
       message: "Database Error: Failed to Edit Series.",
     };
@@ -57,7 +56,6 @@ export async function deleteSeries(id: number) {
       where: { id },
     });
   } catch (error) {
-    console.error(error);
     return {
       message: "Database Error: Failed to Delete Series.",
     };
@@ -108,7 +106,6 @@ export async function createSeries(_: State, formData: FormData) {
       data: { name, colour, ownerId: userId },
     });
   } catch (error) {
-    console.error(error);
     return {
       message: "Database Error: Failed to Create Series.",
     };
