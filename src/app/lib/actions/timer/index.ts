@@ -53,7 +53,6 @@ export async function editTimer(
       data: { name, colour, repeat, interval, main },
     });
   } catch (error) {
-    console.error(error);
     return {
       message: "Database Error: Failed to Edit Timer.",
     };
@@ -64,8 +63,8 @@ export async function editTimer(
 }
 
 export async function editTimers(seriesId: number, timers: Timer[]) {
-  let results;
-  await prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
+    let results: { message: string } | Timer[];
     // Update the given timers for the series given by the id.
     // The series id is not needed but ensures the correct series
     // is provided for the given timers.
@@ -78,29 +77,33 @@ export async function editTimers(seriesId: number, timers: Timer[]) {
       });
       results = await Promise.all(updatePromises);
     } catch (error) {
-      console.error(error);
-      return {
+      results = {
         message: "Database Error: Failed to Edit Timers.",
       };
     }
+    return results;
   });
+  if ("message" in result) {
+    return {
+      message: result?.message,
+    };
+  }
   // Revalidate the cache for the selected series page.
   revalidatePath(`/series/${seriesId}`);
   return {
     message: "Successfully edited Timers.",
-    timers: results || [],
+    timers: result || [],
   };
 }
 
 export async function deleteTimer(id: number, seriesId: number) {
-  prisma.$transaction(async (tx) => {
+  const transaction = await prisma.$transaction(async (tx) => {
     // Delete timer.
     try {
       await tx.timer.delete({
         where: { id },
       });
     } catch (error) {
-      console.error(error);
       return {
         message: "Database Error: Failed to Delete Timer.",
       };
@@ -114,20 +117,20 @@ export async function deleteTimer(id: number, seriesId: number) {
         },
       });
       timers.forEach(async (timer, index) => {
-        await prisma.timer.update({
-          where: { id: timer.id },
-          data: { position: index },
+        await tx.timer.update({
+          where: { id: timers[0].id },
+          data: { position: 0 },
         });
       });
+      return { message: "Deleted Timer." };
     } catch (error) {
-      console.error(error);
       return {
         message: "Database Error: Failed to update timer position.",
       };
     }
   });
   revalidatePath(`/series/${seriesId}`);
-  return { message: "Deleted Timer." };
+  return transaction;
 }
 
 export async function createTimer(
@@ -188,7 +191,6 @@ export async function createTimer(
       },
     });
   } catch (error) {
-    console.error(error);
     return {
       message: "Database Error: Failed to Create Timer.",
     };
