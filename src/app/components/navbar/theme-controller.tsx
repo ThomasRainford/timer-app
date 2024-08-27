@@ -1,26 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import useThemeToggle from "@/app/hooks/useThemeToggle";
 import { MoonIcon, SunIcon } from "../icons";
 
 const ThemeController = () => {
-  const [theme, setTheme] = useState(
-    global?.window !== undefined
-      ? localStorage.getItem("theme") ?? "dark"
-      : "dark"
-  );
-  const handleToggle = (e: any) => {
-    if (e.target.checked) {
-      setTheme("light");
-    } else {
-      setTheme("dark");
-    }
-  };
-  useEffect(() => {
-    localStorage.setItem("theme", theme!);
-    const localTheme = localStorage.getItem("theme");
-    document.querySelector("html")?.setAttribute("data-theme", localTheme!);
-  }, [theme]);
+  const [theme, handleToggle] = useThemeToggle({
+    key: "theme",
+    otherTheme: "light",
+    defaultTheme: "dark",
+  });
 
   return (
     <div>
