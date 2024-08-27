@@ -26,6 +26,7 @@ const CreateSeriesForm = () => {
     const colour = value.charAt(0).toLowerCase() + value.slice(1);
     setSelectedColour(colour as Colour);
   };
+
   let initialState = { message: null, errors: undefined } as State;
   const [state, dispatch] = useFormState<State>(
     createSeries as any,
