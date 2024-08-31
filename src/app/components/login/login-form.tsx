@@ -1,6 +1,6 @@
 "use client";
 
-import { authenticate } from "@/app/lib/actions/actions";
+import { authenticate } from "@/app/lib/actions/auth";
 import { useFormState, useFormStatus } from "react-dom";
 
 const LoginForm = () => {
