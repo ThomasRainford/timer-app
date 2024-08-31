@@ -1,39 +1,27 @@
 "use client";
 
-import { Colour, supprtedColours } from "@/app/components/util";
+import useColours from "@/app/hooks/useColours";
 import { editSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useFormState } from "react-dom";
+import { Colour } from "../../util";
 
 interface Props {
   modalId: string;
   id: number;
   initialName: string;
-  initialColour: string;
-  selectedColour: Colour;
-  handleColourChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  initialColour: Colour;
 }
 
-const EditSeriesForm = ({
-  modalId,
-  id,
-  initialName,
-  initialColour,
-  selectedColour,
-  handleColourChange,
-}: Props) => {
+const EditSeriesForm = ({ modalId, id, initialName, initialColour }: Props) => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const colours = Object.keys(supprtedColours).map((c) => {
-    return c.charAt(0).toUpperCase() + c.slice(1);
-  });
-  const initialColourSelect =
-    initialColour.charAt(0).toUpperCase() + initialColour.slice(1);
-  const selectedColourDisplay =
-    supprtedColours[
-      (selectedColour.charAt(0).toLowerCase() +
-        selectedColour.slice(1)) as Colour
-    ];
+  const {
+    colours,
+    initialDisplayColour,
+    selectedDisplayColour,
+    handleColourChange,
+  } = useColours({ initialColour });
 
   const editSeriesWithId = editSeries.bind(null, id);
   let initialState = { message: null, errors: undefined };
@@ -79,7 +67,7 @@ const EditSeriesForm = ({
           id="colour"
           name="colour"
           className="select select-bordered select-md bg-base-100"
-          defaultValue={initialColourSelect}
+          defaultValue={initialDisplayColour}
           onChange={handleColourChange}
         >
           <option disabled>Colour</option>
@@ -94,7 +82,7 @@ const EditSeriesForm = ({
         </div>
       </div>
 
-      <div className={`w-full h-[20px] ${selectedColourDisplay} mt-1`} />
+      <div className={`w-full h-[20px] ${selectedDisplayColour} mt-1`} />
       <div className="flex justify-end mt-4">
         <div>
           <button

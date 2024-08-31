@@ -1,31 +1,20 @@
 "use client";
 
+import useColours from "@/app/hooks/useColours";
 import { createSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
 import Link from "next/link";
-import { ChangeEvent, useState } from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import { Colour, randomColour, supprtedColours } from "../../util";
+import { randomColour } from "../../util";
 
 const CreateSeriesForm = () => {
-  const [selectedColour, setSelectedColour] = useState<Colour>(randomColour());
-  const colours = Object.keys(supprtedColours).map((c) => {
-    return c.charAt(0).toUpperCase() + c.slice(1);
-  });
-  const initialColourSelect =
-    selectedColour.charAt(0).toUpperCase() + selectedColour.slice(1);
-  const selectedColourDisplay = selectedColour
-    ? supprtedColours[
-        (selectedColour.charAt(0).toLowerCase() +
-          selectedColour.slice(1)) as Colour
-      ]
-    : "";
+  const {
+    colours,
+    initialDisplayColour,
+    selectedDisplayColour,
+    handleColourChange,
+  } = useColours({ initialColour: randomColour() });
 
-  const handleColourChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    const colour = value.charAt(0).toLowerCase() + value.slice(1);
-    setSelectedColour(colour as Colour);
-  };
   let initialState = { message: null, errors: undefined } as State;
   const [state, dispatch] = useFormState<State>(
     createSeries as any,
@@ -66,7 +55,7 @@ const CreateSeriesForm = () => {
           name="colour"
           className="select select-bordered select-md bg-base-100"
           onChange={handleColourChange}
-          defaultValue={initialColourSelect}
+          defaultValue={initialDisplayColour}
         >
           <option disabled>Colour</option>
           {colours.map((colour) => (
@@ -79,7 +68,7 @@ const CreateSeriesForm = () => {
           ) : null}
         </div>
       </div>
-      <div className={`w-full h-[20px] ${selectedColourDisplay} mt-1`} />
+      <div className={`w-full h-[20px] ${selectedDisplayColour} mt-1`} />
       <div
         className="flex h-8 items-end space-x-1"
         aria-live="polite"
