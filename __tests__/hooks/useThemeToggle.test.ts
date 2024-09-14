@@ -1,4 +1,4 @@
-import useThemeToggle from "@/app/hooks/useThemeToggle";
+import useThemeToggle from "@/app/hooks/use-theme-toggle";
 import { act, renderHook } from "@testing-library/react";
 
 describe("useThemeToggle Hook", () => {

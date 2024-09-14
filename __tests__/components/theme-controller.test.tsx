@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 import { fireEvent, render, screen } from "@testing-library/react";
 
 // Mock the useThemeToggle hook
-jest.mock("@/app/hooks/useThemeToggle", () => ({
+jest.mock("@/app/hooks/use-theme-toggle", () => ({
   __esModule: true,
   default: jest.fn(),
 }));
@@ -23,7 +23,7 @@ describe("ThemeController Component", () => {
   let mockUseThemeToggle: jest.Mock;
 
   beforeEach(() => {
-    mockUseThemeToggle = require("@/app/hooks/useThemeToggle").default;
+    mockUseThemeToggle = require("@/app/hooks/use-theme-toggle").default;
   });
 
   it("should render correctly with dark theme by default", () => {

@@ -6,7 +6,7 @@ import {
   TimerRun,
   TimerRuns,
 } from "@/app/components/util";
-import { useCountdown } from "@/app/hooks/useCountdown";
+import { useCountdown } from "@/app/hooks/use-countdown";
 import { Series, Timer } from "@prisma/client";
 import { useEffect, useMemo, useState } from "react";
 

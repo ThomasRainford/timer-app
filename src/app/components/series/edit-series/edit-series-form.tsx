@@ -1,6 +1,6 @@
 "use client";
 
-import useColours from "@/app/hooks/useColours";
+import useColours from "@/app/hooks/use-colours";
 import { editSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
 import { useState } from "react";

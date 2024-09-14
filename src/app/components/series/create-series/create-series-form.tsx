@@ -1,6 +1,6 @@
 "use client";
 
-import useColours from "@/app/hooks/useColours";
+import useColours from "@/app/hooks/use-colours";
 import { createSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
 import Link from "next/link";
