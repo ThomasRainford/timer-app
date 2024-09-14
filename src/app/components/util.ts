@@ -79,3 +79,12 @@ export const randomColour = (): Colour => {
   const colours = Object.keys(supprtedColours) as Colour[];
   return colours[Math.floor(Math.random() * colours.length)];
 };
+
+export type TimerRun = {
+  interval: number;
+  main: number;
+  colour: Colour;
+  repeat: number;
+};
+
+export type TimerRuns = Array<TimerRun>;
