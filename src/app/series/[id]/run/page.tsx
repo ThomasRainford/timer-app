@@ -32,8 +32,17 @@ const Run = async ({ params }: Props) => {
   if (!series) {
     return <NoSeries />;
   }
-
-  return <RunPageContent series={series} />;
+  const seriesName = series.name;
+  return (
+    <div>
+      <div className="flex justify-center align-middle  w-[100%]">
+        <div className="divider divider-primary text-2xl font-bold w-[100%]">
+          {seriesName}
+        </div>
+      </div>
+      <RunPageContent series={series} />
+    </div>
+  );
 };
 
 export default Run;

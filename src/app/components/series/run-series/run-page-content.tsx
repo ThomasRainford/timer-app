@@ -27,6 +27,7 @@ const RunPageContent = ({ series }: Props) => {
         .map((timer) => {
           const repeat = timer.repeat;
           const run: TimerRun = {
+            name: timer.name,
             interval: timer.interval,
             main: timer.main,
             colour: timer.colour as Colour,
@@ -54,7 +55,7 @@ const RunPageContent = ({ series }: Props) => {
   );
 
   useEffect(() => {
-    //start();
+    start();
   }, [start]);
 
   if (count === 0) {
@@ -72,7 +73,10 @@ const RunPageContent = ({ series }: Props) => {
     }
   }
 
+  const nextName = nextTimerRun.name;
   const nextInterval = nextTimerRun.interval;
+
+  const name = currentTimerRun?.name;
   const main = currentTimerRun?.main;
   const colour = currentTimerRun?.colour as Colour;
   const mainColour = supprtedColours[colour];
@@ -85,27 +89,52 @@ const RunPageContent = ({ series }: Props) => {
     return (
       <div className="flex flex-col h-screen">
         <div
-          className={`${intervalColour} h-[80%] flex justify-center items-center`}
+          className={`${intervalColour} h-[70%] flex justify-center items-center`}
         >
           <h1 className="text-9xl text-center">{count}</h1>
         </div>
         <div
-          className={`${mainColour} h-[20%] flex justify-center items-center`}
+          className={`${mainColour} h-[30%] flex flex-col justify-start items-center`}
         >
-          <h1 className="text-6xl text-center text-base-100">{main}</h1>
+          <div className="h-[100%]">
+            <div className="mt-1 pb-4">
+              <h5 className="text-lg text-center text-base-300">
+                Next: {nextName}
+              </h5>
+            </div>
+            <div>
+              <h3 className="text-6xl text-center text-base-300">{main}</h3>
+            </div>
+          </div>
         </div>
       </div>
     );
   }
   return (
     <div className="flex flex-col h-screen">
-      <div className={`${mainColour} h-[80%] flex justify-center items-center`}>
-        <h1 className="text-9xl text-center text-base-200">{count}</h1>
+      <div className={`${mainColour} h-[70%] flex justify-center items-center`}>
+        <div className="h-[100%] flex flex-col">
+          <div className="mt-4" style={{ paddingBottom: "165px" }}>
+            <h5 className="text-xl pb-2 text-center text-base-300">{name}</h5>
+          </div>
+          <div>
+            <h1 className="text-9xl text-center text-base-300">{count}</h1>
+          </div>
+        </div>
       </div>
       <div
-        className={`${intervalColour} h-[20%] flex justify-center items-center`}
+        className={`${intervalColour} h-[30%] flex flex-col justify-center items-center`}
       >
-        <h1 className="text-6xl text-center ">{nextInterval}</h1>
+        <div className="h-[100%]">
+          <div className="pb-5" style={{ visibility: "hidden" }}>
+            <h5 className="text-lg text-center text-base-300">
+              Next: {nextName}
+            </h5>
+          </div>
+          <div>
+            <h3 className="text-6xl text-center">{nextInterval}</h3>
+          </div>
+        </div>
       </div>
     </div>
   );
