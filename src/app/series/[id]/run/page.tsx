@@ -34,8 +34,8 @@ const Run = async ({ params }: Props) => {
   }
   const seriesName = series.name;
   return (
-    <div>
-      <div className="flex justify-center align-middle  w-[100%]">
+    <div className="flex flex-col flex-grow">
+      <div className="flex justify-center align-middle w-[100%]">
         <div className="divider divider-primary text-2xl font-bold w-[100%]">
           {seriesName}
         </div>

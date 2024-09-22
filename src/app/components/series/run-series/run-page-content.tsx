@@ -55,7 +55,7 @@ const RunPageContent = ({ series }: Props) => {
   );
 
   useEffect(() => {
-    start();
+    //start();
   }, [start]);
 
   if (count === 0) {
@@ -87,14 +87,14 @@ const RunPageContent = ({ series }: Props) => {
   console.log(currentTimerRun);
   if (currentCountType === "interval") {
     return (
-      <div className="flex flex-col h-screen">
+      <div className="flex flex-col flex-grow">
         <div
-          className={`${intervalColour} h-[70%] flex justify-center items-center`}
+          className={`${intervalColour} h-[80%] flex justify-center items-center`}
         >
           <h1 className="text-9xl text-center">{count}</h1>
         </div>
         <div
-          className={`${mainColour} h-[30%] flex flex-col justify-start items-center`}
+          className={`${mainColour} h-[20%] flex flex-col justify-start items-center`}
         >
           <div className="h-[100%]">
             <div className="mt-1 pb-4">
@@ -111,7 +111,7 @@ const RunPageContent = ({ series }: Props) => {
     );
   }
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col flex-grow">
       <div className={`${mainColour} h-[70%] flex justify-center items-center`}>
         <div className="h-[100%] flex flex-col">
           <div className="mt-4" style={{ paddingBottom: "165px" }}>
