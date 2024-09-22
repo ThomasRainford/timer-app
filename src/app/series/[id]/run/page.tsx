@@ -36,7 +36,7 @@ const Run = async ({ params }: Props) => {
   return (
     <div className="flex flex-col flex-grow">
       <div className="flex justify-center align-middle w-[100%]">
-        <div className="divider divider-primary text-2xl font-bold w-[100%]">
+        <div className="text-center py-2 text-2xl font-bold w-[100%]">
           {seriesName}
         </div>
       </div>

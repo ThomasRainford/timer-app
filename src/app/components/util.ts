@@ -114,3 +114,27 @@ export type TimerRun = {
 };
 
 export type TimerRuns = Array<TimerRun>;
+
+export type TimeDetails = {
+  totalSeconds: number;
+  seconds: number;
+  minutes: number;
+  hours: number;
+  days: number;
+};
+
+export const getTimeFromSeconds = (secs: number): TimeDetails => {
+  const totalSeconds = Math.ceil(secs);
+  const days = Math.floor(totalSeconds / (60 * 60 * 24));
+  const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
+  const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+  const seconds = Math.floor(totalSeconds % 60);
+
+  return {
+    totalSeconds,
+    seconds,
+    minutes,
+    hours,
+    days,
+  };
+};
