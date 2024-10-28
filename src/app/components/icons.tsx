@@ -215,9 +215,9 @@ export const PlayIcon = (props: IconProps) => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
     >
       <polygon points="5 3 19 12 5 21 5 3" />
     </svg>
@@ -262,6 +262,24 @@ export const CircleArrowIcon = (props: IconProps) => {
     >
       <path stroke="none" d="M0 0h24v24H0z" />
       <path d="M19.95 11a8 8 0 1 0 -.5 4m.5 5v-5h-5" />
+    </svg>
+  );
+};
+
+export const PauseIcon = (props: IconProps) => {
+  const { size } = props;
+  return (
+    <svg
+      className={`h-${size} w-${size}`}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="6" y="4" width="4" height="16" />
+      <rect x="14" y="4" width="4" height="16" />
     </svg>
   );
 };

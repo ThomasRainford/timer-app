@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  buttonHoverColours,
   Colour,
   getTimeFromSeconds,
   supprtedColours,
@@ -10,7 +11,7 @@ import {
 import { useCountdown } from "@/app/hooks/use-countdown";
 import { Series, Timer } from "@prisma/client";
 import { useEffect, useMemo, useState } from "react";
-import { CircleArrowIcon } from "../../icons";
+import { CircleArrowIcon, PauseIcon, PlayIcon } from "../../icons";
 import Time from "./Time";
 
 interface Props {
@@ -21,9 +22,10 @@ const RunPageContent = ({ series }: Props) => {
   const timers = series?.timers.sort((a, b) => {
     return a.position - b.position;
   });
-  const { count, start, pause, resume, restart, restartWith } = useCountdown({
-    initialCount: timers[0].interval,
-  });
+  const { count, isPaused, start, pause, resume, restart, restartWith } =
+    useCountdown({
+      initialCount: timers[0].interval,
+    });
   const timerRuns: TimerRuns = useMemo(
     () =>
       timers
@@ -118,6 +120,8 @@ const RunPageContent = ({ series }: Props) => {
     ? "End"
     : getTimeFromSeconds(nextInterval);
 
+  const actionBtnHoverColour = buttonHoverColours[colour];
+
   if (currentCountType === "interval") {
     return (
       <div className="flex flex-col flex-grow">
@@ -150,16 +154,42 @@ const RunPageContent = ({ series }: Props) => {
     return (
       <div className="flex flex-col flex-grow">
         <div
-          className={`${mainColour} h-[80%] flex justify-center items-center`}
+          className={`${mainColour} h-[80%] w-[100%] flex justify-center items-center`}
         >
-          <div className="h-[100%] flex flex-col">
+          <div className="h-[100%] w-[100%] flex flex-col mx-4">
             <div className="mt-4" style={{ paddingBottom: "165px" }}>
               <h5 className="text-xl pb-2 text-center text-base-300">{name}</h5>
             </div>
-            <div>
-              <h1 className="text-9xl text-center text-base-300">
-                <Time timeDetails={countTimeDetails} />
-              </h1>
+            <div className="flex flex-row justify-around">
+              <div className="flex items-center">
+                <div
+                  className={`btn btn-outline btn-square ${actionBtnHoverColour}`}
+                  onClick={() => {
+                    restartWith(currentTimerRun.main);
+                  }}
+                >
+                  <CircleArrowIcon size={6} />
+                </div>
+              </div>
+              <div>
+                <h1 className="text-9xl text-center text-base-300">
+                  <Time timeDetails={countTimeDetails} />
+                </h1>
+              </div>
+              <div className="flex items-center">
+                <div
+                  className={`btn btn-outline btn-square ${actionBtnHoverColour}`}
+                  onClick={() => {
+                    if (isPaused) {
+                      resume();
+                    } else {
+                      pause();
+                    }
+                  }}
+                >
+                  {!isPaused ? <PauseIcon size={6} /> : <PlayIcon size={6} />}
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -21,7 +21,7 @@ export const useCountdown = ({ initialCount }: Props) => {
         }
         return prevTime - 1;
       });
-    }, 250);
+    }, 1000);
   }, []);
 
   // Stop timer
@@ -59,5 +59,5 @@ export const useCountdown = ({ initialCount }: Props) => {
     start();
   };
 
-  return { count, start, pause, resume, restart, restartWith };
+  return { count, isPaused, start, pause, resume, restart, restartWith };
 };
