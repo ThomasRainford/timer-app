@@ -106,6 +106,7 @@ export const randomColour = (): Colour => {
 };
 
 export type TimerRun = {
+  id: number;
   name: string;
   interval: number;
   main: number;
