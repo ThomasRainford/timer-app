@@ -208,10 +208,10 @@ export const ArrowLeftIcon = (props: IconProps) => {
 };
 
 export const PlayIcon = (props: IconProps) => {
-  const { size } = props;
+  const { size, className } = props;
   return (
     <svg
-      className={`h-${size} w-${size}`}
+      className={`h-${size} w-${size} ${className}`}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -247,10 +247,10 @@ export const DotSquareIcon = (props: IconProps) => {
 };
 
 export const CircleArrowIcon = (props: IconProps) => {
-  const { size } = props;
+  const { size, className } = props;
   return (
     <svg
-      className={`h-${size} w-${size}`}
+      className={`h-${size} w-${size} ${className}`}
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -267,10 +267,10 @@ export const CircleArrowIcon = (props: IconProps) => {
 };
 
 export const PauseIcon = (props: IconProps) => {
-  const { size } = props;
+  const { size, className } = props;
   return (
     <svg
-      className={`h-${size} w-${size}`}
+      className={`h-${size} w-${size} ${className}`}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"

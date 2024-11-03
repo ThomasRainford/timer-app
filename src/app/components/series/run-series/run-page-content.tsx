@@ -95,7 +95,7 @@ const RunPageContent = ({ series }: Props) => {
     const name = nextTimerRun.name;
     const repeat = nextTimerRun.repeat;
     if (repeat > 0) {
-      return `${name} (${repeat})`;
+      return `${name} (${repeat + 1})`;
     }
     return name;
   })();
@@ -105,7 +105,7 @@ const RunPageContent = ({ series }: Props) => {
     const name = currentTimerRun.name;
     const repeat = currentTimerRun.repeat;
     if (repeat > 0) {
-      return `${name} (${repeat})`;
+      return `${name} (${repeat + 1})`;
     }
     return name;
   })();
@@ -126,7 +126,7 @@ const RunPageContent = ({ series }: Props) => {
     return (
       <div className="flex flex-col flex-grow">
         <div
-          className={`${intervalColour} h-[80%] flex justify-center items-center`}
+          className={`${intervalColour} h-[80%] w-[100%] flex justify-center items-center`}
         >
           <h1 className="text-9xl text-center">
             <Time timeDetails={countTimeDetails} />
@@ -168,7 +168,7 @@ const RunPageContent = ({ series }: Props) => {
                     restartWith(currentTimerRun.main);
                   }}
                 >
-                  <CircleArrowIcon size={6} />
+                  <CircleArrowIcon className="text-base-300" size={6} />
                 </div>
               </div>
               <div>
@@ -187,7 +187,11 @@ const RunPageContent = ({ series }: Props) => {
                     }
                   }}
                 >
-                  {!isPaused ? <PauseIcon size={6} /> : <PlayIcon size={6} />}
+                  {!isPaused ? (
+                    <PauseIcon className="text-base-300" size={6} />
+                  ) : (
+                    <PlayIcon className="text-base-300" size={6} />
+                  )}
                 </div>
               </div>
             </div>
