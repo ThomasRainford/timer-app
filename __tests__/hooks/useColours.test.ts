@@ -1,5 +1,5 @@
 import { Colour } from "@/app/components/util";
-import useColours from "@/app/hooks/useColours";
+import useColours from "@/app/hooks/use-colours";
 import { renderHook } from "@testing-library/react";
 import { act } from "react";
 

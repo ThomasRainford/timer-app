@@ -73,9 +73,69 @@ export const buttonHoverColours = {
   rose: "hover:bg-pink-400",
 };
 
+export const supprtedTextColours = {
+  white: "text-white",
+  slate: "text-gray-500",
+  gray: "text-gray-500",
+  stone: "text-stone-500",
+  red: "text-red-500",
+  orange: "text-orange-500",
+  amber: "text-amber-500",
+  yellow: "text-yellow-500",
+  lime: "text-lime-500",
+  green: "text-green-500",
+  emerald: "text-emerald-500",
+  teal: "text-teal-500",
+  cyan: "text-cyan-500",
+  sky: "text-sky-500",
+  blue: "text-blue-500",
+  indigo: "text-indigo-500",
+  violet: "text-violet-500",
+  purple: "text-purple-500",
+  fuchsia: "text-fuchsia-500",
+  pink: "text-pink-500",
+  magenta: "text-magenta-500",
+  rose: "text-pink-500",
+};
+
 export type Colour = keyof typeof supprtedColours;
 
 export const randomColour = (): Colour => {
   const colours = Object.keys(supprtedColours) as Colour[];
   return colours[Math.floor(Math.random() * colours.length)];
+};
+
+export type TimerRun = {
+  id: number;
+  name: string;
+  interval: number;
+  main: number;
+  colour: Colour;
+  repeat: number;
+};
+
+export type TimerRuns = Array<TimerRun>;
+
+export type TimeDetails = {
+  totalSeconds: number;
+  seconds: number;
+  minutes: number;
+  hours: number;
+  days: number;
+};
+
+export const getTimeFromSeconds = (secs: number): TimeDetails => {
+  const totalSeconds = Math.ceil(secs);
+  const days = Math.floor(totalSeconds / (60 * 60 * 24));
+  const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
+  const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+  const seconds = Math.floor(totalSeconds % 60);
+
+  return {
+    totalSeconds,
+    seconds,
+    minutes,
+    hours,
+    days,
+  };
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import useThemeToggle from "@/app/hooks/useThemeToggle";
+import useThemeToggle from "@/app/hooks/use-theme-toggle";
 import { MoonIcon, SunIcon } from "../icons";
 
 const ThemeController = () => {
