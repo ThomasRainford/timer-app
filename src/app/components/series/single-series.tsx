@@ -12,9 +12,12 @@ const SingleSeries = ({ series, index }: Props) => {
   const name = series.name;
   const timersCount = series.timers.length;
   const totalTime = series.timers.reduce((acc, curr) => {
-    return acc + curr.main + curr.interval;
+    // Calculate the main timer given the number of repeats.
+    const mainRepeat = curr.repeat ? (curr.repeat + 1) * curr.main : curr.main;
+    return acc + curr.interval + mainRepeat;
   }, 0);
   const colour = series.colour as Colour;
+  console.log(totalTime);
 
   const dislayColour = supprtedColours[colour];
   const hoverColour = supprtedHoverColours[colour];

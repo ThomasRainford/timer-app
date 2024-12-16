@@ -11,6 +11,7 @@ import {
 import { useCountdown } from "@/app/hooks/use-countdown";
 import { Series, Timer } from "@prisma/client";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import useSound from "use-sound";
 import { CircleArrowIcon } from "../../icons";
 import IntervalTimerView from "./interval-timer-view";
 import MainTimerView from "./main-timer-view";
@@ -71,8 +72,23 @@ const RunPageContent = ({ series }: Props) => {
         : timerState.currentRunIndex
     ];
 
+  const [playPauseTick] = useSound("/tick.mp3", {
+    volume: 0.25,
+  });
+  const [playCountTick] = useSound("/tick-2.mp3", {
+    volume: 0.25,
+  });
+  const [playIntervalEndTick] = useSound("/beep.mp3", {
+    volume: 0.25,
+  });
+
   // Handle timer completion
   useEffect(() => {
+    if (count === 3 || count === 2 || count === 1) {
+      playCountTick(); // Play count sound on 3,2,1.
+    } else if (count === 0 && timerState.currentCountType === "interval") {
+      playIntervalEndTick(); // Play interval end sound.
+    }
     if (count === 0) {
       const doneMain = timerState.currentCountType === "main";
       if (doneMain) {
@@ -95,6 +111,9 @@ const RunPageContent = ({ series }: Props) => {
     count,
     currentTimerRun.main,
     nextTimerRun.main,
+    playCountTick,
+    playIntervalEndTick,
+    playPauseTick,
     restartWith,
     timerRuns,
     timerState,
@@ -164,7 +183,17 @@ const RunPageContent = ({ series }: Props) => {
         countTimeDetails={countTimeDetails}
         nextIntervalTimeDetails={nextIntervalTimeDetails}
         onRestart={() => restartWith(currentTimerRun.main)}
-        onPauseResume={() => (isPaused ? resume() : pause())}
+        onPauseResume={() =>
+          isPaused
+            ? (() => {
+                playPauseTick();
+                resume();
+              })()
+            : (() => {
+                playPauseTick();
+                pause();
+              })()
+        }
       />
     );
   }

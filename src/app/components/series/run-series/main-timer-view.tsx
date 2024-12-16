@@ -1,6 +1,6 @@
 import { CircleArrowIcon, PauseIcon, PlayIcon } from "../../icons";
 import { getTimeFromSeconds } from "../../util";
-import Time from "./Time";
+import Time from "./time";
 import TimerActionButton from "./timer-action-button";
 
 interface Props {
