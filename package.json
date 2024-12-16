@@ -30,6 +30,7 @@
     "react-dom": "^18",
     "react-toastify": "^10.0.5",
     "theme-change": "^2.5.0",
+    "use-sound": "^4.0.3",
     "zod": "^3.23.8"
   },
   "devDependencies": {
