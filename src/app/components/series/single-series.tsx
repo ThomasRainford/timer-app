@@ -17,7 +17,6 @@ const SingleSeries = ({ series, index }: Props) => {
     return acc + curr.interval + mainRepeat;
   }, 0);
   const colour = series.colour as Colour;
-  console.log(totalTime);
 
   const dislayColour = supprtedColours[colour];
   const hoverColour = supprtedHoverColours[colour];
