@@ -33,6 +33,16 @@ const TimerComponent = ({ timer }: Props) => {
   const position = timer.position;
   const dislayColour = supprtedColours[colour];
 
+  const formatRepititions = (repetitions: number) => {
+    if (repetitions === 1) {
+      return "Once";
+    } else if (repetitions === 2) {
+      return "Twice";
+    } else {
+      return `${repetitions} times`;
+    }
+  };
+
   return (
     <div
       ref={setNodeRef}
@@ -60,7 +70,9 @@ const TimerComponent = ({ timer }: Props) => {
         <div className="text-base-300 text-start font-bold">{name}</div>
         <div>
           <h6 className={`text-base-300 text-sm font-bold text-center`}>
-            {repetitions > 0 ? `Repeat ${repetitions}` : "No Repeat"}
+            {repetitions > 0
+              ? `Repeat ${formatRepititions(repetitions)}`
+              : "No Repeat"}
           </h6>
         </div>
         <div className="flex flex-row justify-end">

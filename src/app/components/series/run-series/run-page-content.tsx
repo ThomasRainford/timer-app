@@ -25,6 +25,7 @@ type CountType = "interval" | "main" | "end";
 interface TimerState {
   currentRunIndex: number;
   currentCountType: CountType;
+  completeTimers: number[]; // Array if timer ids.
 }
 
 const RunPageContent = ({ series }: Props) => {
@@ -62,6 +63,7 @@ const RunPageContent = ({ series }: Props) => {
   const [timerState, setTimerState] = useState<TimerState>({
     currentRunIndex: 0,
     currentCountType: timerRuns[0].interval > 0 ? "interval" : "main",
+    completeTimers: [],
   });
 
   const currentTimerRun = timerRuns[timerState.currentRunIndex];
@@ -97,18 +99,21 @@ const RunPageContent = ({ series }: Props) => {
         setTimerState((prev) => ({
           currentRunIndex: prev.currentRunIndex + 1,
           currentCountType: nextIsInterval ? "interval" : "main",
+          completeTimers: [...prev.completeTimers, currentTimerRun.id],
         }));
         restartWith(nextIsInterval ? nextInterval : nextTimerRun.main);
       } else {
         setTimerState((prev) => ({
           ...prev,
           currentCountType: "main",
+          completeTimers: [...prev.completeTimers],
         }));
         restartWith(currentTimerRun.main);
       }
     }
   }, [
     count,
+    currentTimerRun.id,
     currentTimerRun.main,
     nextTimerRun.main,
     playCountTick,
@@ -129,6 +134,7 @@ const RunPageContent = ({ series }: Props) => {
     setTimerState({
       currentRunIndex: 0,
       currentCountType: "end",
+      completeTimers: [],
     });
     pause();
   }, [pause]);
@@ -144,10 +150,16 @@ const RunPageContent = ({ series }: Props) => {
   }, [isLastTimer, count, resetTimerOnEnd]);
 
   // Compute display values
-  const getDisplayName = useCallback((timerRun: TimerRun) => {
-    const { name, repeat } = timerRun;
-    return repeat > 0 ? `${name} (${repeat + 1})` : name;
-  }, []);
+  const getDisplayName = useCallback(
+    (timerRun: TimerRun) => {
+      const { name, repeat } = timerRun;
+      const repeatIndex = timerState.completeTimers.filter(
+        (id) => id === timerRun.id
+      ).length;
+      return repeat > 0 ? `${name} (${repeatIndex + 1}/${repeat + 1})` : name;
+    },
+    [timerState.completeTimers]
+  );
 
   const nextName = getDisplayName(nextTimerRun);
   const name = getDisplayName(currentTimerRun);
@@ -210,6 +222,7 @@ const RunPageContent = ({ series }: Props) => {
                 currentRunIndex: 0,
                 currentCountType:
                   timerRuns[0].interval > 0 ? "interval" : "main",
+                completeTimers: [...timerState.completeTimers],
               });
             }}
           >
