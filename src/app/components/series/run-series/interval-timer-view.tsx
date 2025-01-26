@@ -1,5 +1,5 @@
 import { getTimeFromSeconds } from "../../util";
-import Time from "./times";
+import Time from "./time";
 
 interface Props {
   name: string;
