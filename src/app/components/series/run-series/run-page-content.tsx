@@ -169,17 +169,29 @@ const RunPageContent = ({ series }: Props) => {
 
   const countTimeDetails = getTimeFromSeconds(count);
   const mainTimeDetails = getTimeFromSeconds(currentTimerRun.main);
-  const nextIntervalTimeDetails = isLastTimer
-    ? "End"
-    : getTimeFromSeconds(nextTimerRun.interval);
+  const nextIntervalTimeDetails = (time: number) =>
+    isLastTimer ? "End" : getTimeFromSeconds(time);
 
   if (timerState.currentCountType === "interval") {
     return (
       <IntervalTimerView
         name={name}
+        isPaused={isPaused}
         mainTimeDetails={mainTimeDetails}
         countTimeDetails={countTimeDetails}
         mainColour={mainColour}
+        onRestart={() => restartWith(currentTimerRun.interval)}
+        onPauseResume={() =>
+          isPaused
+            ? (() => {
+                playPauseTick();
+                resume();
+              })()
+            : (() => {
+                playPauseTick();
+                pause();
+              })()
+        }
       />
     );
   }
@@ -193,7 +205,7 @@ const RunPageContent = ({ series }: Props) => {
         mainColour={mainColour}
         actionBtnHoverColour={actionBtnHoverColour}
         countTimeDetails={countTimeDetails}
-        nextIntervalTimeDetails={nextIntervalTimeDetails}
+        nextIntervalTimeDetails={nextIntervalTimeDetails(nextTimerRun.interval)}
         onRestart={() => restartWith(currentTimerRun.main)}
         onPauseResume={() =>
           isPaused

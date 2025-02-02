@@ -13,11 +13,7 @@ const Time = ({ timeDetails }: Props) => {
     timeString = `${minutes}:${secondsString}`;
   }
 
-  return (
-    <div>
-      <div>{timeString}</div>
-    </div>
-  );
+  return <div>{timeString}</div>;
 };
 
 export default Time;
