@@ -19,7 +19,6 @@ export const supprtedColours = {
   purple: "bg-purple-500",
   fuchsia: "bg-fuchsia-500",
   pink: "bg-pink-500",
-  magenta: "bg-magenta-500",
   rose: "bg-pink-500",
 };
 
@@ -44,7 +43,6 @@ export const supprtedHoverColours = {
   purple: "hover:bg-purple-600",
   fuchsia: "hover:bg-fuchsia-600",
   pink: "hover:bg-pink-600",
-  magenta: "hover:bg-magenta-600",
   rose: "hover:bg-pink-600",
 };
 
@@ -69,7 +67,6 @@ export const buttonHoverColours = {
   purple: "hover:bg-purple-400",
   fuchsia: "hover:bg-fuchsia-400",
   pink: "hover:bg-pink-400",
-  magenta: "hover:bg-magenta-400",
   rose: "hover:bg-pink-400",
 };
 
@@ -94,7 +91,6 @@ export const supprtedTextColours = {
   purple: "text-purple-500",
   fuchsia: "text-fuchsia-500",
   pink: "text-pink-500",
-  magenta: "text-magenta-500",
   rose: "text-pink-500",
 };
 
