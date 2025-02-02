@@ -9,7 +9,7 @@ import { Colour, randomColour, supprtedColours } from "../../util";
 
 interface Props {
   seriesId: number;
-  lastPosition: number;
+  lastPosition: number | undefined;
 }
 
 const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {

@@ -135,7 +135,7 @@ export async function deleteTimer(id: number, seriesId: number) {
 
 export async function createTimer(
   id: number,
-  lastPosition: number,
+  lastPosition: number | undefined,
   _: State,
   formData: FormData
 ) {
@@ -186,7 +186,7 @@ export async function createTimer(
         repeat,
         interval,
         main,
-        position: lastPosition + 1,
+        position: lastPosition !== undefined ? lastPosition + 1 : 0,
         seriesId: id,
       },
     });

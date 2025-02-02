@@ -35,8 +35,11 @@ const Create = async ({ params }: Props) => {
   const timers = series?.timers.sort((a, b) => {
     return a.position - b.position;
   });
-  const lastTimerPosition =
-    !timers || timers.length === 0 ? 1 : timers[timers.length - 1].position;
+  const lastTimerPosition = !timers
+    ? undefined
+    : timers.length === 0
+    ? undefined
+    : timers[timers.length - 1].position;
 
   return (
     <div className="flex flex-col justify-center items-center bg-base-200 m-3 p-3 py-4 rounded h-full md:h-auto">
