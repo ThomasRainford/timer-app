@@ -2,7 +2,8 @@
 
 import { register } from "@/app/lib/actions/auth";
 import { useFormState } from "react-dom";
-import SubmitFormButton from "../submit-form-button";
+import FormInputError from "../form/form-input-error";
+import SubmitFormButton from "../form/submit-form-button";
 
 const RegisterForm = () => {
   const [errorMessage, dispatch] = useFormState(register, undefined);
@@ -53,26 +54,7 @@ const RegisterForm = () => {
         <SubmitFormButton form="register-form" buttonText="Register" />
       </div>
       <div className="flex mt-4" aria-live="polite" aria-atomic="true">
-        {errorMessage && (
-          <>
-            <div role="alert" className="alert alert-error">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 shrink-0 stroke-current"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <span>{errorMessage}</span>
-            </div>
-          </>
-        )}
+        {errorMessage && <FormInputError message={errorMessage} />}
       </div>
     </form>
   );
