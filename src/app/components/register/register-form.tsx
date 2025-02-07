@@ -1,14 +1,15 @@
 "use client";
 
 import { register } from "@/app/lib/actions/auth";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
+import FormInputError from "../form/form-input-error";
+import SubmitFormButton from "../form/submit-form-button";
 
 const RegisterForm = () => {
   const [errorMessage, dispatch] = useFormState(register, undefined);
-  const { pending } = useFormStatus();
 
   return (
-    <form action={dispatch}>
+    <form action={dispatch} id="register-form">
       <div className="form-control">
         <label className="label" htmlFor="email">
           <span className="label-text">Email</span>
@@ -50,20 +51,10 @@ const RegisterForm = () => {
         />
       </div>
       <div className="form-control mt-6">
-        <button className="btn btn-primary" aria-disabled={pending}>
-          Register
-        </button>
+        <SubmitFormButton form="register-form" buttonText="Register" />
       </div>
-      <div
-        className="flex h-8 items-end space-x-1"
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        {errorMessage && (
-          <>
-            <p className="text-sm text-red-500">{errorMessage}</p>
-          </>
-        )}
+      <div className="flex mt-4" aria-live="polite" aria-atomic="true">
+        {errorMessage && <FormInputError message={errorMessage} />}
       </div>
     </form>
   );

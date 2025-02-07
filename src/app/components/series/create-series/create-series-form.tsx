@@ -4,7 +4,9 @@ import useColours from "@/app/hooks/use-colours";
 import { createSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
 import Link from "next/link";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
+import FormInputError from "../../form/form-input-error";
+import SubmitFormButton from "../../form/submit-form-button";
 import { randomColour } from "../../util";
 
 const CreateSeriesForm = () => {
@@ -20,7 +22,6 @@ const CreateSeriesForm = () => {
     createSeries as any,
     initialState
   );
-  const { pending } = useFormStatus();
 
   const nameError = state.errors?.name;
   const colourError = state.errors?.colour;
@@ -41,9 +42,11 @@ const CreateSeriesForm = () => {
           required
         />
         <div>
-          {nameError ? (
-            <span className="text-error text-sm">{nameError}</span>
-          ) : null}
+          {nameError?.map((message) => (
+            <div key={message} className="mt-1">
+              <FormInputError key={message} message={message} />
+            </div>
+          ))}
         </div>
       </div>
       <div className="form-control">
@@ -63,9 +66,13 @@ const CreateSeriesForm = () => {
           ))}
         </select>
         <div>
-          {colourError ? (
-            <span className="text-error text-sm">{colourError}</span>
-          ) : null}
+          <div>
+            {colourError?.map((message) => (
+              <div key={message} className="mt-1">
+                <FormInputError message={message} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className={`w-full h-[20px] ${selectedDisplayColour} mt-1`} />
@@ -75,21 +82,19 @@ const CreateSeriesForm = () => {
         aria-atomic="true"
       >
         {limitError && (
-          <>
-            <p className="text-md text-red-500">{limitError}</p>
-          </>
+          <div className="mt-1">
+            <FormInputError message={limitError} />
+          </div>
         )}
       </div>
+      <div></div>
       <div className="flex justify-end mt-4">
         <div>
-          <button
-            type="submit"
-            form={`create-series-form`}
-            className="btn btn-primary"
-            disabled={pending || limitError !== undefined}
-          >
-            Confirm
-          </button>
+          <SubmitFormButton
+            form="create-series-form"
+            buttonText="Confirm"
+            disabled={limitError !== undefined}
+          />
         </div>
         <div className="mt-0 ml-4">
           <Link className="btn outline" href={"/series"}>

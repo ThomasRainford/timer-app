@@ -4,7 +4,9 @@ import { createTimer } from "@/app/lib/actions/timer";
 import { State } from "@/app/lib/actions/types";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
+import FormInputError from "../../form/form-input-error";
+import SubmitFormButton from "../../form/submit-form-button";
 import { Colour, randomColour, supprtedColours } from "../../util";
 
 interface Props {
@@ -38,7 +40,6 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
     createTimerWithId as any,
     initialState
   );
-  const { pending } = useFormStatus();
 
   const nameError = state.errors?.name;
   const colourError = state.errors?.colour;
@@ -60,9 +61,11 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
           required
         />
         <div>
-          {nameError ? (
-            <span className="text-error text-sm">{nameError}</span>
-          ) : null}
+          {nameError?.map((message) => (
+            <div key={message} className="mt-1">
+              <FormInputError key={message} message={message} />
+            </div>
+          ))}
         </div>
       </div>
       <div className="form-control">
@@ -82,9 +85,11 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
           ))}
         </select>
         <div>
-          {colourError ? (
-            <span className="text-error text-sm">{colourError}</span>
-          ) : null}
+          {colourError?.map((message) => (
+            <div key={message} className="mt-1">
+              <FormInputError key={message} message={message} />
+            </div>
+          ))}
         </div>
       </div>
       <div className={`w-full h-[20px] ${selectedColourDisplay} mt-1`} />
@@ -139,9 +144,11 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
           defaultValue={0}
         />
         <div>
-          {mainError ? (
-            <span className="text-error text-sm">{mainError}</span>
-          ) : null}
+          {mainError?.map((message) => (
+            <div key={message} className="mt-1">
+              <FormInputError key={message} message={message} />
+            </div>
+          ))}
         </div>
       </div>
       <div
@@ -150,21 +157,18 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
         aria-atomic="true"
       >
         {limitError && (
-          <>
-            <p className="text-md text-red-500">{limitError}</p>
-          </>
+          <div className="mt-1">
+            <FormInputError message={limitError} />
+          </div>
         )}
       </div>
       <div className="flex justify-end mt-4">
         <div>
-          <button
-            type="submit"
-            form={`create-timer-form`}
-            className="btn btn-primary"
-            disabled={pending || limitError !== undefined}
-          >
-            Confirm
-          </button>
+          <SubmitFormButton
+            form="create-timer-form"
+            buttonText="Confirm"
+            disabled={limitError !== undefined}
+          />
         </div>
         <div className="mt-0 ml-4">
           <Link className="btn outline" href={`/series/${seriesId}`}>

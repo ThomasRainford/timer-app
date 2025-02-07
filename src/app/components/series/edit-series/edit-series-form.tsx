@@ -5,6 +5,8 @@ import { editSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
 import { useState } from "react";
 import { useFormState } from "react-dom";
+import FormInputError from "../../form/form-input-error";
+import SubmitFormButton from "../../form/submit-form-button";
 import { Colour } from "../../util";
 
 interface Props {
@@ -54,9 +56,11 @@ const EditSeriesForm = ({ modalId, id, initialName, initialColour }: Props) => {
           defaultValue={initialName}
         />
         <div>
-          {nameError ? (
-            <span className="text-error text-sm">{nameError}</span>
-          ) : null}
+          {nameError?.map((message) => (
+            <div key={message} className="mt-1">
+              <FormInputError key={message} message={message} />
+            </div>
+          ))}
         </div>
       </div>
       <div className="form-control">
@@ -76,25 +80,24 @@ const EditSeriesForm = ({ modalId, id, initialName, initialColour }: Props) => {
           ))}
         </select>
         <div>
-          {colourError ? (
-            <span className="text-error text-sm">{colourError}</span>
-          ) : null}
+          {colourError?.map((message) => (
+            <div key={message} className="mt-1">
+              <FormInputError key={message} message={message} />
+            </div>
+          ))}
         </div>
       </div>
 
       <div className={`w-full h-[20px] ${selectedDisplayColour} mt-1`} />
       <div className="flex justify-end mt-4">
         <div>
-          <button
-            type="submit"
+          <SubmitFormButton
             form={`edit-series-form-${id}`}
-            className="btn btn-primary"
+            buttonText="Confirm"
             onClick={() => {
               setHasSubmitted(true);
             }}
-          >
-            Confirm
-          </button>
+          />
         </div>
         <div className="mt-0 ml-4">
           <button
