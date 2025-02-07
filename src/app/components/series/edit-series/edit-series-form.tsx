@@ -5,6 +5,7 @@ import { editSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
 import { useState } from "react";
 import { useFormState } from "react-dom";
+import SubmitFormButton from "../../submit-form-button";
 import { Colour } from "../../util";
 
 interface Props {
@@ -85,16 +86,13 @@ const EditSeriesForm = ({ modalId, id, initialName, initialColour }: Props) => {
       <div className={`w-full h-[20px] ${selectedDisplayColour} mt-1`} />
       <div className="flex justify-end mt-4">
         <div>
-          <button
-            type="submit"
+          <SubmitFormButton
             form={`edit-series-form-${id}`}
-            className="btn btn-primary"
+            buttonText="Confirm"
             onClick={() => {
               setHasSubmitted(true);
             }}
-          >
-            Confirm
-          </button>
+          />
         </div>
         <div className="mt-0 ml-4">
           <button

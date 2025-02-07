@@ -4,7 +4,8 @@ import { createTimer } from "@/app/lib/actions/timer";
 import { State } from "@/app/lib/actions/types";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
+import SubmitFormButton from "../../submit-form-button";
 import { Colour, randomColour, supprtedColours } from "../../util";
 
 interface Props {
@@ -38,7 +39,6 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
     createTimerWithId as any,
     initialState
   );
-  const { pending } = useFormStatus();
 
   const nameError = state.errors?.name;
   const colourError = state.errors?.colour;
@@ -157,14 +157,11 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
       </div>
       <div className="flex justify-end mt-4">
         <div>
-          <button
-            type="submit"
-            form={`create-timer-form`}
-            className="btn btn-primary"
-            disabled={pending || limitError !== undefined}
-          >
-            Confirm
-          </button>
+          <SubmitFormButton
+            form="create-timer-form"
+            buttonText="Confirm"
+            disabled={limitError !== undefined}
+          />
         </div>
         <div className="mt-0 ml-4">
           <Link className="btn outline" href={`/series/${seriesId}`}>

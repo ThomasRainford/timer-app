@@ -4,7 +4,8 @@ import useColours from "@/app/hooks/use-colours";
 import { createSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
 import Link from "next/link";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
+import SubmitFormButton from "../../submit-form-button";
 import { randomColour } from "../../util";
 
 const CreateSeriesForm = () => {
@@ -20,7 +21,6 @@ const CreateSeriesForm = () => {
     createSeries as any,
     initialState
   );
-  const { pending } = useFormStatus();
 
   const nameError = state.errors?.name;
   const colourError = state.errors?.colour;
@@ -82,14 +82,11 @@ const CreateSeriesForm = () => {
       </div>
       <div className="flex justify-end mt-4">
         <div>
-          <button
-            type="submit"
-            form={`create-series-form`}
-            className="btn btn-primary"
-            disabled={pending || limitError !== undefined}
-          >
-            Confirm
-          </button>
+          <SubmitFormButton
+            form="create-series-form"
+            buttonText="Confirm"
+            disabled={limitError !== undefined}
+          />
         </div>
         <div className="mt-0 ml-4">
           <Link className="btn outline" href={"/series"}>

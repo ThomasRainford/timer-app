@@ -2,13 +2,13 @@
 
 import { register } from "@/app/lib/actions/auth";
 import { useFormState } from "react-dom";
-import RegisterButton from "./register-button";
+import SubmitFormButton from "../submit-form-button";
 
 const RegisterForm = () => {
   const [errorMessage, dispatch] = useFormState(register, undefined);
 
   return (
-    <form action={dispatch}>
+    <form action={dispatch} id="register-form">
       <div className="form-control">
         <label className="label" htmlFor="email">
           <span className="label-text">Email</span>
@@ -50,7 +50,7 @@ const RegisterForm = () => {
         />
       </div>
       <div className="form-control mt-6">
-        <RegisterButton />
+        <SubmitFormButton form="register-form" buttonText="Register" />
       </div>
       <div className="flex mt-4" aria-live="polite" aria-atomic="true">
         {errorMessage && (
