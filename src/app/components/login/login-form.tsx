@@ -1,11 +1,11 @@
 "use client";
 
 import { authenticate } from "@/app/lib/actions/auth";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
+import LoginButton from "./login-button";
 
 const LoginForm = () => {
   const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-  const { pending } = useFormStatus();
 
   return (
     <form action={dispatch}>
@@ -37,18 +37,27 @@ const LoginForm = () => {
         />
       </div>
       <div className="form-control mt-6">
-        <button className="btn btn-primary" aria-disabled={pending}>
-          Login
-        </button>
+        <LoginButton />
       </div>
-      <div
-        className="flex h-8 items-end space-x-1"
-        aria-live="polite"
-        aria-atomic="true"
-      >
+      <div className="flex mt-4" aria-live="polite" aria-atomic="true">
         {errorMessage && (
           <>
-            <p className="text-sm text-red-500">{errorMessage}</p>
+            <div role="alert" className="alert alert-error">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 shrink-0 stroke-current"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>{errorMessage}</span>
+            </div>
           </>
         )}
       </div>
