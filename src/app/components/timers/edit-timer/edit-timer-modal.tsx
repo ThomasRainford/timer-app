@@ -37,7 +37,7 @@ const EditTimerModal = ({ timer }: Props) => {
           <PencilIcon />
         </button>
       </div>
-      <dialog id={modalId} className="modal modal-bottom sm:modal-middle">
+      <dialog id={modalId} className="modal modal-top sm:modal-middle">
         <div className="modal-box">
           <h3 className="font-bold text-lg text-accent">{`Edit ${name}?`}</h3>
           <div className="mt-2">
