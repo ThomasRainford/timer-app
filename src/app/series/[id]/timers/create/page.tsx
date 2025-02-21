@@ -42,7 +42,7 @@ const Create = async ({ params }: Props) => {
     : timers[timers.length - 1].position;
 
   return (
-    <div className="flex flex-col justify-center items-center bg-base-200 m-3 p-3 py-4 rounded h-full md:h-auto">
+    <>
       <div className="text-center">
         <h1 className="text-2xl font-bold text-base-content">Create Timer</h1>
       </div>
@@ -52,7 +52,7 @@ const Create = async ({ params }: Props) => {
           lastPosition={lastTimerPosition}
         />
       </div>
-    </div>
+    </>
   );
 };
 
