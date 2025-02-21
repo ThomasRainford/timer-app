@@ -23,7 +23,7 @@ const Series = async () => {
   });
 
   return (
-    <div className="flex flex-col justify-center overflow-y-hidden px-4 mt-2">
+    <div className="flex flex-col justify-center overflow-y-hidden px-2 md:px-4 mt-2">
       <div className="mb-4">
         <Link
           className="btn btn-primary w-full md:w-[30%] text-md"
