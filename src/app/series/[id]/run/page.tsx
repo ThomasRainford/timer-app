@@ -36,7 +36,7 @@ const Run = async ({ params }: Props) => {
   }
   const seriesName = series.name;
   return (
-    <div className="flex flex-col flex-grow">
+    <div className="flex flex-col flex-grow my-2">
       <div className="flex justify-center align-middle w-[100%]">
         <div className="flex flex-row items-center ml-4">
           <Link

@@ -22,8 +22,8 @@ const IntervalTimerView = ({
   onRestart,
   onPauseResume,
 }: Props) => (
-  <div className="flex flex-col flex-grow">
-    <div className="bg-base-200 h-[80%] w-full flex justify-center items-center">
+  <div className="flex flex-col flex-grow px-2">
+    <div className="bg-base-200 h-[80%] w-full flex justify-center items-center rounded-t-md">
       <div className="h-full w-full flex flex-col mx-4">
         <div className="mt-4">
           <h5 className="text-xl pb-2 text-center">{"Interval"}</h5>
@@ -50,7 +50,7 @@ const IntervalTimerView = ({
       </div>
     </div>
     <div
-      className={`${mainColour} h-[20%] flex flex-col justify-start items-center`}
+      className={`${mainColour} h-[20%] flex flex-col justify-start items-center rounded-b-md`}
     >
       <div className="h-full">
         <div className="mt-1 pb-4">

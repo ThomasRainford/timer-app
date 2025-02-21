@@ -26,9 +26,9 @@ const MainTimerView = ({
   onRestart,
   onPauseResume,
 }: Props) => (
-  <div className="flex flex-col flex-grow">
+  <div className="flex flex-col flex-grow px-2">
     <div
-      className={`${mainColour} h-[80%] w-full flex justify-center items-center`}
+      className={`${mainColour} h-[80%] w-full flex justify-center items-center rounded-t-md`}
     >
       <div className="h-full w-full flex flex-col mx-4">
         <div className="mt-4">
@@ -61,7 +61,7 @@ const MainTimerView = ({
         </div>
       </div>
     </div>
-    <div className="bg-base-200 h-[20%] flex flex-col justify-center items-center">
+    <div className="bg-base-200 h-[20%] flex flex-col justify-center items-center rounded-b-md">
       <div className="h-full">
         <div className="pb-5" style={{ visibility: "hidden" }}>
           <h5 className="text-lg text-center text-base-300">
