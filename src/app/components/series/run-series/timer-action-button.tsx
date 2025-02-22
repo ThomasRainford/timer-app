@@ -4,15 +4,15 @@ interface Props {
   hoverColour: string;
 }
 
-const TimerActionButton = ({ icon, onClick, hoverColour }: Props) => (
-  <div className="flex items-center">
+const TimerActionButton = ({ icon, onClick, hoverColour }: Props) => {
+  return (
     <div
       className={`btn btn-outline btn-square ${hoverColour}`}
       onClick={onClick}
     >
       {icon}
     </div>
-  </div>
-);
+  );
+};
 
 export default TimerActionButton;

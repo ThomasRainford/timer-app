@@ -53,11 +53,10 @@ export const useCountdown = ({ initialCount }: Props) => {
     start();
   };
 
-  const restartWith = (newCount: number) => {
+  const resetWith = (newCount: number) => {
     setCount(newCount);
-    setIsPaused(false);
     start();
   };
 
-  return { count, isPaused, start, pause, resume, restart, restartWith };
+  return { count, isPaused, start, pause, resume, restart, resetWith };
 };

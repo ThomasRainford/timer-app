@@ -35,28 +35,32 @@ const MainTimerView = ({
           <h5 className="text-xl pb-2 text-center text-base-300">{name}</h5>
         </div>
         <div className="h-full w-full flex flex-col justify-center items-center mb-[15%] md:mb-[50px]">
-          <div className="flex flex-row justify-around w-full md:w-[550px]">
-            <TimerActionButton
-              icon={<CircleArrowIcon className="text-base-300" size={6} />}
-              onClick={onRestart}
-              hoverColour={actionBtnHoverColour}
-            />
-            <div className="w-[50%]">
-              <h1 className="text-9xl text-center text-base-300">
-                <Time timeDetails={countTimeDetails} />
-              </h1>
+          <div className="flex flex-row justify-around w-full">
+            <h1 className="text-9xl text-center w-full text-base-300 font-mono">
+              <Time timeDetails={countTimeDetails} />
+            </h1>
+          </div>
+          <div className="flex flex-row justify-evenly w-full pt-5 md:w-[550px]">
+            <div className="flex items-center">
+              <TimerActionButton
+                icon={<CircleArrowIcon className="text-base-300" size={6} />}
+                onClick={onRestart}
+                hoverColour={actionBtnHoverColour}
+              />
             </div>
-            <TimerActionButton
-              icon={
-                !isPaused ? (
-                  <PauseIcon className="text-base-300" size={6} />
-                ) : (
-                  <PlayIcon className="text-base-300" size={6} />
-                )
-              }
-              onClick={onPauseResume}
-              hoverColour={actionBtnHoverColour}
-            />
+            <div className="flex items-center">
+              <TimerActionButton
+                icon={
+                  !isPaused ? (
+                    <PauseIcon className="text-base-300" size={6} />
+                  ) : (
+                    <PlayIcon className="text-base-300" size={6} />
+                  )
+                }
+                onClick={onPauseResume}
+                hoverColour={actionBtnHoverColour}
+              />
+            </div>
           </div>
         </div>
       </div>
