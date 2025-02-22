@@ -73,7 +73,7 @@ const MainTimerView = ({
           </h5>
         </div>
         <div>
-          <h3 className="text-6xl text-center">
+          <h3 className="text-6xl text-center font-mono">
             {typeof nextIntervalTimeDetails === "string" ? (
               <div>{nextIntervalTimeDetails}</div>
             ) : (

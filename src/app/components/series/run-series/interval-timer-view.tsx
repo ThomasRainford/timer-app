@@ -63,7 +63,7 @@ const IntervalTimerView = ({
           <h5 className="text-lg text-center text-base-300">Next: {name}</h5>
         </div>
         <div>
-          <h3 className="text-6xl text-center text-base-300">
+          <h3 className="text-6xl text-center font-mono text-base-300">
             <Time timeDetails={mainTimeDetails} />
           </h3>
         </div>
