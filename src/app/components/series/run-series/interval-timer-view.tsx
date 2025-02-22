@@ -29,22 +29,28 @@ const IntervalTimerView = ({
           <h5 className="text-xl pb-2 text-center">{"Interval"}</h5>
         </div>
         <div className="h-full w-full flex flex-col justify-center items-center mb-[15%] md:mb-[50px]">
-          <div className="flex flex-row justify-around w-full md:w-[550px]">
-            <TimerActionButton
-              icon={<CircleArrowIcon size={6} />}
-              onClick={onRestart}
-              hoverColour={"bg-base-200"}
-            />
-            <div className="w-[50%]">
-              <h1 className="text-9xl text-center">
-                <Time timeDetails={countTimeDetails} />
-              </h1>
+          <div className="flex flex-row justify-around w-full">
+            <h1 className="text-9xl text-center w-full font-mono">
+              <Time timeDetails={countTimeDetails} />
+            </h1>
+          </div>
+          <div className="flex flex-row justify-evenly w-full pt-5 md:w-[550px]">
+            <div className="flex items-center">
+              <TimerActionButton
+                icon={<CircleArrowIcon size={6} />}
+                onClick={onRestart}
+                hoverColour={"bg-base-200"}
+              />
             </div>
-            <TimerActionButton
-              icon={!isPaused ? <PauseIcon size={6} /> : <PlayIcon size={6} />}
-              onClick={onPauseResume}
-              hoverColour={"bg-base-200"}
-            />
+            <div className="flex items-center">
+              <TimerActionButton
+                icon={
+                  !isPaused ? <PauseIcon size={6} /> : <PlayIcon size={6} />
+                }
+                onClick={onPauseResume}
+                hoverColour={"bg-base-200"}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -57,7 +63,7 @@ const IntervalTimerView = ({
           <h5 className="text-lg text-center text-base-300">Next: {name}</h5>
         </div>
         <div>
-          <h3 className="text-6xl text-center text-base-300">
+          <h3 className="text-6xl text-center font-mono text-base-300">
             <Time timeDetails={mainTimeDetails} />
           </h3>
         </div>

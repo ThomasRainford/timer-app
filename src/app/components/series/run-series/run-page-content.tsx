@@ -35,7 +35,7 @@ const RunPageContent = ({ series }: Props) => {
     [series?.timers]
   );
 
-  const { count, isPaused, start, pause, resume, restart, restartWith } =
+  const { count, isPaused, start, pause, resume, restart, resetWith } =
     useCountdown({
       initialCount: timers[0].interval,
     });
@@ -101,14 +101,14 @@ const RunPageContent = ({ series }: Props) => {
           currentCountType: nextIsInterval ? "interval" : "main",
           completeTimers: [...prev.completeTimers, currentTimerRun.id],
         }));
-        restartWith(nextIsInterval ? nextInterval : nextTimerRun.main);
+        resetWith(nextIsInterval ? nextInterval : nextTimerRun.main);
       } else {
         setTimerState((prev) => ({
           ...prev,
           currentCountType: "main",
           completeTimers: [...prev.completeTimers],
         }));
-        restartWith(currentTimerRun.main);
+        resetWith(currentTimerRun.main);
       }
     }
   }, [
@@ -119,7 +119,7 @@ const RunPageContent = ({ series }: Props) => {
     playCountTick,
     playIntervalEndTick,
     playPauseTick,
-    restartWith,
+    resetWith,
     timerRuns,
     timerState,
   ]);
@@ -180,7 +180,7 @@ const RunPageContent = ({ series }: Props) => {
         mainTimeDetails={mainTimeDetails}
         countTimeDetails={countTimeDetails}
         mainColour={mainColour}
-        onRestart={() => restartWith(currentTimerRun.interval)}
+        onRestart={() => resetWith(currentTimerRun.interval)}
         onPauseResume={() =>
           isPaused
             ? (() => {
@@ -206,7 +206,7 @@ const RunPageContent = ({ series }: Props) => {
         actionBtnHoverColour={actionBtnHoverColour}
         countTimeDetails={countTimeDetails}
         nextIntervalTimeDetails={nextIntervalTimeDetails(nextTimerRun.interval)}
-        onRestart={() => restartWith(currentTimerRun.main)}
+        onRestart={() => resetWith(currentTimerRun.main)}
         onPauseResume={() =>
           isPaused
             ? (() => {

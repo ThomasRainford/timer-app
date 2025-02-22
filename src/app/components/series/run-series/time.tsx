@@ -8,12 +8,10 @@ const Time = ({ timeDetails }: Props) => {
   const { minutes, seconds } = timeDetails;
 
   let timeString = seconds.toString();
-  if (minutes > 0) {
-    const secondsString = seconds < 10 ? `0${seconds}` : timeString;
-    timeString = `${minutes}:${secondsString}`;
-  }
+  const secondsString = seconds < 10 ? `0${seconds}` : timeString;
+  timeString = `${minutes}:${secondsString}`;
 
-  return <div>{timeString}</div>;
+  return <>{timeString}</>;
 };
 
 export default Time;
