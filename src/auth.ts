@@ -1,7 +1,7 @@
 import prisma from "@/app/lib/db";
 import { authConfig } from "@/auth.config";
 import { User } from "@prisma/client";
-import * as bcrypt from "bcryptjs";
+import bcrypt from "bcryptjs";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";

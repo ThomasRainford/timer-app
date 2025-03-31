@@ -21,7 +21,23 @@ const Timers = ({ timers, seriesId }: Props) => {
 
   // Update items with new timers.
   useEffect(() => {
-    setItems(timers);
+    setItems((curr) => {
+      // Check if arrays have the same length and all items match
+      const areArraysEqual =
+        curr.length === timers.length &&
+        curr.every(
+          (currTimer, index) =>
+            currTimer.id === timers[index].id &&
+            currTimer.position === timers[index].position &&
+            currTimer.colour == timers[index].colour &&
+            currTimer.main === timers[index].main &&
+            currTimer.interval === timers[index].interval &&
+            currTimer.repeat === timers[index].repeat &&
+            currTimer.name === timers[index].name &&
+            currTimer.seriesId === timers[index].seriesId
+        );
+      return areArraysEqual ? curr : timers;
+    });
   }, [timers]);
 
   const updateTimersPosition = async (seriesId: number, timers: Timer[]) => {
