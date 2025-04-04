@@ -14,7 +14,7 @@ const Countdown = () => {
   }, [timer]);
 
   return (
-    <div className="bg-neutral rounded-box text-neutral-content p-2">
+    <div className="bg-accent-content rounded-box text-neutral-content p-2">
       <span className="countdown font-mono text-6xl">
         <span style={{ "--value": timer } as any}></span>
       </span>

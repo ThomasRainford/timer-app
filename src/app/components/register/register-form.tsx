@@ -10,7 +10,7 @@ const RegisterForm = () => {
 
   return (
     <form action={dispatch} id="register-form">
-      <div className="form-control">
+      <div className="form-control mb-4">
         <label className="label" htmlFor="email">
           <span className="label-text">Email</span>
         </label>
@@ -23,7 +23,7 @@ const RegisterForm = () => {
           required
         />
       </div>
-      <div className="form-control">
+      <div className="form-control mb-4">
         <label className="label" htmlFor="password">
           <span className="label-text">Password</span>
         </label>

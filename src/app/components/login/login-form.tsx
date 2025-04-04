@@ -10,7 +10,7 @@ const LoginForm = () => {
 
   return (
     <form action={dispatch} id="login-form">
-      <div className="form-control">
+      <div className="form-control mb-4">
         <label className="label" htmlFor="email">
           <span className="label-text">Email</span>
         </label>

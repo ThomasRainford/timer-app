@@ -46,7 +46,7 @@ const Create = async ({ params }: Props) => {
       <div className="text-center">
         <h1 className="text-2xl font-bold text-base-content">Create Timer</h1>
       </div>
-      <div className="w-full md:w-[70%] lg:w-[50%] ">
+      <div className="w-full md:w-[50%] lg:w-[30%]">
         <CreateTimerForm
           seriesId={series?.id}
           lastPosition={lastTimerPosition}

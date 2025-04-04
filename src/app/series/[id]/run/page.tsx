@@ -40,7 +40,7 @@ const Run = async ({ params }: Props) => {
       <div className="flex justify-center align-middle w-[100%]">
         <div className="flex flex-row items-center ml-4">
           <Link
-            className={`btn btn-neutral btn-outline btn-square btn-sm`}
+            className={`btn btn-outline  btn-square btn-sm`}
             href={`/series/${series.id}`}
           >
             <ArrowLeftIcon className="h-5 w-5" />

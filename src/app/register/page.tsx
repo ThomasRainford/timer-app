@@ -16,15 +16,18 @@ const Register = () => {
             <PersonIcon size={16} />
           </div>
         </div>
-        <div className="prose flex justify-center mt-2">
-          <h2>Register.</h2>
+        <div className="flex justify-center mt-2 text-2xl font-bold">
+          Register
         </div>
         <div className="card-body">
           <RegisterForm />
         </div>
         <div className="prose pl-4 pb-4">
-          <p className="text-sm">
-            Already registered? <Link href={"/login"}>Login here.</Link>
+          <p className="text-sm opacity-60">
+            Already registered?{" "}
+            <Link className="hover:underline" href={"/login"}>
+              Login here.
+            </Link>
           </p>
         </div>
       </div>

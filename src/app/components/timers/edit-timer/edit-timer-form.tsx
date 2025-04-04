@@ -61,16 +61,16 @@ const EditTimerForm = ({
 
   return (
     <form action={dispatch} id={`edit-timer-form-${id}`}>
-      <div className="form-control">
+      <div className="form-control mb-2">
         <label className="label" htmlFor="name">
-          <span className="label-text text-lg">Name</span>
+          <span className="label-text text-md">Name</span>
         </label>
         <input
           id="name"
           type="text"
           name="name"
           placeholder="Timer name"
-          className="input input-bordered input-md bg-base-100"
+          className="input input-bordered input-md bg-base-100 w-[100%]"
           required
           defaultValue={initialName}
         />
@@ -84,12 +84,12 @@ const EditTimerForm = ({
       </div>
       <div className="form-control">
         <label className="label" htmlFor="colour">
-          <span className="label-text text-lg">Colour</span>
+          <span className="label-text text-md">Colour</span>
         </label>
         <select
           id="colour"
           name="colour"
-          className="select select-bordered select-md bg-base-100"
+          className="select select-bordered select-md bg-base-100 w-[100%]"
           defaultValue={initialColourSelect}
           onChange={handleColourChange}
         >
@@ -106,17 +106,17 @@ const EditTimerForm = ({
           ))}
         </div>
       </div>
-      <div className={`w-full h-[20px] ${selectedColourDisplay} mt-1`} />
-      <div className="form-control">
+      <div className={`w-full h-[20px] ${selectedColourDisplay} mt-1 mb-2`} />
+      <div className="form-control mb-2">
         <label className="label" htmlFor="repeat">
-          <span className="label-text text-lg">Repetitions</span>
+          <span className="label-text text-md">Repetitions</span>
           <span className="label-text-alt text-sm">(0 for none)</span>
         </label>
         <input
           id="repeat"
           type="number"
           name="repeat"
-          className="input input-bordered input-md bg-base-100 "
+          className="input input-bordered input-md bg-base-100 w-[100%]"
           required
           defaultValue={initialRepeat}
           min={0}
@@ -124,9 +124,9 @@ const EditTimerForm = ({
           step={1}
         />
       </div>
-      <div className="form-control">
+      <div className="form-control mb-2">
         <label className="label" htmlFor="interval">
-          <span className="label-text text-lg">Interval</span>
+          <span className="label-text text-md">Interval</span>
           <span className="label-text-alt text-sm">
             (in seconds, 0 for no interval)
           </span>
@@ -135,23 +135,23 @@ const EditTimerForm = ({
           id="interval"
           type="number"
           name="interval"
-          className="input input-bordered input-md bg-base-100 "
+          className="input input-bordered input-md bg-base-100 w-[100%]"
           required
           defaultValue={initialInterval}
           min={0}
           step={5}
         />
       </div>
-      <div className="form-control">
+      <div className="form-control mb-2">
         <label className="label" htmlFor="main">
-          <span className="label-text text-lg">Main</span>
+          <span className="label-text text-md">Main</span>
           <span className="label-text-alt text-sm">(in seconds)</span>
         </label>
         <input
           id="main"
           type="number"
           name="main"
-          className="input input-bordered input-md bg-base-100 "
+          className="input input-bordered input-md bg-base-100 w-[100%]"
           required
           defaultValue={initialMain}
           min={0}
