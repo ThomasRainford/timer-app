@@ -8,7 +8,7 @@ interface Props {
 const DraggableTimers = ({ timers }: Props) => {
   return (
     <div>
-      {[...timers].map((timer) => {
+      {timers.map((timer) => {
         return <Timer key={timer.id} timer={timer} />;
       })}
     </div>
