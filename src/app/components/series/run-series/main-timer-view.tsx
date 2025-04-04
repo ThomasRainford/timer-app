@@ -26,7 +26,7 @@ const MainTimerView = ({
   onRestart,
   onPauseResume,
 }: Props) => (
-  <div className="flex flex-col flex-grow px-2">
+  <div className="flex flex-col grow px-2">
     <div
       className={`${mainColour} h-[80%] w-full flex justify-center items-center rounded-t-md`}
     >
