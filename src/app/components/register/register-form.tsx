@@ -50,11 +50,11 @@ const RegisterForm = () => {
           required
         />
       </div>
-      <div className="form-control mt-6">
-        <SubmitFormButton form="register-form" buttonText="Register" />
-      </div>
       <div className="flex mt-4" aria-live="polite" aria-atomic="true">
         {errorMessage && <FormInputError message={errorMessage} />}
+      </div>
+      <div className="form-control mt-6">
+        <SubmitFormButton form="register-form" buttonText="Register" />
       </div>
     </form>
   );

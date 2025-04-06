@@ -37,11 +37,11 @@ const LoginForm = () => {
           minLength={6}
         />
       </div>
-      <div className="form-control mt-6">
-        <SubmitFormButton form="login-form" buttonText="Login" />
-      </div>
       <div className="flex mt-4" aria-live="polite" aria-atomic="true">
         {errorMessage && <FormInputError message={errorMessage} />}
+      </div>
+      <div className="form-control mt-6">
+        <SubmitFormButton form="login-form" buttonText="Login" />
       </div>
     </form>
   );
