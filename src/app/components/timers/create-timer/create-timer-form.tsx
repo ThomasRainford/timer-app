@@ -47,17 +47,17 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
   const limitError = state.errors?.limit;
 
   return (
-    <form action={dispatch} id="create-timer-form" className="w-full">
+    <form action={dispatch} id="create-timer-form">
       <div className="form-control">
-        <label className="label" htmlFor="name">
-          <span className="label-text text-lg">Name</span>
+        <label className="fieldset-label" htmlFor="name">
+          <span className="label-text text-md">Name</span>
         </label>
         <input
           id="name"
           type="text"
           name="name"
           placeholder="Timer name"
-          className="input input-bordered input-md bg-base-100"
+          className="input input-bordered input-md bg-base-100 w-[100%]"
           required
         />
         <div>
@@ -69,13 +69,13 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
         </div>
       </div>
       <div className="form-control">
-        <label className="label" htmlFor="colour">
-          <span className="label-text text-lg">Colour</span>
+        <label className="fieldset-label" htmlFor="colour">
+          <span className="label-text text-md">Colour</span>
         </label>
         <select
           id="colour"
           name="colour"
-          className="select select-bordered select-md bg-base-100"
+          className="select select-bordered select-md bg-base-100 w-[100%]"
           onChange={handleColourChange}
           defaultValue={initialColourSelect}
         >
@@ -94,15 +94,15 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
       </div>
       <div className={`w-full h-[20px] ${selectedColourDisplay} mt-1`} />
       <div className="form-control">
-        <label className="label" htmlFor="repeat">
-          <span className="label-text text-lg">Repetitions</span>
+        <label className="fieldset-label" htmlFor="repeat">
+          <span className="label-text text-md">Repetitions</span>
           <span className="label-text-alt text-sm">(0 for none)</span>
         </label>
         <input
           id="repeat"
           type="number"
           name="repeat"
-          className="input input-bordered input-md bg-base-100 "
+          className="input input-bordered input-md bg-base-100 w-[100%]"
           required
           min={0}
           max={10}
@@ -111,8 +111,8 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
         />
       </div>
       <div className="form-control">
-        <label className="label" htmlFor="interval">
-          <span className="label-text text-lg">Interval</span>
+        <label className="fieldset-label" htmlFor="interval">
+          <span className="label-text text-md">Interval</span>
           <span className="label-text-alt text-sm">
             (in seconds, 0 for no interval)
           </span>
@@ -121,7 +121,7 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
           id="interval"
           type="number"
           name="interval"
-          className="input input-bordered input-md bg-base-100 "
+          className="input input-bordered input-md bg-base-100 w-[100%]"
           required
           min={0}
           step={5}
@@ -129,15 +129,15 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
         />
       </div>
       <div className="form-control">
-        <label className="label" htmlFor="main">
-          <span className="label-text text-lg">Main</span>
+        <label className="fieldset-label" htmlFor="main">
+          <span className="label-text text-md">Main</span>
           <span className="label-text-alt text-sm">(in seconds)</span>
         </label>
         <input
           id="main"
           type="number"
           name="main"
-          className="input input-bordered input-md bg-base-100 "
+          className="input input-bordered input-md bg-base-100 w-[100%]"
           required
           min={0}
           step={5}

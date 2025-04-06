@@ -38,7 +38,7 @@ const CreateSeriesForm = () => {
           type="text"
           name="name"
           placeholder="Series name"
-          className="input input-bordered input-md bg-base-100"
+          className="input input-bordered input-md bg-base-100 w-[100%]"
           required
         />
         <div>
@@ -56,7 +56,7 @@ const CreateSeriesForm = () => {
         <select
           id="colour"
           name="colour"
-          className="select select-bordered select-md bg-base-100"
+          className="select select-bordered select-md bg-base-100 w-[100%]"
           onChange={handleColourChange}
           defaultValue={initialDisplayColour}
         >

@@ -10,7 +10,7 @@ const RegisterForm = () => {
 
   return (
     <form action={dispatch} id="register-form">
-      <div className="form-control">
+      <div className="form-control mb-4">
         <label className="label" htmlFor="email">
           <span className="label-text">Email</span>
         </label>
@@ -23,7 +23,7 @@ const RegisterForm = () => {
           required
         />
       </div>
-      <div className="form-control">
+      <div className="form-control mb-4">
         <label className="label" htmlFor="password">
           <span className="label-text">Password</span>
         </label>
@@ -50,11 +50,11 @@ const RegisterForm = () => {
           required
         />
       </div>
-      <div className="form-control mt-6">
-        <SubmitFormButton form="register-form" buttonText="Register" />
-      </div>
       <div className="flex mt-4" aria-live="polite" aria-atomic="true">
         {errorMessage && <FormInputError message={errorMessage} />}
+      </div>
+      <div className="form-control mt-6">
+        <SubmitFormButton form="register-form" buttonText="Register" />
       </div>
     </form>
   );

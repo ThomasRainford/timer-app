@@ -16,15 +16,18 @@ const Login = () => {
             <PersonIcon size={16} />
           </div>
         </div>
-        <div className="prose flex justify-center mt-2">
-          <h2>Log in.</h2>
+        <div className="flex justify-center mt-2 text-2xl font-bold">
+          Log in.
         </div>
         <div className="card-body">
           <LoginForm />
         </div>
         <div className="prose pl-4 pb-4">
-          <p className="text-sm">
-            Not registered? <Link href={"/register"}>Create account</Link>
+          <p className="text-sm opacity-60">
+            Not registered?{" "}
+            <Link className="hover:underline" href={"/register"}>
+              Create account
+            </Link>
           </p>
         </div>
       </div>

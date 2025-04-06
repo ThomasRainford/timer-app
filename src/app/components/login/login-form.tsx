@@ -10,7 +10,7 @@ const LoginForm = () => {
 
   return (
     <form action={dispatch} id="login-form">
-      <div className="form-control">
+      <div className="form-control mb-4">
         <label className="label" htmlFor="email">
           <span className="label-text">Email</span>
         </label>
@@ -37,11 +37,11 @@ const LoginForm = () => {
           minLength={6}
         />
       </div>
-      <div className="form-control mt-6">
-        <SubmitFormButton form="login-form" buttonText="Login" />
-      </div>
       <div className="flex mt-4" aria-live="polite" aria-atomic="true">
         {errorMessage && <FormInputError message={errorMessage} />}
+      </div>
+      <div className="form-control mt-6">
+        <SubmitFormButton form="login-form" buttonText="Login" />
       </div>
     </form>
   );

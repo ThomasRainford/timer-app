@@ -42,16 +42,16 @@ const EditSeriesForm = ({ modalId, id, initialName, initialColour }: Props) => {
 
   return (
     <form action={dispatch} id={`edit-series-form-${id}`}>
-      <div className="form-control">
+      <div className="form-control mb-3">
         <label className="label" htmlFor="name">
-          <span className="label-text text-lg">Name</span>
+          <span className="label-text text-md">Name</span>
         </label>
         <input
           id="name"
           type="text"
           name="name"
           placeholder="Series name"
-          className="input input-bordered input-md bg-base-100"
+          className="input input-bordered input-md bg-base-100 w-[100%]"
           required
           defaultValue={initialName}
         />
@@ -65,12 +65,12 @@ const EditSeriesForm = ({ modalId, id, initialName, initialColour }: Props) => {
       </div>
       <div className="form-control">
         <label className="label" htmlFor="colour">
-          <span className="label-text text-lg">Colour</span>
+          <span className="label-text text-md">Colour</span>
         </label>
         <select
           id="colour"
           name="colour"
-          className="select select-bordered select-md bg-base-100"
+          className="select select-bordered select-md bg-base-100 w-[100%]"
           defaultValue={initialDisplayColour}
           onChange={handleColourChange}
         >
