@@ -21,7 +21,6 @@ const TimerComponent = ({ timer }: Props) => {
     transition,
   };
   const dragHandleStyle = {
-    ...containerStyle,
     cursor: "grab",
   };
 
