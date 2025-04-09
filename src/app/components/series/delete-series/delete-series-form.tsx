@@ -4,6 +4,7 @@ import { deleteSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
 import { useEffect } from "react";
 import { useFormState } from "react-dom";
+import DeleteFormButton from "../../form/delete-form-button";
 
 interface Props {
   id: number;
@@ -26,7 +27,7 @@ const DeleteSeriesForm = ({ id, modalId }: Props) => {
 
   return (
     <form action={dispatch}>
-      <button className="btn btn-error">Delete</button>
+      <DeleteFormButton />
     </form>
   );
 };

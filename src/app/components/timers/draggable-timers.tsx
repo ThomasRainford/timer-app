@@ -9,7 +9,9 @@ const DraggableTimers = ({ timers }: Props) => {
   return (
     <div>
       {timers.map((timer) => {
-        return <Timer key={timer.id} timer={timer} />;
+        return (
+          <Timer key={timer.id} timer={timer} timerCount={timers.length} />
+        );
       })}
     </div>
   );
