@@ -10,9 +10,10 @@ import EditTimerModal from "./edit-timer/edit-timer-modal";
 
 interface Props {
   timer: Timer;
+  timerCount: number;
 }
 
-const TimerComponent = ({ timer }: Props) => {
+const TimerComponent = ({ timer, timerCount }: Props) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: timer.position + 1 });
 
@@ -74,19 +75,21 @@ const TimerComponent = ({ timer }: Props) => {
               : "No Repeat"}
           </h6>
         </div>
-        <div className="flex flex-row justify-end">
-          <div
-            className="flex flex-col justify-center align-middle"
-            style={dragHandleStyle}
-            {...attributes}
-            {...listeners}
-          >
-            <DotSquareIcon size={5} />
+        {timerCount > 1 ? (
+          <div className="flex flex-row justify-end">
+            <div
+              className="flex flex-col justify-center align-middle"
+              style={dragHandleStyle}
+              {...attributes}
+              {...listeners}
+            >
+              <DotSquareIcon size={5} />
+            </div>
+            <div className="text-base-300 text-end font-bold ml-2">
+              {position + 1}
+            </div>
           </div>
-          <div className="text-base-300 text-end font-bold ml-2">
-            {position + 1}
-          </div>
-        </div>
+        ) : null}
       </div>
     </div>
   );

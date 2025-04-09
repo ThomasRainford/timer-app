@@ -26,7 +26,7 @@ const SubmitFormButton = ({
       onClick={onClick}
     >
       {pending ? (
-        <span className="loading loading-spinner loading-xs"></span>
+        <span className="loading loading-spinner loading-xs mx-5"></span>
       ) : (
         buttonText
       )}
