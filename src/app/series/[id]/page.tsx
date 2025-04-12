@@ -1,3 +1,4 @@
+import EmptyStateAlert from "@/app/components/empty-state-alert";
 import { PlayIcon, PlusIcon } from "@/app/components/icons";
 import NoSeries from "@/app/components/series/no-series";
 import Timers from "@/app/components/timers/timers";
@@ -61,7 +62,9 @@ const Series = async ({ params }: Props) => {
         </div>
         <div>
           <Link
-            className="btn btn-success btn-sm w-full text-md"
+            className={`btn btn-success btn-sm w-full text-md ${
+              timers.length === 0 ? "btn-disabled" : ""
+            }`}
             href={`/series/${id}/run`}
           >
             <PlayIcon size={5} />
@@ -69,9 +72,15 @@ const Series = async ({ params }: Props) => {
           </Link>
         </div>
       </div>
-      <div className="overflow-y-auto">
-        <Timers timers={timers} seriesId={id} />
-      </div>
+      {timers.length > 0 ? (
+        <div className="overflow-y-auto">
+          <Timers timers={timers} seriesId={id} />
+        </div>
+      ) : (
+        <div className="mt-4">
+          <EmptyStateAlert text="Create timers to run the series." />
+        </div>
+      )}
     </div>
   );
 };
