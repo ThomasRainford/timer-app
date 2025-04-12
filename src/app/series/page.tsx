@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import Link from "next/link";
+import EmptyStateAlert from "../components/empty-state-alert";
 import { PlusIcon } from "../components/icons";
 import SingleSeries from "../components/series/single-series";
 import prisma from "../lib/db";
@@ -33,11 +34,17 @@ const Series = async () => {
           Create New Series
         </Link>
       </div>
-      <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-2 w-full overflow-y-auto pb-4">
-        {[...series].map((s, i) => (
-          <SingleSeries key={s.id} series={s} index={i} />
-        ))}
-      </div>
+      {series.length > 0 ? (
+        <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-2 w-full overflow-y-auto pb-4">
+          {series.map((s, i) => (
+            <SingleSeries key={s.id} series={s} index={i} />
+          ))}
+        </div>
+      ) : (
+        <div className="mt-4">
+          <EmptyStateAlert text={"Create a series to get started."} />
+        </div>
+      )}
     </div>
   );
 };
