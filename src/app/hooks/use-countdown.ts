@@ -21,7 +21,7 @@ export const useCountdown = ({ initialCount }: Props) => {
         }
         return prevTime - 1;
       });
-    }, 500);
+    }, 1000);
   }, []);
 
   // Stop timer

@@ -4,7 +4,12 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Timer } from "@prisma/client";
 import { DotSquareIcon } from "../icons";
-import { Colour, supprtedColours } from "../util";
+import {
+  Colour,
+  formatTime,
+  getTimeFromSeconds,
+  supprtedColours,
+} from "../util";
 import DeleteTimerModal from "./delete-timer/delete-timer-modal";
 import EditTimerModal from "./edit-timer/edit-timer-modal";
 
@@ -43,6 +48,11 @@ const TimerComponent = ({ timer, timerCount }: Props) => {
     }
   };
 
+  const maintimeDetails = getTimeFromSeconds(timer.main);
+  const mainTimeDisplay = formatTime(maintimeDetails);
+  const intervalTimeDetails = getTimeFromSeconds(intervalTime);
+  const intervalTimeDisplay = formatTime(intervalTimeDetails);
+
   return (
     <div
       ref={setNodeRef}
@@ -52,7 +62,7 @@ const TimerComponent = ({ timer, timerCount }: Props) => {
       <div className="grid grid-cols-3">
         <div></div>
         <h6 className="text-base-300 text-sm font-bold text-center">
-          {intervalTime > 0 ? `${intervalTime} sec.` : "No Interval"}
+          {intervalTime > 0 ? intervalTimeDisplay : "No Interval"}
         </h6>
         <div className="flex justify-end">
           <div>
@@ -64,7 +74,7 @@ const TimerComponent = ({ timer, timerCount }: Props) => {
         </div>
       </div>
       <div className="text-base-300 text-xl font-bold text-center mt-6 mb-6">
-        <h3>{mainTime} sec.</h3>
+        <h3>{mainTimeDisplay}</h3>
       </div>
       <div className="grid grid-cols-3">
         <div className="text-base-300 text-start font-bold">{name}</div>
