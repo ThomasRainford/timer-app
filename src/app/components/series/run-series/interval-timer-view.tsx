@@ -6,7 +6,7 @@ import TimerActionButton from "./timer-action-button";
 interface Props {
   name: string;
   isPaused: boolean;
-  mainTimeDetails: ReturnType<typeof getTimeFromSeconds>;
+  mainTimeDetails: ReturnType<typeof getTimeFromSeconds> | "End";
   countTimeDetails: ReturnType<typeof getTimeFromSeconds>;
   mainColour: string;
   onRestart: () => void;
@@ -55,20 +55,35 @@ const IntervalTimerView = ({
         </div>
       </div>
     </div>
-    <div
-      className={`${mainColour} h-[20%] flex flex-col justify-start items-center rounded-b-md`}
-    >
-      <div className="h-full">
-        <div className="mt-1 pb-4">
-          <h5 className="text-lg text-center text-base-300">Next: {name}</h5>
-        </div>
-        <div>
-          <h3 className="text-6xl text-center font-mono text-base-300">
-            <Time timeDetails={mainTimeDetails} />
-          </h3>
+    {typeof mainTimeDetails === "string" ? (
+      <div className="bg-base-200 h-[20%] flex flex-col justify-center items-center rounded-b-md">
+        <div className="h-full">
+          <div className="pb-5" style={{ visibility: "hidden" }}>
+            <h5 className="text-lg text-center text-base-300">Next:</h5>
+          </div>
+          <div>
+            <h3 className="text-6xl text-center font-mono">
+              <div>{mainTimeDetails}</div>
+            </h3>
+          </div>
         </div>
       </div>
-    </div>
+    ) : (
+      <div
+        className={`${mainColour} h-[20%] flex flex-col justify-start items-center rounded-b-md`}
+      >
+        <div className="h-full">
+          <div className="mt-1 pb-4">
+            <h5 className="text-lg text-center text-base-300">Next: {name}</h5>
+          </div>
+          <div>
+            <h3 className="text-6xl text-center font-mono text-base-300">
+              <Time timeDetails={mainTimeDetails} />
+            </h3>
+          </div>
+        </div>
+      </div>
+    )}
   </div>
 );
 

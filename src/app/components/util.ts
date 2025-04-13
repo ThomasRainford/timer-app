@@ -135,3 +135,16 @@ export const getTimeFromSeconds = (secs: number): TimeDetails => {
     days,
   };
 };
+
+export const formatTime = (time: TimeDetails): string => {
+  const { days, hours, minutes, seconds } = time;
+  if (days > 0) {
+    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  } else if (hours > 0) {
+    return `${hours}h ${minutes}m ${seconds}s`;
+  } else if (minutes > 0) {
+    return `${minutes}m ${seconds}s`;
+  } else {
+    return `${seconds}s`;
+  }
+};
