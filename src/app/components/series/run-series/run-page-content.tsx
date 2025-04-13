@@ -15,12 +15,13 @@ import useSound from "use-sound";
 import { CircleArrowIcon } from "../../icons";
 import IntervalTimerView from "./interval-timer-view";
 import MainTimerView from "./main-timer-view";
+import StartTimerView from "./start-timer-view";
 
 interface Props {
   series: Series & { timers: Timer[] };
 }
 
-type CountType = "interval" | "main" | "end";
+type CountType = "start" | "interval" | "main" | "end";
 
 interface TimerState {
   currentRunIndex: number;
@@ -37,16 +38,28 @@ const RunPageContent = ({ series }: Props) => {
 
   const { count, isPaused, start, pause, resume, restart, resetWith } =
     useCountdown({
-      initialCount: timers[0].interval,
+      initialCount: 5,
     });
 
-  // Create timer runs array
+  const startTimerRun: TimerRun = useMemo(
+    () => ({
+      id: -1,
+      name: "Start",
+      interval: 0,
+      main: 5,
+      colour: "white",
+      repeat: 0,
+    }),
+    []
+  );
+
+  // Create timer runs array starting with the start timer run.
   const timerRuns: TimerRuns = useMemo(
     () =>
-      timers
-        .map((timer) => {
+      [startTimerRun, ...timers]
+        .map((timer, index) => {
           const run: TimerRun = {
-            id: timer.id,
+            id: index - 1,
             name: timer.name,
             interval: timer.interval,
             main: timer.main,
@@ -56,15 +69,16 @@ const RunPageContent = ({ series }: Props) => {
           return timer.repeat === 0 ? run : Array(timer.repeat + 1).fill(run);
         })
         .flat(),
-    [timers]
+    [startTimerRun, timers]
   );
 
-  // Timer state management
-  const [timerState, setTimerState] = useState<TimerState>({
+  // Timer state management.
+  const initialState: TimerState = {
     currentRunIndex: 0,
-    currentCountType: timerRuns[0].interval > 0 ? "interval" : "main",
+    currentCountType: "start",
     completeTimers: [],
-  });
+  };
+  const [timerState, setTimerState] = useState<TimerState>(initialState);
 
   const currentTimerRun = timerRuns[timerState.currentRunIndex];
   const nextTimerRun =
@@ -84,44 +98,59 @@ const RunPageContent = ({ series }: Props) => {
     volume: 0.25,
   });
 
-  // Handle timer completion
+  // Handle timer completion.
   useEffect(() => {
+    if (timerState.currentCountType === "end") return;
     if (count === 3 || count === 2 || count === 1) {
-      playCountTick(); // Play count sound on 3,2,1.
+      playCountTick(); // Play count sound on 3, 2 and 1.
     } else if (count === 0 && timerState.currentCountType === "interval") {
       playIntervalEndTick(); // Play interval end sound.
     }
     if (count === 0) {
-      const doneMain = timerState.currentCountType === "main";
-      if (doneMain) {
-        const nextInterval = timerRuns[timerState.currentRunIndex].interval;
-        const nextIsInterval = nextInterval > 0;
+      const doneStart = timerState.currentCountType === "start";
+      const doneInterval = timerState.currentCountType === "interval";
+      if (doneStart) {
         setTimerState((prev) => ({
           currentRunIndex: prev.currentRunIndex + 1,
-          currentCountType: nextIsInterval ? "interval" : "main",
+          currentCountType: "main",
+          completeTimers: [currentTimerRun.id],
+        }));
+        resetWith(nextTimerRun.main);
+      } else if (doneInterval) {
+        const nextMain = timerRuns[timerState.currentRunIndex].main;
+        const nextIsMain = nextMain > 0;
+        setTimerState((prev) => ({
+          currentRunIndex: prev.currentRunIndex + 1,
+          currentCountType: nextIsMain ? "main" : "interval",
           completeTimers: [...prev.completeTimers, currentTimerRun.id],
         }));
-        resetWith(nextIsInterval ? nextInterval : nextTimerRun.main);
+        resetWith(nextIsMain ? nextMain : nextTimerRun.interval);
       } else {
         setTimerState((prev) => ({
           ...prev,
-          currentCountType: "main",
+          currentCountType: "interval",
           completeTimers: [...prev.completeTimers],
         }));
-        resetWith(currentTimerRun.main);
+        resetWith(currentTimerRun.interval);
       }
     }
   }, [
+    timerRuns,
+    nextTimerRun,
+    timerState,
     count,
+    timerState.currentCountType,
+    timerState.currentRunIndex,
     currentTimerRun.id,
     currentTimerRun.main,
     nextTimerRun.main,
+    currentTimerRun.interval,
+    nextTimerRun.id,
+    nextTimerRun.interval,
     playCountTick,
     playIntervalEndTick,
     playPauseTick,
     resetWith,
-    timerRuns,
-    timerState,
   ]);
 
   // Start timer on mount
@@ -139,9 +168,14 @@ const RunPageContent = ({ series }: Props) => {
     pause();
   }, [pause]);
 
-  const isLastTimer =
-    timerState.currentRunIndex === timerRuns.length - 1 &&
-    timerState.currentCountType === "main";
+  const isLastTimer = (() => {
+    if (timerState.currentRunIndex !== timerRuns.length - 1) return false;
+    if (nextTimerRun.interval > 0) {
+      return timerState.currentCountType === "interval";
+    } else {
+      return timerState.currentCountType === "main";
+    }
+  })();
 
   useEffect(() => {
     if (isLastTimer && count === 0) {
@@ -149,37 +183,65 @@ const RunPageContent = ({ series }: Props) => {
     }
   }, [isLastTimer, count, resetTimerOnEnd]);
 
-  // Compute display values
+  // Compute display values.
   const getDisplayName = useCallback(
     (timerRun: TimerRun) => {
       const { name, repeat } = timerRun;
-      const repeatIndex = timerState.completeTimers.filter(
+      let repeatIndex = timerState.completeTimers.filter(
         (id) => id === timerRun.id
       ).length;
+      repeatIndex = repeatIndex < 0 ? 0 : repeatIndex;
       return repeat > 0 ? `${name} (${repeatIndex + 1}/${repeat + 1})` : name;
     },
     [timerState.completeTimers]
   );
 
-  const nextName = getDisplayName(nextTimerRun);
-  const name = getDisplayName(currentTimerRun);
-  const colour = currentTimerRun?.colour as Colour;
+  const name = currentTimerRun.name;
+  const displayName = getDisplayName(currentTimerRun);
+  const nextName = nextTimerRun.name;
+  const colour = currentTimerRun?.colour;
   const mainColour = supprtedColours[colour];
+  const nextMainColour = supprtedColours[nextTimerRun.colour];
   const actionBtnHoverColour = buttonHoverColours[colour];
 
   const countTimeDetails = getTimeFromSeconds(count);
-  const mainTimeDetails = getTimeFromSeconds(currentTimerRun.main);
+  const nextTimeDetails = getTimeFromSeconds(nextTimerRun.main);
   const nextIntervalTimeDetails = (time: number) =>
     isLastTimer ? "End" : getTimeFromSeconds(time);
+
+  if (timerState.currentCountType === "start") {
+    return (
+      <StartTimerView
+        name={name}
+        nextName={nextName}
+        isPaused={isPaused}
+        mainColour={nextMainColour}
+        countTimeDetails={countTimeDetails}
+        mainTimeDetails={nextTimeDetails}
+        onRestart={() => resetWith(currentTimerRun.main)}
+        onPauseResume={() =>
+          isPaused
+            ? (() => {
+                playPauseTick();
+                resume();
+              })()
+            : (() => {
+                playPauseTick();
+                pause();
+              })()
+        }
+      />
+    );
+  }
 
   if (timerState.currentCountType === "interval") {
     return (
       <IntervalTimerView
         name={name}
         isPaused={isPaused}
-        mainTimeDetails={mainTimeDetails}
+        mainTimeDetails={nextIntervalTimeDetails(currentTimerRun.main)}
         countTimeDetails={countTimeDetails}
-        mainColour={mainColour}
+        mainColour={nextMainColour}
         onRestart={() => resetWith(currentTimerRun.interval)}
         onPauseResume={() =>
           isPaused
@@ -199,7 +261,7 @@ const RunPageContent = ({ series }: Props) => {
   if (timerState.currentCountType === "main") {
     return (
       <MainTimerView
-        name={name}
+        name={displayName}
         nextName={nextName}
         isPaused={isPaused}
         mainColour={mainColour}
@@ -231,9 +293,7 @@ const RunPageContent = ({ series }: Props) => {
             onClick={() => {
               restart();
               setTimerState({
-                currentRunIndex: 0,
-                currentCountType:
-                  timerRuns[0].interval > 0 ? "interval" : "main",
+                ...initialState,
                 completeTimers: [...timerState.completeTimers],
               });
             }}
