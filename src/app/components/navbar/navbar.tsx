@@ -48,7 +48,7 @@ const AppNameAndLinks = () => {
           className="flex flex-row bg-base-100 no-underline p-1 md:px-3"
           href="/"
         >
-          <ClockIcon className="h-6 w-6 md:h-9 md:w-9 text-accent" />
+          <ClockIcon className="h-6 w-6 md:h-9 md:w-9 text-success" />
           <div className="m-0 p-0 ml-2 text-lg md:text-2xl text-base-content font-bold">
             Timer App
           </div>
@@ -58,7 +58,7 @@ const AppNameAndLinks = () => {
         <ul className="menu menu-horizontal px-1">
           <li>
             <Link href={"/series"}>
-              <h3 className="prose font-bold text-accent">Series</h3>
+              <h3 className="prose font-bold text-base-content">Series</h3>
             </Link>
           </li>
         </ul>
