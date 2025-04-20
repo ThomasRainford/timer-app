@@ -25,13 +25,13 @@ const StartTimerView = ({
   onPauseResume,
 }: Props) => {
   return (
-    <div className="flex flex-col grow px-2">
+    <div className="flex flex-col grow px-2 md:px-4 lg:px-6">
       <div
         className={`bg-base-200 h-[80%] w-full flex justify-center items-center rounded-t-md`}
       >
         <div className="h-full w-full flex flex-col mx-4">
           <div className="mt-4">
-            <h5 className="text-xl pb-2 text-center ">Starting in...</h5>
+            <h5 className="text-xl pb-2 text-center ml-4">Starting in...</h5>
           </div>
           <div className="h-full w-full flex flex-col justify-center items-center mb-[15%] md:mb-[50px]">
             <div className="flex flex-row justify-around w-full">

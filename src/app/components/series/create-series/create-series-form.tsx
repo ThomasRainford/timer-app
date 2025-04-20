@@ -75,7 +75,9 @@ const CreateSeriesForm = () => {
           </div>
         </div>
       </div>
-      <div className={`w-full h-[20px] ${selectedDisplayColour} mt-1`} />
+      <div
+        className={`w-full h-[20px] ${selectedDisplayColour} rounded mt-1`}
+      />
       <div
         className="flex h-8 items-end space-x-1"
         aria-live="polite"
