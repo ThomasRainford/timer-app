@@ -7,6 +7,7 @@ import { ChangeEvent, useState } from "react";
 import { useFormState } from "react-dom";
 import FormInputError from "../../form/form-input-error";
 import SubmitFormButton from "../../form/submit-form-button";
+import TimerInput from "../../form/timer-input";
 import { Colour, randomColour, supprtedColours } from "../../util";
 
 interface Props {
@@ -113,43 +114,15 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
       <div className="form-control">
         <label className="fieldset-label" htmlFor="interval">
           <span className="label-text text-md">Interval</span>
-          <span className="label-text-alt text-sm">
-            (in seconds, 0 for no interval)
-          </span>
+          <span className="label-text-alt text-sm">(0 for no interval)</span>
         </label>
-        <input
-          id="interval"
-          type="number"
-          name="interval"
-          className="input input-bordered input-md bg-base-100 w-[100%]"
-          required
-          min={0}
-          step={5}
-          defaultValue={0}
-        />
+        <TimerInput defaultValue={0} name={"interval"} />
       </div>
       <div className="form-control">
-        <label className="fieldset-label" htmlFor="main">
+        <label className="fieldset-label" htmlFor="interval">
           <span className="label-text text-md">Main</span>
-          <span className="label-text-alt text-sm">(in seconds)</span>
         </label>
-        <input
-          id="main"
-          type="number"
-          name="main"
-          className="input input-bordered input-md bg-base-100 w-[100%]"
-          required
-          min={0}
-          step={5}
-          defaultValue={0}
-        />
-        <div>
-          {mainError?.map((message) => (
-            <div key={message} className="mt-1">
-              <FormInputError key={message} message={message} />
-            </div>
-          ))}
-        </div>
+        <TimerInput defaultValue={0} name={"main"} />
       </div>
       <div
         className="flex h-8 items-end space-x-1"

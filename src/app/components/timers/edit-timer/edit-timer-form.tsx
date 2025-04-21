@@ -7,6 +7,7 @@ import { ChangeEvent, useState } from "react";
 import { useFormState } from "react-dom";
 import FormInputError from "../../form/form-input-error";
 import SubmitFormButton from "../../form/submit-form-button";
+import TimerInput from "../../form/timer-input";
 
 interface Props {
   modalId: string;
@@ -124,39 +125,18 @@ const EditTimerForm = ({
           step={1}
         />
       </div>
-      <div className="form-control mb-2">
-        <label className="label" htmlFor="interval">
+      <div className="form-control">
+        <label className="fieldset-label" htmlFor="interval">
           <span className="label-text text-md">Interval</span>
-          <span className="label-text-alt text-sm">
-            (in seconds, 0 for no interval)
-          </span>
+          <span className="label-text-alt text-sm">(0 for no interval)</span>
         </label>
-        <input
-          id="interval"
-          type="number"
-          name="interval"
-          className="input input-bordered input-md bg-base-100 w-[100%]"
-          required
-          defaultValue={initialInterval}
-          min={0}
-          step={5}
-        />
+        <TimerInput defaultValue={initialInterval} name={"interval"} />
       </div>
-      <div className="form-control mb-2">
-        <label className="label" htmlFor="main">
+      <div className="form-control">
+        <label className="fieldset-label" htmlFor="interval">
           <span className="label-text text-md">Main</span>
-          <span className="label-text-alt text-sm">(in seconds)</span>
         </label>
-        <input
-          id="main"
-          type="number"
-          name="main"
-          className="input input-bordered input-md bg-base-100 w-[100%]"
-          required
-          defaultValue={initialMain}
-          min={0}
-          step={5}
-        />
+        <TimerInput defaultValue={initialMain} name={"main"} />
       </div>
       <div className="flex justify-end mt-4">
         <div>
