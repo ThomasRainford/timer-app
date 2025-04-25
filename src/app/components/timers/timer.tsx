@@ -61,8 +61,10 @@ const TimerComponent = ({ timer, timerCount }: Props) => {
     >
       <div className="grid grid-cols-3">
         <div></div>
-        <h6 className="text-base-300 text-sm font-bold text-center">
-          {intervalTime > 0 ? intervalTimeDisplay : "No Interval"}
+        <h6 className={`text-base-300 text-sm font-bold text-center`}>
+          {repetitions > 0
+            ? `Repeat ${formatRepititions(repetitions)}`
+            : "No Repeat"}
         </h6>
         <div className="flex justify-end">
           <div>
@@ -79,10 +81,8 @@ const TimerComponent = ({ timer, timerCount }: Props) => {
       <div className="grid grid-cols-3">
         <div className="text-base-300 text-start font-bold">{name}</div>
         <div>
-          <h6 className={`text-base-300 text-sm font-bold text-center`}>
-            {repetitions > 0
-              ? `Repeat ${formatRepititions(repetitions)}`
-              : "No Repeat"}
+          <h6 className="text-base-300 text-sm font-bold text-center">
+            {intervalTime > 0 ? intervalTimeDisplay : "No Interval"}
           </h6>
         </div>
         {timerCount > 1 ? (

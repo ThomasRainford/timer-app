@@ -5,6 +5,7 @@ import { createSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
 import Link from "next/link";
 import { useFormState } from "react-dom";
+import ColourDisplay from "../../form/ColourDisplay";
 import FormInputError from "../../form/form-input-error";
 import SubmitFormButton from "../../form/submit-form-button";
 import { randomColour } from "../../util";
@@ -75,9 +76,7 @@ const CreateSeriesForm = () => {
           </div>
         </div>
       </div>
-      <div
-        className={`w-full h-[20px] ${selectedDisplayColour} rounded mt-1`}
-      />
+      <ColourDisplay colour={selectedDisplayColour} />
       <div
         className="flex h-8 items-end space-x-1"
         aria-live="polite"
