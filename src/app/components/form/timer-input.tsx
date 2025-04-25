@@ -158,7 +158,7 @@ const TimerInput = ({ name, defaultValue }: Props) => {
       <div className="flex flex-col">
         <button
           type="button"
-          className="btn btn-outline btn-sm text-lg opacity-70"
+          className="btn btn-outline btn-sm text-xl opacity-70"
           onClick={incrementMinutes}
         >
           +

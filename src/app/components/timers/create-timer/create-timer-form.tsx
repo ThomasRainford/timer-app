@@ -5,6 +5,7 @@ import { State } from "@/app/lib/actions/types";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import { useFormState } from "react-dom";
+import ColourDisplay from "../../form/ColourDisplay";
 import FormInputError from "../../form/form-input-error";
 import SubmitFormButton from "../../form/submit-form-button";
 import TimerInput from "../../form/timer-input";
@@ -22,7 +23,7 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
   });
   const initialColourSelect =
     selectedColour.charAt(0).toUpperCase() + selectedColour.slice(1);
-  const selectedColourDisplay = selectedColour
+  const selectedDisplayColour = selectedColour
     ? supprtedColours[
         (selectedColour.charAt(0).toLowerCase() +
           selectedColour.slice(1)) as Colour
@@ -44,12 +45,11 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
 
   const nameError = state.errors?.name;
   const colourError = state.errors?.colour;
-  const mainError = state.errors?.main;
   const limitError = state.errors?.limit;
 
   return (
     <form action={dispatch} id="create-timer-form">
-      <div className="form-control">
+      <div className="form-control mb-2">
         <label className="fieldset-label" htmlFor="name">
           <span className="label-text text-md">Name</span>
         </label>
@@ -69,7 +69,7 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
           ))}
         </div>
       </div>
-      <div className="form-control">
+      <div className="form-control mb-2">
         <label className="fieldset-label" htmlFor="colour">
           <span className="label-text text-md">Colour</span>
         </label>
@@ -93,8 +93,8 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
           ))}
         </div>
       </div>
-      <div className={`w-full h-[20px] ${selectedColourDisplay} mt-1`} />
-      <div className="form-control">
+      <ColourDisplay colour={selectedDisplayColour} />
+      <div className="form-control mb-2">
         <label className="fieldset-label" htmlFor="repeat">
           <span className="label-text text-md">Repetitions</span>
           <span className="label-text-alt text-sm">(0 for none)</span>
@@ -111,18 +111,18 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
           defaultValue={0}
         />
       </div>
-      <div className="form-control">
+      <div className="form-control mb-2">
+        <label className="fieldset-label" htmlFor="interval">
+          <span className="label-text text-md">Main</span>
+        </label>
+        <TimerInput defaultValue={0} name={"main"} />
+      </div>
+      <div className="form-control mb-2">
         <label className="fieldset-label" htmlFor="interval">
           <span className="label-text text-md">Interval</span>
           <span className="label-text-alt text-sm">(0 for no interval)</span>
         </label>
         <TimerInput defaultValue={0} name={"interval"} />
-      </div>
-      <div className="form-control">
-        <label className="fieldset-label" htmlFor="interval">
-          <span className="label-text text-md">Main</span>
-        </label>
-        <TimerInput defaultValue={0} name={"main"} />
       </div>
       <div
         className="flex h-8 items-end space-x-1"

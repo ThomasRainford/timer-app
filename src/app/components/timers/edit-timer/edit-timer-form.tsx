@@ -5,6 +5,7 @@ import { editTimer } from "@/app/lib/actions/timer";
 import { State } from "@/app/lib/actions/types";
 import { ChangeEvent, useState } from "react";
 import { useFormState } from "react-dom";
+import ColourDisplay from "../../form/ColourDisplay";
 import FormInputError from "../../form/form-input-error";
 import SubmitFormButton from "../../form/submit-form-button";
 import TimerInput from "../../form/timer-input";
@@ -40,7 +41,7 @@ const EditTimerForm = ({
   });
   const initialColourSelect =
     initialColour.charAt(0).toUpperCase() + initialColour.slice(1);
-  const selectedColourDisplay =
+  const selectedDisplayColour =
     supprtedColours[
       (selectedColour.charAt(0).toLowerCase() +
         selectedColour.slice(1)) as Colour
@@ -107,7 +108,7 @@ const EditTimerForm = ({
           ))}
         </div>
       </div>
-      <div className={`w-full h-[20px] ${selectedColourDisplay} mt-1 mb-2`} />
+      <ColourDisplay colour={selectedDisplayColour} />
       <div className="form-control mb-2">
         <label className="label" htmlFor="repeat">
           <span className="label-text text-md">Repetitions</span>
@@ -125,18 +126,18 @@ const EditTimerForm = ({
           step={1}
         />
       </div>
-      <div className="form-control">
+      <div className="form-control mb-2">
+        <label className="fieldset-label" htmlFor="interval">
+          <span className="label-text text-md">Main</span>
+        </label>
+        <TimerInput defaultValue={initialMain} name={"main"} />
+      </div>
+      <div className="form-control mb-2">
         <label className="fieldset-label" htmlFor="interval">
           <span className="label-text text-md">Interval</span>
           <span className="label-text-alt text-sm">(0 for no interval)</span>
         </label>
         <TimerInput defaultValue={initialInterval} name={"interval"} />
-      </div>
-      <div className="form-control">
-        <label className="fieldset-label" htmlFor="interval">
-          <span className="label-text text-md">Main</span>
-        </label>
-        <TimerInput defaultValue={initialMain} name={"main"} />
       </div>
       <div className="flex justify-end mt-4">
         <div>

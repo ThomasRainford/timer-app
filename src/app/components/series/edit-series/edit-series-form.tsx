@@ -5,6 +5,7 @@ import { editSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
 import { useState } from "react";
 import { useFormState } from "react-dom";
+import ColourDisplay from "../../form/ColourDisplay";
 import FormInputError from "../../form/form-input-error";
 import SubmitFormButton from "../../form/submit-form-button";
 import { Colour } from "../../util";
@@ -87,8 +88,7 @@ const EditSeriesForm = ({ modalId, id, initialName, initialColour }: Props) => {
           ))}
         </div>
       </div>
-
-      <div className={`w-full h-[20px] ${selectedDisplayColour} mt-1`} />
+      <ColourDisplay colour={selectedDisplayColour} />
       <div className="flex justify-end mt-4">
         <div>
           <SubmitFormButton
