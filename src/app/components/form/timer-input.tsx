@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { formatTime, getTimeFromSeconds } from "../util";
 
 interface Props {
   name: string;
@@ -153,62 +154,69 @@ const TimerInput = ({ name, defaultValue }: Props) => {
     }
   };
 
+  const formattedTotalTime = formatTime(getTimeFromSeconds(totalSeconds));
+
   return (
     <div className="flex flex-row">
-      <div className="flex flex-col">
-        <button
-          type="button"
-          className="btn btn-outline btn-sm text-xl opacity-70"
-          onClick={incrementMinutes}
-        >
-          +
-        </button>
-        <input
-          type="text"
-          inputMode="numeric"
-          min="0"
-          className="text-center text-xl font-bold my-2 w-16 appearance-textfield [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-          value={formattedMinutes}
-          onChange={handleMinutesChange}
-          onBlur={handleMinutesBlur}
-        />
-        <button
-          type="button"
-          className="btn btn-outline btn-sm text-lg opacity-70"
-          onClick={decrementMinutes}
-        >
-          -
-        </button>
+      <div className="flex flex-row">
+        <div className="flex flex-col">
+          <button
+            type="button"
+            className="btn btn-outline btn-sm text-xl opacity-70"
+            onClick={incrementMinutes}
+          >
+            +
+          </button>
+          <input
+            type="text"
+            inputMode="numeric"
+            min="0"
+            className="text-center text-xl font-bold my-2 w-16 appearance-textfield [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            value={formattedMinutes}
+            onChange={handleMinutesChange}
+            onBlur={handleMinutesBlur}
+          />
+          <button
+            type="button"
+            className="btn btn-outline btn-sm text-lg opacity-70"
+            onClick={decrementMinutes}
+          >
+            -
+          </button>
+        </div>
+        <div className="flex justify-center items-center text-xl font-bold ml-1 mr-1">
+          :
+        </div>
+        <div className="flex flex-col">
+          <button
+            type="button"
+            className="btn btn-outline btn-sm text-lg opacity-70"
+            onClick={incrementSeconds}
+          >
+            +
+          </button>
+          <input
+            type="text"
+            inputMode="numeric"
+            min="0"
+            className="text-center text-xl font-bold my-2 w-16 appearance-textfield [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            value={formattedSeconds}
+            onChange={handleSecondsChange}
+            onBlur={handleSecondsBlur}
+          />
+          <button
+            type="button"
+            className="btn btn-outline btn-sm text-lg opacity-70"
+            onClick={decrementSeconds}
+          >
+            -
+          </button>
+        </div>
+        <input type="hidden" name={name} value={totalSeconds} />
       </div>
-      <div className="flex justify-center items-center text-xl font-bold ml-1 mr-1">
-        :
+      <div className="flex flex-col justify-center items-center w-full px-8">
+        <div className="divider font-bold text-lg">{formattedTotalTime}</div>
       </div>
-      <div className="flex flex-col">
-        <button
-          type="button"
-          className="btn btn-outline btn-sm text-lg opacity-70"
-          onClick={incrementSeconds}
-        >
-          +
-        </button>
-        <input
-          type="text"
-          inputMode="numeric"
-          min="0"
-          className="text-center text-xl font-bold my-2 w-16 appearance-textfield [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-          value={formattedSeconds}
-          onChange={handleSecondsChange}
-          onBlur={handleSecondsBlur}
-        />
-        <button
-          type="button"
-          className="btn btn-outline btn-sm text-lg opacity-70"
-          onClick={decrementSeconds}
-        >
-          -
-        </button>
-      </div>
-      <input type="hidden" name={name} value={totalSeconds} />
     </div>
   );
 };
