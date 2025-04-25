@@ -1,4 +1,4 @@
-import { CircleArrowIcon, PauseIcon, PlayIcon } from "../../icons";
+import { CircleArrowIcon, PauseIcon, PlayIcon, SkipIcon } from "../../icons";
 import { getTimeFromSeconds } from "../../util";
 import Time from "./time";
 import TimerActionButton from "./timer-action-button";
@@ -11,6 +11,7 @@ interface Props {
   mainColour: string;
   onRestart: () => void;
   onPauseResume: () => void;
+  onSkip: () => void;
 }
 
 const IntervalTimerView = ({
@@ -21,6 +22,7 @@ const IntervalTimerView = ({
   mainColour,
   onRestart,
   onPauseResume,
+  onSkip,
 }: Props) => (
   <div className="flex flex-col grow px-2 md:px-4 lg:px-6">
     <div className="bg-base-200 h-[80%] w-full flex justify-center items-center rounded-t-md">
@@ -34,7 +36,7 @@ const IntervalTimerView = ({
               <Time timeDetails={countTimeDetails} />
             </h1>
           </div>
-          <div className="flex flex-row justify-evenly w-full pt-5 md:w-[550px]">
+          <div className="flex flex-row justify-evenly w-[275px] pt-5">
             <div className="flex items-center">
               <TimerActionButton
                 icon={<CircleArrowIcon size={6} />}
@@ -48,6 +50,13 @@ const IntervalTimerView = ({
                   !isPaused ? <PauseIcon size={6} /> : <PlayIcon size={6} />
                 }
                 onClick={onPauseResume}
+                hoverColour={"bg-base-200"}
+              />
+            </div>
+            <div className="flex items-center">
+              <TimerActionButton
+                icon={<SkipIcon size={6} />}
+                onClick={onSkip}
                 hoverColour={"bg-base-200"}
               />
             </div>

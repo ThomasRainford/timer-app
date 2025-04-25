@@ -1,4 +1,4 @@
-import { CircleArrowIcon, PauseIcon, PlayIcon } from "../../icons";
+import { CircleArrowIcon, PauseIcon, PlayIcon, SkipIcon } from "../../icons";
 import { getTimeFromSeconds } from "../../util";
 import Time from "./time";
 import TimerActionButton from "./timer-action-button";
@@ -10,9 +10,15 @@ interface Props {
   mainColour: string;
   actionBtnHoverColour: string;
   countTimeDetails: ReturnType<typeof getTimeFromSeconds>;
-  nextIntervalTimeDetails: ReturnType<typeof getTimeFromSeconds> | "End";
+  nextTimerRunDetails: {
+    type: "main" | "interval";
+    time: ReturnType<typeof getTimeFromSeconds> | "End";
+    name?: string;
+    colour?: string;
+  };
   onRestart: () => void;
   onPauseResume: () => void;
+  onSkip: () => void;
 }
 
 const MainTimerView = ({
@@ -22,9 +28,10 @@ const MainTimerView = ({
   mainColour,
   actionBtnHoverColour,
   countTimeDetails,
-  nextIntervalTimeDetails,
+  nextTimerRunDetails,
   onRestart,
   onPauseResume,
+  onSkip,
 }: Props) => (
   <div className="flex flex-col grow px-2 md:px-4 lg:px-6">
     <div
@@ -40,7 +47,7 @@ const MainTimerView = ({
               <Time timeDetails={countTimeDetails} />
             </h1>
           </div>
-          <div className="flex flex-row justify-evenly w-full pt-5 md:w-[550px]">
+          <div className="flex flex-row justify-evenly w-[275px] pt-5">
             <div className="flex items-center">
               <TimerActionButton
                 icon={<CircleArrowIcon className="text-base-300" size={6} />}
@@ -61,28 +68,56 @@ const MainTimerView = ({
                 hoverColour={actionBtnHoverColour}
               />
             </div>
+            <div className="flex items-center">
+              <TimerActionButton
+                icon={<SkipIcon className="text-base-300" size={6} />}
+                onClick={onSkip}
+                hoverColour={actionBtnHoverColour}
+              />
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div className="bg-base-200 h-[20%] flex flex-col justify-center items-center rounded-b-md">
-      <div className="h-full">
-        <div className="pb-5" style={{ visibility: "hidden" }}>
-          <h5 className="text-lg text-center text-base-300">
-            Next: {nextName}
-          </h5>
-        </div>
-        <div>
-          <h3 className="text-6xl text-center font-mono">
-            {typeof nextIntervalTimeDetails === "string" ? (
-              <div>{nextIntervalTimeDetails}</div>
-            ) : (
-              <Time timeDetails={nextIntervalTimeDetails} />
-            )}
-          </h3>
+    {nextTimerRunDetails.type === "main" ? (
+      <div
+        className={`${nextTimerRunDetails.colour} h-[20%] flex flex-col justify-start items-center rounded-b-md`}
+      >
+        <div className="h-full">
+          <div className="mt-1 pb-4">
+            <h5 className="text-lg text-center text-base-300">
+              Next: {nextTimerRunDetails.name}
+            </h5>
+          </div>
+          <div>
+            <h3 className="text-6xl text-center font-mono text-base-300">
+              {typeof nextTimerRunDetails.time === "string" ? (
+                <div>{nextTimerRunDetails.time}</div>
+              ) : (
+                <Time timeDetails={nextTimerRunDetails.time} />
+              )}
+            </h3>
+          </div>
         </div>
       </div>
-    </div>
+    ) : (
+      <div className="bg-base-200 h-[20%] flex flex-col justify-center items-center rounded-b-md">
+        <div className="h-full">
+          <div className="pb-5" style={{ visibility: "hidden" }}>
+            <h5 className="text-lg text-center text-base-300">Next:</h5>
+          </div>
+          <div>
+            <h3 className="text-6xl text-center font-mono">
+              {typeof nextTimerRunDetails.time === "string" ? (
+                <div>{nextTimerRunDetails.time}</div>
+              ) : (
+                <Time timeDetails={nextTimerRunDetails.time} />
+              )}
+            </h3>
+          </div>
+        </div>
+      </div>
+    )}
   </div>
 );
 

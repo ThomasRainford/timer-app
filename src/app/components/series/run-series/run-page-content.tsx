@@ -178,6 +178,10 @@ const RunPageContent = ({ series }: Props) => {
   })();
 
   useEffect(() => {
+    if (isPaused) pause();
+  }, [isPaused, pause]);
+
+  useEffect(() => {
     if (isLastTimer && count === 0) {
       resetTimerOnEnd();
     }
@@ -230,6 +234,15 @@ const RunPageContent = ({ series }: Props) => {
                 pause();
               })()
         }
+        onSkip={() => {
+          playCountTick();
+          setTimerState((prev) => ({
+            currentRunIndex: prev.currentRunIndex + 1,
+            currentCountType: "main",
+            completeTimers: [...prev.completeTimers, currentTimerRun.id],
+          }));
+          resetWith(nextTimerRun.main);
+        }}
       />
     );
   }
@@ -254,6 +267,23 @@ const RunPageContent = ({ series }: Props) => {
                 pause();
               })()
         }
+        onSkip={() => {
+          playCountTick();
+          if (isLastTimer) {
+            setTimerState(() => ({
+              currentRunIndex: 0,
+              currentCountType: "end",
+              completeTimers: [],
+            }));
+            return;
+          }
+          setTimerState((prev) => ({
+            currentRunIndex: prev.currentRunIndex + 1,
+            currentCountType: "main",
+            completeTimers: [...prev.completeTimers, currentTimerRun.id],
+          }));
+          resetWith(nextTimerRun.main);
+        }}
       />
     );
   }
@@ -267,7 +297,19 @@ const RunPageContent = ({ series }: Props) => {
         mainColour={mainColour}
         actionBtnHoverColour={actionBtnHoverColour}
         countTimeDetails={countTimeDetails}
-        nextIntervalTimeDetails={nextIntervalTimeDetails(nextTimerRun.interval)}
+        nextTimerRunDetails={
+          currentTimerRun.interval > 0
+            ? {
+                type: "interval",
+                time: nextIntervalTimeDetails(currentTimerRun.interval),
+              }
+            : {
+                type: "main",
+                time: nextTimeDetails,
+                name: nextTimerRun.name,
+                colour: supprtedColours[nextTimerRun.colour],
+              }
+        }
         onRestart={() => resetWith(currentTimerRun.main)}
         onPauseResume={() =>
           isPaused
@@ -280,6 +322,21 @@ const RunPageContent = ({ series }: Props) => {
                 pause();
               })()
         }
+        onSkip={() => {
+          playCountTick();
+          const nextInterval = timerRuns[timerState.currentRunIndex].interval;
+          const nextIsInterval = nextInterval > 0;
+          setTimerState((prev) => ({
+            currentRunIndex: nextIsInterval
+              ? prev.currentRunIndex
+              : prev.currentRunIndex + 1,
+            currentCountType: nextIsInterval ? "interval" : "main",
+            completeTimers: !nextIsInterval
+              ? [...prev.completeTimers, currentTimerRun.id]
+              : [...prev.completeTimers],
+          }));
+          resetWith(nextIsInterval ? nextInterval : nextTimerRun.main);
+        }}
       />
     );
   }
