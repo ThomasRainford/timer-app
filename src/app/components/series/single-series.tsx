@@ -32,7 +32,7 @@ const SingleSeries = ({ series, index }: Props) => {
 
   return (
     <Link
-      className={`flex flex-col ${dislayColour} ${hoverColour} cursor-pointer rounded-md p-2`}
+      className={`flex flex-col ${dislayColour} ${hoverColour} cursor-pointer rounded-md py-2 px-4`}
       href={`/series/${id}`}
     >
       <div className="text-base-300 text-6xl text-center my-14">

@@ -49,10 +49,13 @@ const Run = async ({ params }: Props) => {
         <div className="text-center py-2 text-2xl font-bold w-[100%]">
           {seriesName}
         </div>
-        <div>
-          <div
-            className={`invisible btn btn-outline btn-square btn-sm mr-4`}
-          ></div>
+        <div className="invisible flex flex-row items-center ml-4 md:ml-6 lg:ml-8">
+          <Link
+            className={`btn btn-outline btn-square btn-sm`}
+            href={`/series/${series.id}`}
+          >
+            <ArrowLeftIcon className="h-5 w-5" />
+          </Link>
         </div>
       </div>
       <RunPageContent series={series} />

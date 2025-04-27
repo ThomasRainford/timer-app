@@ -250,9 +250,9 @@ const RunPageContent = ({ series }: Props) => {
   if (timerState.currentCountType === "interval") {
     return (
       <IntervalTimerView
-        name={name}
+        name={nextName}
         isPaused={isPaused}
-        mainTimeDetails={nextIntervalTimeDetails(currentTimerRun.main)}
+        mainTimeDetails={nextIntervalTimeDetails(nextTimerRun.main)}
         countTimeDetails={countTimeDetails}
         mainColour={nextMainColour}
         onRestart={() => resetWith(currentTimerRun.interval)}
