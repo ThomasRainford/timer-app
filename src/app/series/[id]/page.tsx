@@ -50,7 +50,7 @@ const Series = async ({ params }: Props) => {
         <TimersHeading id={id} name={name} colour={colour} />
       </div>
       <div className="divider divider-primary mt-5 text-xl">Timers</div>
-      <div className="mb-2 flex justify-between">
+      <div className="mb-3 flex justify-between">
         <div>
           <Link
             className="btn btn-primary btn-sm w-full text-md"
