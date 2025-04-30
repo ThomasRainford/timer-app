@@ -30,7 +30,7 @@ const CreateSeriesForm = () => {
 
   return (
     <form action={dispatch} id="create-series-form" className="w-full">
-      <div className="form-control">
+      <div className="form-control mb-2">
         <label className="label" htmlFor="name">
           <span className="label-text text-lg">Name</span>
         </label>
@@ -50,7 +50,7 @@ const CreateSeriesForm = () => {
           ))}
         </div>
       </div>
-      <div className="form-control">
+      <div className="form-control mb-2">
         <label className="label" htmlFor="colour">
           <span className="label-text text-lg">Colour</span>
         </label>

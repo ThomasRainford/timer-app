@@ -3,7 +3,7 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => {
-  return <div className="flex flex-col grow">{children}</div>;
+  return <div className="h-full">{children}</div>;
 };
 
 export default Layout;

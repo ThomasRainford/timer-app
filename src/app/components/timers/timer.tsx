@@ -61,7 +61,9 @@ const TimerComponent = ({ timer, timerCount }: Props) => {
     >
       <div className="grid grid-cols-3">
         <div></div>
-        <h6 className={`text-base-300 text-sm font-bold text-center`}>
+        <h6
+          className={`text-base-300 text-xs md:text-sm font-bold text-center`}
+        >
           {repetitions > 0
             ? `Repeat ${formatRepititions(repetitions)}`
             : "No Repeat"}
