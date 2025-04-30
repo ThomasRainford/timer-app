@@ -342,8 +342,8 @@ const RunPageContent = ({ series }: Props) => {
   }
 
   return (
-    <div className="flex flex-col grow">
-      <div className="flex flex-row grow justify-center">
+    <div className="flex flex-col grow ">
+      <div className="flex flex-row grow justify-center bg-base-300 m-2 rounded-md">
         <div className="flex items-center mr-1">
           <div
             className="btn btn-primary btn-lg"
