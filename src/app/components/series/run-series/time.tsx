@@ -5,11 +5,15 @@ interface Props {
 }
 
 const Time = ({ timeDetails }: Props) => {
-  const { minutes, seconds } = timeDetails;
+  const { hours, minutes, seconds } = timeDetails;
 
   let timeString = seconds.toString();
   const secondsString = seconds < 10 ? `0${seconds}` : timeString;
-  timeString = `${minutes}:${secondsString}`;
+  const minutesString = minutes < 10 ? `0${minutes}` : minutes.toString();
+  timeString =
+    hours > 0
+      ? `${hours}:${minutesString}:${secondsString}`
+      : `${minutes}:${secondsString}`;
 
   return <>{timeString}</>;
 };
