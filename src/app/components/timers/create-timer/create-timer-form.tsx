@@ -48,7 +48,7 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
   const limitError = state.errors?.limit;
 
   return (
-    <form action={dispatch} id="create-timer-form">
+    <form action={dispatch} id="create-timer-form" className="h-full">
       <div className="form-control mb-2">
         <label className="fieldset-label" htmlFor="name">
           <span className="label-text text-md">Name</span>
