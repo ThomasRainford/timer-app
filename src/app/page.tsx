@@ -43,8 +43,8 @@ export default async function Home() {
               Features
             </h2>
           </div>
-          <div className="flex flex-row flex-wrap ">
-            <div className="bg-base-300 rounded-lg p-5 mt-2 md:ml-2 w-full md:w-[48%]">
+          <div className="grid grid-cols-2 grid-rows-2 gap-2">
+            <div className="bg-base-300 rounded-lg p-5 w-full">
               <div className="text-4xl mb-2">⏱️</div>
               <div className="mb-2">
                 <h3 className="text-xl font-bold">Sequential Timers</h3>
@@ -56,7 +56,7 @@ export default async function Home() {
                 </p>
               </div>
             </div>
-            <div className="bg-base-300 rounded-lg p-5 mt-2 md:ml-2 w-full md:w-[48%]">
+            <div className="bg-base-300 rounded-lg p-5 w-full">
               <div className="text-4xl mb-2">😴</div>
               <div className="mb-2">
                 <h3 className="text-xl font-bold">Customizable Intervals</h3>
@@ -69,7 +69,7 @@ export default async function Home() {
                 </p>
               </div>
             </div>
-            <div className="bg-base-300 rounded-lg p-5 mt-2 md:ml-2 w-full md:w-[48%]">
+            <div className="bg-base-300 rounded-lg p-5 w-full">
               <div className="text-4xl mb-2">⏭️</div>
               <div className="mb-2">
                 <h3 className="text-xl font-bold">Skip & Reset Functions</h3>
@@ -78,7 +78,7 @@ export default async function Home() {
                 <p>Easily skip timers or intervals, or reset them as needed.</p>
               </div>
             </div>
-            <div className="bg-base-300 rounded-lg p-5 mt-2 md:ml-2 w-full md:w-[48%]">
+            <div className="bg-base-300 rounded-lg p-5 w-full">
               <div className="text-4xl mb-2">🌘</div>
               <div className="mb-2">
                 <h3 className="text-xl font-bold">Dark Mode</h3>
@@ -89,7 +89,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <div className="mb-12 mt-12 bg-base-200 rounded-lg mx-2">
+        <div className="mb-12 mt-12 bg-base-200 rounded-lg">
           <div>
             <h2 className="text-2xl font-bold text-center mb-5 mt-6 p-3">
               Perfect For Timed Activities

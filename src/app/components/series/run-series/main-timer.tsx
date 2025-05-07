@@ -8,7 +8,7 @@ interface Props {
 const MainTime = ({ timeDetails }: Props) => {
   return (
     <div className="flex flex-row justify-around">
-      <h1 className="text-[20vw] text-center font-mono">
+      <h1 className="text-[18vw] sm:text-[15vw] md:text-[12vw] text-center font-mono">
         <Time timeDetails={timeDetails} />
       </h1>
     </div>
