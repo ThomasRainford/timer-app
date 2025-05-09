@@ -45,7 +45,7 @@ const Series = async ({ params }: Props) => {
     return a.position - b.position;
   });
   return (
-    <div className="flrx flex-col h-auto overflow-y-hidden">
+    <div className="flex flex-col h-auto overflow-y-hidden">
       <div className="flex flex-col h-full md:self-center md:w-[90%] lg:w-[75%] mt-2 overflow-y-hidden">
         <div>
           <TimersHeading id={id} name={name} colour={colour} />

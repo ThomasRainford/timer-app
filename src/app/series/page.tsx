@@ -24,7 +24,7 @@ const Series = async () => {
   });
 
   return (
-    <>
+    <div className="flex flex-col h-auto overflow-y-hidden px-2 md:px-4 mt-2">
       <div className="mb-4">
         <Link
           className="btn btn-primary w-full md:w-[30%] text-md"
@@ -45,7 +45,7 @@ const Series = async () => {
           <EmptyStateAlert text={"Create a series to get started."} />
         </div>
       )}
-    </>
+    </div>
   );
 };
 
