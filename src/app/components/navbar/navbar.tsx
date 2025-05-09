@@ -15,7 +15,7 @@ const MobileDropdown = ({ user }: { user?: User }) => {
         className="menu menu-sm dropdown-content mt-3 z-1 p-2 shadow-sm bg-base-100 rounded-box w-52"
       >
         <li>
-          <Link className="text-accent" href={"/series"}>
+          <Link className="font-bold text-base-content" href={"/series"}>
             Series
           </Link>
         </li>

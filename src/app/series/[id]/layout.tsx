@@ -4,7 +4,7 @@ interface Props {
 
 const Layout = ({ children }: Props) => {
   return (
-    <div className="flex flex-col justify-center h-auto overflow-y-visible items-center bg-base-200 m-3 p-3 py-4 rounded-sm">
+    <div className="flex flex-col h-full overflow-y-auto px-2 md:px-4 mt-2">
       {children}
     </div>
   );

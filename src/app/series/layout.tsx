@@ -8,7 +8,7 @@ const Layout = ({ children }: Props) => {
   return (
     <main className="flex flex-col h-screen">
       <NavBar />
-      {children}
+      <>{children}</>
     </main>
   );
 };
