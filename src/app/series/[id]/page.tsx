@@ -45,42 +45,44 @@ const Series = async ({ params }: Props) => {
     return a.position - b.position;
   });
   return (
-    <div className="flex flex-col md:self-center px-2 md:px-0 md:w-[90%] lg:w-[75%] mt-2 overflow-y-hidden">
-      <div>
-        <TimersHeading id={id} name={name} colour={colour} />
-      </div>
-      <div className="divider divider-primary mt-5 text-xl">Timers</div>
-      <div className="mb-3 flex justify-between">
+    <div className="flrx flex-col h-auto overflow-y-hidden">
+      <div className="flex flex-col h-full md:self-center md:w-[90%] lg:w-[75%] mt-2 overflow-y-hidden">
         <div>
-          <Link
-            className="btn btn-primary btn-sm w-full text-md"
-            href={`/series/${id}/timers/create`}
-          >
-            <PlusIcon size={6} />
-            Create New Timer
-          </Link>
+          <TimersHeading id={id} name={name} colour={colour} />
         </div>
-        <div>
-          <Link
-            className={`btn btn-success btn-sm w-full text-md ${
-              timers.length === 0 ? "btn-disabled" : ""
-            }`}
-            href={`/series/${id}/run`}
-          >
-            <PlayIcon size={5} />
-            Run series
-          </Link>
+        <div className="divider divider-primary mt-5 text-xl">Timers</div>
+        <div className="mb-3 flex justify-between">
+          <div>
+            <Link
+              className="btn btn-primary btn-sm w-full text-md"
+              href={`/series/${id}/timers/create`}
+            >
+              <PlusIcon size={6} />
+              Create New Timer
+            </Link>
+          </div>
+          <div>
+            <Link
+              className={`btn btn-success btn-sm w-full text-md ${
+                timers.length === 0 ? "btn-disabled" : ""
+              }`}
+              href={`/series/${id}/run`}
+            >
+              <PlayIcon size={5} />
+              Run series
+            </Link>
+          </div>
         </div>
+        {timers.length > 0 ? (
+          <div className="overflow-y-auto">
+            <Timers timers={timers} seriesId={id} />
+          </div>
+        ) : (
+          <div className="mt-4">
+            <EmptyStateAlert text="Create timers to run the series." />
+          </div>
+        )}
       </div>
-      {timers.length > 0 ? (
-        <div className="overflow-y-auto">
-          <Timers timers={timers} seriesId={id} />
-        </div>
-      ) : (
-        <div className="mt-4">
-          <EmptyStateAlert text="Create timers to run the series." />
-        </div>
-      )}
     </div>
   );
 };

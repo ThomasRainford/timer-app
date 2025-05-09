@@ -43,7 +43,7 @@ export default async function Home() {
               Features
             </h2>
           </div>
-          <div className="grid grid-cols-2 grid-rows-2 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 grid-rows-2 gap-2">
             <div className="bg-base-300 rounded-lg p-5 w-full">
               <div className="text-4xl mb-2">⏱️</div>
               <div className="mb-2">

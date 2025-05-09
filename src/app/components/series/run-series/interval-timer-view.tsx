@@ -25,7 +25,7 @@ const IntervalTimerView = ({
   onPauseResume,
   onSkip,
 }: Props) => (
-  <div className="flex flex-col grow h-full px-2 md:px-4 lg:px-6 pb-2">
+  <div className="flex flex-col grow h-full pb-2">
     <div className="grow bg-base-200 w-full flex justify-center items-center rounded-t-md">
       <div className="h-full w-full flex flex-col mx-4">
         <div className="mt-4">

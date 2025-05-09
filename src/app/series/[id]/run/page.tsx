@@ -38,7 +38,7 @@ const Run = async ({ params }: Props) => {
   return (
     <div className="flex flex-col h-full">
       <div className="flex justify-center align-middle w-[100%]">
-        <div className="flex flex-row items-center ml-4 md:ml-6 lg:ml-8">
+        <div className="flex flex-row items-center ml-2">
           <Link
             className={`btn btn-outline btn-square btn-sm`}
             href={`/series/${series.id}`}
