@@ -8,7 +8,7 @@ export default async function Home() {
   const user = session?.user as unknown as User | undefined;
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-dvh">
       <NavBar />
       <div className="flex flex-col p-2 px-4 md:p-4 md:px-8">
         <div className="mt-12 mb-12 px-2">

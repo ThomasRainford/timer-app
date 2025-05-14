@@ -21,7 +21,7 @@ export default function RootLayout({
     <html data-theme="dark" lang="en">
       <body
         style={{ maxWidth: "100%", overflowX: "hidden" }}
-        className={`${inter.className} antialiased min-h-screen h-screen`}
+        className={`${inter.className} antialiased min-h-dvh h-dvh`}
       >
         {children}
       </body>
