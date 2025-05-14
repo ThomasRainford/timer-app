@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 const Register = () => {
   return (
-    <div className="hero h-dvh bg-base-200">
-      <div className="card shrink-0  shadow-3xl bg-base-100 mx-4 sm:mx-0">
+    <div className="hero h-dvh bg-base-200 px-4 sm:px-0">
+      <div className="card shrink-0 w-full max-w-sm shadow-3xl bg-base-100 mx-4 sm:mx-0">
         <div className="flex justify-center mt-2">
           <div className="bg-base-100 rounded-full p-3">
             <PersonIcon size={16} />
