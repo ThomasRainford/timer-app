@@ -3,7 +3,7 @@ interface Props {
 }
 
 const Layout = ({ children }: Props) => {
-  return <main className="min-h-screen">{children}</main>;
+  return <main className="min-h-dvh">{children}</main>;
 };
 
 export default Layout;
