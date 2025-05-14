@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 
 const Login = () => {
   return (
-    <div className="hero min-h-dvh bg-base-200">
-      <div className="card shrink-0 w-full max-w-sm shadow-3xl bg-base-100">
+    <div className="hero h-dvh bg-base-200">
+      <div className="card shrink-0 sm:w-full max-w-sm shadow-3xl bg-base-100 mx-4 sm:mx-0">
         <div className="flex justify-center mt-2">
           <div className="bg-base-100 rounded-full p-3">
             <PersonIcon size={16} />
