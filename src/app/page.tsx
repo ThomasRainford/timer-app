@@ -164,7 +164,7 @@ export default async function Home() {
           <div className="p-10 md:p-16">
             <div className="flex flex-col md:flex-row justify-between">
               <div className="mb-4 md:mb-0">
-                <h3 className="text-xl font-bold">Timers App</h3>
+                <h3 className="text-xl font-bold">Timer App</h3>
                 <p className="text-sm">
                   Designed and developed by{" "}
                   <a
