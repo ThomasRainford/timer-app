@@ -9,7 +9,9 @@ const Loading = () => {
           Create New Series
         </button>
       </div>
-      <div className="skeleton h-[228px] md:w-[450px] lg:w-[360px] mt-2"></div>
+      <div className="grid grid-col-1 md:grid-cols-2 lg:grid-cols-3 gap-2 w-full overflow-y-auto pb-4">
+        <div className="skeleton h-[228px] mt-2"></div>
+      </div>
     </div>
   );
 };
