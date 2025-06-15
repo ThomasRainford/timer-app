@@ -342,7 +342,7 @@ const RunPageContent = ({ series }: Props) => {
   }
 
   return (
-    <div className="flex flex-col grow ">
+    <div className="flex flex-col grow mb-2">
       <div className="flex flex-row grow justify-center bg-base-300 rounded-md">
         <div className="flex items-center mr-1">
           <div

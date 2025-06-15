@@ -20,7 +20,6 @@ const ThemeController = () => {
           value={theme}
           className="theme-controller row-start-1 col-start-1 col-span-2"
         />
-
         <SunIcon />
         <MoonIcon />
       </label>
