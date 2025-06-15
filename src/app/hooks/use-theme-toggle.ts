@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 interface ThemeToggle {
@@ -11,11 +13,7 @@ const useThemeToggle = ({
   otherTheme,
   defaultTheme,
 }: ThemeToggle): [string, (e: any) => void] => {
-  const [theme, setTheme] = useState(
-    global?.window !== undefined
-      ? localStorage.getItem(key) ?? defaultTheme
-      : defaultTheme
-  );
+  const [theme, setTheme] = useState(localStorage.getItem(key) ?? defaultTheme);
 
   const handleToggle = (e: any) => {
     if (e.target.checked) {

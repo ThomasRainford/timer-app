@@ -1,8 +1,11 @@
 import { auth, signOut } from "@/auth";
 import { User } from "@prisma/client";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ClockIcon, MenuIcon } from "../icons";
-import ThemeController from "./theme-controller";
+const ThemeController = dynamic(() => import("./theme-controller"), {
+  ssr: false,
+});
 
 const MobileDropdown = ({ user }: { user?: User }) => {
   return (
