@@ -1,4 +1,4 @@
-"ues client";
+"use client";
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -19,8 +19,20 @@ interface Props {
 }
 
 const TimerComponent = ({ timer, timerCount }: Props) => {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: timer.position + 1 });
+  const {
+    attributes: {
+      role,
+      tabIndex,
+      "aria-disabled": ariaDisabled,
+      "aria-pressed": ariaPressed,
+      "aria-roledescription": ariaRoledescription,
+      "aria-describedby": ariaDescribedby,
+    },
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id: timer.position + 1 });
 
   const containerStyle = {
     transform: CSS.Transform.toString(transform),
@@ -32,7 +44,6 @@ const TimerComponent = ({ timer, timerCount }: Props) => {
 
   const name = timer.name;
   const colour = timer.colour as Colour;
-  const mainTime = timer.main;
   const intervalTime = timer.interval;
   const repetitions = timer.repeat;
   const position = timer.position;
@@ -92,7 +103,12 @@ const TimerComponent = ({ timer, timerCount }: Props) => {
             <div
               className="flex flex-col justify-center align-middle"
               style={dragHandleStyle}
-              {...attributes}
+              role={role}
+              tabIndex={tabIndex}
+              aria-disabled={ariaDisabled}
+              aria-pressed={ariaPressed}
+              aria-roledescription={ariaRoledescription}
+              aria-describedby={ariaDescribedby}
               {...listeners}
             >
               <DotSquareIcon size={5} />

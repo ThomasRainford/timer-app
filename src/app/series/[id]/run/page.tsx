@@ -6,12 +6,13 @@ import { auth } from "@/auth";
 import Link from "next/link";
 
 interface Props {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-const Run = async ({ params }: Props) => {
+const Run = async (props: Props) => {
+  const params = await props.params;
   const paramId = Number(params.id);
   const session = await auth();
   const userEmail = session?.user?.email || undefined;

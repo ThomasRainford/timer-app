@@ -48,7 +48,7 @@ The application uses PostgreSQL as its database. Follow these steps to set up th
 ##### 1. Start the local PostgreSQL database:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 ##### 2. Run database migrations:

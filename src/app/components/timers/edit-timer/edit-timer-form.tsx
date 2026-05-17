@@ -3,8 +3,7 @@
 import { Colour, supprtedColours } from "@/app/components/util";
 import { editTimer } from "@/app/lib/actions/timer";
 import { State } from "@/app/lib/actions/types";
-import { ChangeEvent, useState } from "react";
-import { useFormState } from "react-dom";
+import { ChangeEvent, useActionState, useState } from "react";
 import ColourDisplay from "../../form/ColourDisplay";
 import FormInputError from "../../form/form-input-error";
 import SubmitFormButton from "../../form/submit-form-button";
@@ -49,9 +48,9 @@ const EditTimerForm = ({
 
   const editTimerWithId = editTimer.bind(null, id, seriesId);
   let initialState = { message: null, errors: undefined };
-  const [state, dispatch] = useFormState<State>(
+  const [state, dispatch] = useActionState<State>(
     editTimerWithId as any,
-    initialState
+    initialState,
   );
   const nameError = state.errors?.name;
   const colourError = state.errors?.colour;
