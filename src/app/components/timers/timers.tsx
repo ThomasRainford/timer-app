@@ -7,7 +7,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Timer } from "@prisma/client";
+import { Timer } from "@/generated/prisma/client";
 import { useEffect, useState } from "react";
 import DraggableTimers from "./draggable-timers";
 

@@ -2,7 +2,7 @@
 
 import prisma from "@/app/lib/db";
 import { signIn } from "@/auth";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/generated/prisma/client";
 import bcrypt from "bcryptjs";
 import { AuthError } from "next-auth";
 import { redirect } from "next/navigation";

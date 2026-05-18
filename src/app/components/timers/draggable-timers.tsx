@@ -1,4 +1,4 @@
-import { Timer as PrismaTimer } from "@prisma/client";
+import { Timer as PrismaTimer } from "@/generated/prisma/client";
 import Timer from "./timer";
 
 interface Props {

@@ -2,7 +2,7 @@
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Timer } from "@prisma/client";
+import { Timer } from "@/generated/prisma/client";
 import { DotSquareIcon } from "../icons";
 import {
   Colour,

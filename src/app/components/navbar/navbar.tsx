@@ -1,5 +1,5 @@
 import { auth, signOut } from "@/auth";
-import { User } from "@prisma/client";
+import { User } from "@/generated/prisma/client";
 import Link from "next/link";
 import { ClockIcon, MenuIcon } from "../icons";
 import ThemeController from "./theme-controller-client";
