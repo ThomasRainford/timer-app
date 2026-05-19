@@ -7,7 +7,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { Timer } from "@prisma/client";
+import { Timer } from "@/generated/prisma/client";
 import { useEffect, useState } from "react";
 import DraggableTimers from "./draggable-timers";
 
@@ -49,24 +49,17 @@ const Timers = ({ timers, seriesId }: Props) => {
     const activeId = active?.id as number;
     const overId = over?.id as number;
     if (!over || activeId === overId) return;
-    setItems((prevItems) => {
-      const oldIndex = prevItems.findIndex(
-        (item) => item.position === activeId - 1
-      );
-      const newIndex = prevItems.findIndex(
-        (item) => item.position === overId - 1
-      );
-      const newItems = [...prevItems];
-      const [movedItem] = newItems.splice(oldIndex, 1);
-      newItems.splice(newIndex, 0, movedItem);
-      // Update positions.
-      const updatedItems = newItems.map((item, index) => ({
-        ...item,
-        position: index,
-      }));
-      updateTimersPosition(seriesId, updatedItems);
-      return updatedItems;
-    });
+    const oldIndex = items.findIndex((item) => item.position === activeId - 1);
+    const newIndex = items.findIndex((item) => item.position === overId - 1);
+    const newItems = [...items];
+    const [movedItem] = newItems.splice(oldIndex, 1);
+    newItems.splice(newIndex, 0, movedItem);
+    const updatedItems = newItems.map((item, index) => ({
+      ...item,
+      position: index,
+    }));
+    setItems(updatedItems);
+    await updateTimersPosition(seriesId, updatedItems);
   };
 
   return (

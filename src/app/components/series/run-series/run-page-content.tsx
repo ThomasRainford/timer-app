@@ -9,7 +9,7 @@ import {
   supprtedColours,
 } from "@/app/components/util";
 import { useCountdown } from "@/app/hooks/use-countdown";
-import { Series, Timer } from "@prisma/client";
+import { Series, Timer } from "@/generated/prisma/client";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import useSound from "use-sound";
 import { CircleArrowIcon } from "../../icons";
@@ -326,6 +326,14 @@ const RunPageContent = ({ series }: Props) => {
           playCountTick();
           const nextInterval = timerRuns[timerState.currentRunIndex].interval;
           const nextIsInterval = nextInterval > 0;
+          if (isLastTimer && !nextIsInterval) {
+            setTimerState(() => ({
+              currentRunIndex: 0,
+              currentCountType: "end",
+              completeTimers: [],
+            }));
+            return;
+          }
           setTimerState((prev) => ({
             currentRunIndex: nextIsInterval
               ? prev.currentRunIndex

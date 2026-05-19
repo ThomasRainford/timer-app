@@ -1,7 +1,7 @@
 "use client";
 
 import { Colour, buttonHoverColours } from "@/app/components/util";
-import { Timer } from "@prisma/client";
+import { Timer } from "@/generated/prisma/client";
 import { BinIcon } from "../../icons";
 import DeleteTimerForm from "./delete-timer-form";
 

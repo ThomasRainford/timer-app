@@ -1,12 +1,12 @@
 "use client";
 
 import { register } from "@/app/lib/actions/auth";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import FormInputError from "../form/form-input-error";
 import SubmitFormButton from "../form/submit-form-button";
 
 const RegisterForm = () => {
-  const [errorMessage, dispatch] = useFormState(register, undefined);
+  const [errorMessage, dispatch] = useActionState(register, undefined);
 
   return (
     <form action={dispatch} id="register-form">

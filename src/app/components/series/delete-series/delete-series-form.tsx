@@ -2,8 +2,7 @@
 
 import { deleteSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
-import { useEffect } from "react";
-import { useFormState } from "react-dom";
+import { useActionState, useEffect } from "react";
 import DeleteFormButton from "../../form/delete-form-button";
 
 interface Props {
@@ -14,9 +13,9 @@ interface Props {
 const DeleteSeriesForm = ({ id, modalId }: Props) => {
   const deleteSeriesWithId = deleteSeries.bind(null, id);
   const initialState = { message: null, errors: undefined };
-  const [state, dispatch] = useFormState<State>(
+  const [state, dispatch] = useActionState<State>(
     deleteSeriesWithId,
-    initialState
+    initialState,
   );
 
   useEffect(() => {

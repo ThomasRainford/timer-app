@@ -3,7 +3,7 @@
 import { State } from "@/app/lib/actions/types";
 import prisma from "@/app/lib/db";
 import { auth } from "@/auth";
-import { Timer } from "@prisma/client";
+import { Timer } from "@/generated/prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";

@@ -1,6 +1,6 @@
 import NavBar from "@/app/components/navbar/navbar";
 import { auth } from "@/auth";
-import { User } from "@prisma/client";
+import { User } from "@/generated/prisma/client";
 import Link from "next/link";
 import { GitHubIcon, LinkedInIcon } from "./components/icons";
 

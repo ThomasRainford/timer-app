@@ -1,12 +1,12 @@
 "use client";
 
 import { authenticate } from "@/app/lib/actions/auth";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import FormInputError from "../form/form-input-error";
 import SubmitFormButton from "../form/submit-form-button";
 
 const LoginForm = () => {
-  const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+  const [errorMessage, dispatch] = useActionState(authenticate, undefined);
 
   return (
     <form action={dispatch} id="login-form">

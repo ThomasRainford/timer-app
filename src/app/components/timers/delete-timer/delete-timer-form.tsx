@@ -2,8 +2,7 @@
 
 import { deleteTimer } from "@/app/lib/actions/timer";
 import { State } from "@/app/lib/actions/types";
-import { useEffect } from "react";
-import { useFormState } from "react-dom";
+import { useActionState, useEffect } from "react";
 import DeleteFormButton from "../../form/delete-form-button";
 
 interface Props {
@@ -15,9 +14,9 @@ interface Props {
 const DeleteTimerForm = ({ id, seriesId, modalId }: Props) => {
   const deleteTimerWithId = deleteTimer.bind(null, id, seriesId);
   const initialState = { message: null, errors: undefined };
-  const [state, dispatch] = useFormState<State>(
+  const [state, dispatch] = useActionState<State>(
     deleteTimerWithId,
-    initialState
+    initialState,
   );
 
   useEffect(() => {

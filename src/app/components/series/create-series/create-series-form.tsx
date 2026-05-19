@@ -4,7 +4,7 @@ import useColours from "@/app/hooks/use-colours";
 import { createSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
 import Link from "next/link";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import ColourDisplay from "../../form/ColourDisplay";
 import FormInputError from "../../form/form-input-error";
 import SubmitFormButton from "../../form/submit-form-button";
@@ -19,9 +19,9 @@ const CreateSeriesForm = () => {
   } = useColours({ initialColour: randomColour() });
 
   let initialState = { message: null, errors: undefined } as State;
-  const [state, dispatch] = useFormState<State>(
+  const [state, dispatch] = useActionState<State>(
     createSeries as any,
-    initialState
+    initialState,
   );
 
   const nameError = state.errors?.name;

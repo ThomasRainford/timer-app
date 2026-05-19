@@ -3,8 +3,7 @@
 import { createTimer } from "@/app/lib/actions/timer";
 import { State } from "@/app/lib/actions/types";
 import Link from "next/link";
-import { ChangeEvent, useState } from "react";
-import { useFormState } from "react-dom";
+import { ChangeEvent, useActionState, useState } from "react";
 import ColourDisplay from "../../form/ColourDisplay";
 import FormInputError from "../../form/form-input-error";
 import SubmitFormButton from "../../form/submit-form-button";
@@ -38,9 +37,9 @@ const CreateTimerForm = ({ seriesId, lastPosition }: Props) => {
 
   const createTimerWithId = createTimer.bind(null, seriesId, lastPosition);
   let initialState = { message: null, errors: undefined } as State;
-  const [state, dispatch] = useFormState<State>(
+  const [state, dispatch] = useActionState<State>(
     createTimerWithId as any,
-    initialState
+    initialState,
   );
 
   const nameError = state.errors?.name;

@@ -3,8 +3,7 @@
 import useColours from "@/app/hooks/use-colours";
 import { editSeries } from "@/app/lib/actions/series";
 import { State } from "@/app/lib/actions/types";
-import { useState } from "react";
-import { useFormState } from "react-dom";
+import { useActionState, useState } from "react";
 import ColourDisplay from "../../form/ColourDisplay";
 import FormInputError from "../../form/form-input-error";
 import SubmitFormButton from "../../form/submit-form-button";
@@ -28,9 +27,9 @@ const EditSeriesForm = ({ modalId, id, initialName, initialColour }: Props) => {
 
   const editSeriesWithId = editSeries.bind(null, id);
   let initialState = { message: null, errors: undefined };
-  const [state, dispatch] = useFormState<State>(
+  const [state, dispatch] = useActionState<State>(
     editSeriesWithId as any,
-    initialState
+    initialState,
   );
 
   const nameError = state.errors?.name;
